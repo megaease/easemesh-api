@@ -1,0 +1,122 @@
+// Copyright 2021 MegaEase 
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+syntax = "proto3";
+
+import "google/protobuf/duration.proto";
+
+package easemesh.api.v1alpha1;
+
+// RateLimiterPolicy is the policy used for Resilience component RateLimiter
+// It describes  
+message RateLimiterPolicy {
+    // the name of this policy 
+	string name = 1; 
+
+    // The duration for one request should wait for a permission,e.g.,500ms.
+	google.protobuf.Duration timeoutDuration = 2;  
+
+    // The period of a limit refresh. After each period the rate limiter sets 
+    // its permissions count back to the limitForPeriod value
+	google.protobuf.Duration limitRefreshPeriod = 3; 
+    
+    // The number of permissions available during one limit refresh period
+	int32 limitForPeriod = 4;  
+}
+
+// The ways to match string.
+message StringMatch {
+    // URL matching with exactly
+    string exact = 1;
+
+    // URL matching with prefix
+    string prefix = 2;
+
+    // URL matching with regular expression
+    string regex = 3;
+}
+
+// Rule to filter HTTP request by using HTTP method and url. 
+message URLRule {
+    // Allowed HTTP method string, e.g. "GET","DELETE","POST"
+    repeated string methods = 1;
+
+    // Describe how to match the HTTP request URL. 
+    StringMatch url = 2;
+
+    // Which policy this URLRule references to. 
+    string policyRef = 3;
+}
+
+// It can establish your services' high availability and reliability, 
+// also it can be used for scaling APIs. Protect your servers from overwhelm 
+// by peek traffic.
+message RateLimiter {
+    repeated RateLimiterPolicy policies  = 1;
+    string defaultPolicyRef = 2;
+    repeated URLRule urls = 3;
+}
+
+// message CircuitBreaker {
+//}
+
+// message Retryer {
+//}
+
+// message TimeLimiter {
+
+//}
+
+// The Basic element in EaseMesh to describe a user's business microservice's 
+// name, belonging tenant and governance specs.  
+message Service {
+ 
+    // This service's name.
+    string name = 1; 
+
+    // Which tenatn it belongs to.
+    string registerTenant = 2; 
+
+    // The resilience configurations.
+    Resilience resilience = 3;
+
+    // Canary canary = 4;
+
+    //LoadBalance loadBalance = 5;
+
+    //Sidecar sidecar = 6;
+
+    //Observability observability = 7;
+}
+
+// Including four key types of resilience features, RateLimiter, CircuitBreaker, Retryer and Timeout.
+// Following the design of Resilience4j library.
+message Resilience {
+
+    // Limit and protect backend services.
+    RateLimiter rateLimiter  = 1;
+
+    //CircuitBreaker circuitBreaker = 2;
+
+    //Retryer retryer = 3;
+
+    //TimeLimiter = 4; 
+}
+
+//message Canary {
+//    repeat CanaryRules canaryRule = 1;
+//}
+
+
+
+
+
