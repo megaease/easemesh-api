@@ -14,26 +14,34 @@ syntax = "proto3";
 
 import "google/protobuf/duration.proto";
 
-package easemesh.api.v1alpha1;
 
-// RateLimiterPolicy is the policy used for Resilience component RateLimiter
-// It describes  
+package easemesh.v1alpha1;
+ 
+option go_package="easemesh/api/v1apha1";
+
+
+// RateLimiterPolicy is the limiting policy used for Resilience component RateLimiter.
+// It contains the basic configurations for the limiter, including the permission number,
+// the duration for request waiting and the permission count refreshing period. 
 message RateLimiterPolicy {
     // the name of this policy 
-	string name = 1; 
+    string name = 1; 
 
     // The duration for one request should wait for a permission,e.g.,500ms.
-	google.protobuf.Duration timeoutDuration = 2;  
+    google.protobuf.Duration timeoutDuration = 2;  
 
     // The period of a limit refresh. After each period the rate limiter sets 
     // its permissions count back to the limitForPeriod value
-	google.protobuf.Duration limitRefreshPeriod = 3; 
+    google.protobuf.Duration limitRefreshPeriod = 3; 
     
     // The number of permissions available during one limit refresh period
-	int32 limitForPeriod = 4;  
+    int32 limitForPeriod = 4;  
 }
 
-// The ways to match string.
+// StringMatch can be used to match string in different ways.
+// Its priority is according to the field order. StringMatch will try exactly matching firstly,
+// then try to check has the same prefix, at last, it will use the regular expression to match the
+// string if it's provided
 message StringMatch {
     // URL matching with exactly
     string exact = 1;
@@ -45,7 +53,7 @@ message StringMatch {
     string regex = 3;
 }
 
-// Rule to filter HTTP request by using HTTP method and url. 
+// URLRule can be used to filter HTTP request by using HTTP method and URL. 
 message URLRule {
     // Allowed HTTP method string, e.g. "GET","DELETE","POST"
     repeated string methods = 1;
@@ -57,12 +65,16 @@ message URLRule {
     string policyRef = 3;
 }
 
-// It can establish your services' high availability and reliability, 
-// also it can be used for scaling APIs. Protect your servers from overwhelm 
-// by peek traffic.
+// RateLimiter can establish your services' high availability and reliability, 
+// also it can be used for scaling APIs. Protect your servers from overwhelm by the peak traffic.
 message RateLimiter {
+    // RateLimiterPolicy contains different limiting configurations for this limiter to use.
     repeated RateLimiterPolicy policies  = 1;
+
+    // DefaultPolicyRef is the default reference policy name.
     string defaultPolicyRef = 2;
+
+    // URLs descibs the HTTP requess matching schemes for this limiter to filter.
     repeated URLRule urls = 3;
 }
 
@@ -76,17 +88,17 @@ message RateLimiter {
 
 //}
 
-// The Basic element in EaseMesh to describe a user's business microservice's 
-// name, belonging tenant and governance specs.  
+// Service is the basic element in EaseMesh to describe a user's business microservices' 
+// name, belonging tenant, and governance specs.  
 message Service {
  
-    // This service's name.
+    // Name is the mesh service's name.
     string name = 1; 
 
-    // Which tenatn it belongs to.
+    // registerTenant is the tenatn's ame this service belongs to.
     string registerTenant = 2; 
 
-    // The resilience configurations.
+    // Resilience is the resilent configurations.
     Resilience resilience = 3;
 
     // Canary canary = 4;
@@ -98,7 +110,7 @@ message Service {
     //Observability observability = 7;
 }
 
-// Including four key types of resilience features, RateLimiter, CircuitBreaker, Retryer and Timeout.
+// Resilience includes four key types of resilience features, RateLimiter, CircuitBreaker, Retryer and Timeout.
 // Following the design of Resilience4j library.
 message Resilience {
 
