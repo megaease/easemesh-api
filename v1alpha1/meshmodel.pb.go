@@ -49,7 +49,7 @@ type RateLimiterPolicy struct {
 	// LimitRefreshPeriod is the period of a limit refresh. After each period the rate limiter sets
 	// its permissions count back to the limitForPeriod value.
 	LimitRefreshPeriod *durationpb.Duration `protobuf:"bytes,3,opt,name=limitRefreshPeriod,proto3" json:"limitRefreshPeriod,omitempty"`
-	// limitForPeriod is the number of permissions available during one limit refresh period.
+	// LimitForPeriod is the number of permissions available during one limit refresh period.
 	LimitForPeriod int32 `protobuf:"varint,4,opt,name=limitForPeriod,proto3" json:"limitForPeriod,omitempty"`
 }
 
@@ -459,7 +459,7 @@ type URLRule struct {
 
 	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST"
 	Methods []string `protobuf:"bytes,1,rep,name=methods,proto3" json:"methods,omitempty"`
-	// StringMatch configures how to match the HTTP request URL.
+	// Url configures how to match the HTTP request URL.
 	Url *StringMatch `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
 	// PolicyRef configures which policy this URLRule references to.
 	PolicyRef string `protobuf:"bytes,3,opt,name=policyRef,proto3" json:"policyRef,omitempty"`
@@ -532,7 +532,7 @@ type CanaryRule struct {
 	// Headers configure HTTP requests matching configurations with "OR" relation. Once
 	// HTTP requests match one element in this array, it will be regarded as the colored traffic.
 	Headers map[string]*StringMatch `protobuf:"bytes,2,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// URLs describe the HTTP request matching schemes for this canary rule.
+	// Urls describe the HTTP request matching schemes for this canary rule.
 	Urls []*URLRule `protobuf:"bytes,3,rep,name=urls,proto3" json:"urls,omitempty"`
 }
 
@@ -596,11 +596,11 @@ type RateLimiter struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// RateLimiterPolicy contains different limiting configurations for this RateLimiter to use.
+	// Policies contains different limiting configurations for this RateLimiter to use.
 	Policies []*RateLimiterPolicy `protobuf:"bytes,1,rep,name=policies,proto3" json:"policies,omitempty"`
 	// DefaultPolicyRef is the default reference policy name.
 	DefaultPolicyRef string `protobuf:"bytes,2,opt,name=defaultPolicyRef,proto3" json:"defaultPolicyRef,omitempty"`
-	// URLs describe the HTTP request matching schemes for this limiter to filter.
+	// Urls describe the HTTP request matching schemes for this limiter to filter.
 	Urls []*URLRule `protobuf:"bytes,3,rep,name=urls,proto3" json:"urls,omitempty"`
 }
 
@@ -740,7 +740,7 @@ type Retryer struct {
 	Policies []*RetryerPolicy `protobuf:"bytes,1,rep,name=policies,proto3" json:"policies,omitempty"`
 	// DefaultPolicyRef is the default reference policy name.
 	DefaultPolicyRef string `protobuf:"bytes,2,opt,name=defaultPolicyRef,proto3" json:"defaultPolicyRef,omitempty"`
-	// URLs describe the HTTP request matching schemes for this limiter to filter.
+	// Urls describe the HTTP request matching schemes for this limiter to filter.
 	Urls []*URLRule `protobuf:"bytes,3,rep,name=urls,proto3" json:"urls,omitempty"`
 }
 
@@ -806,7 +806,7 @@ type TimeLimiter struct {
 
 	// DefaultTimeoutDuration configures the default duration for timeout, e.g.,500ms.
 	DefaultTimeoutDuration *durationpb.Duration `protobuf:"bytes,1,opt,name=defaultTimeoutDuration,proto3" json:"defaultTimeoutDuration,omitempty"`
-	// URLs describe the HTTP request matching schemes for this limiter to filter.
+	// Urls describe the HTTP request matching schemes for this limiter to filter.
 	Urls []*URLRule `protobuf:"bytes,3,rep,name=urls,proto3" json:"urls,omitempty"`
 }
 
@@ -1104,9 +1104,9 @@ type Sidecar struct {
 	IngressPort int32 `protobuf:"varint,3,opt,name=ingressPort,proto3" json:"ingressPort,omitempty"`
 	// IngressProtocol is the protocol for ingress traffic. Its value is "http".
 	IngressProtocol string `protobuf:"bytes,4,opt,name=ingressProtocol,proto3" json:"ingressProtocol,omitempty"`
-	// egressPort is the port for egress traffic.
+	// EgressPort is the port for egress traffic.
 	EgressPort int32 `protobuf:"varint,5,opt,name=egressPort,proto3" json:"egressPort,omitempty"`
-	// egressProtocol is the protocol for egress traffic. Its value is "http"
+	// EgressProtocol is the protocol for egress traffic. Its value is "http"
 	EgressProtocol string `protobuf:"bytes,6,opt,name=egressProtocol,proto3" json:"egressProtocol,omitempty"`
 }
 
@@ -1249,7 +1249,7 @@ type Observability struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// OutputServer configures
+	// OutputServer configures JavaAgent's tracing output target.
 	OutputServer *ObservabilityOutputServer `protobuf:"bytes,1,opt,name=outputServer,proto3" json:"outputServer,omitempty"`
 	// Tracings configures whether JavaAgent should deal with tracing HTTP header or not.
 	Tracings *ObservabilityTracings `protobuf:"bytes,2,opt,name=tracings,proto3" json:"tracings,omitempty"`
@@ -1316,7 +1316,7 @@ type ObservabilityOutputServer struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Enables configures to report observability data to Kafka or not.
+	// Enables configures whether reporting observability data to Kafka or not.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// BootstrapServer configures the Kafka bootstrap address.
 	BootstrapServer string `protobuf:"bytes,2,opt,name=bootstrapServer,proto3" json:"bootstrapServer,omitempty"`
@@ -1383,7 +1383,7 @@ type ObservabilityTracingsDetail struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Enabled configures to enable this tracing component or not.
+	// Enabled configures whether reporting this tracing component or not.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// ServicePrefix is the prefix for tracing's remoteEndpoint's service name. It will
 	// combine with the tracing component's name.
@@ -1441,7 +1441,7 @@ type ObservabilityTracingsOutputConfig struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Enabled configures to enable this tracing component's output or not.
+	// Enabled configures whether reporting to tracing output or not.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// ReportThread configures the thread number for JavaAgent to report.
 	ReportThread int32 `protobuf:"varint,2,opt,name=reportThread,proto3" json:"reportThread,omitempty"`
@@ -1544,10 +1544,10 @@ type ObservabilityTracings struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Enabled
+	// Enable configures this mesh service's global tracing switch.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// SampleByQPS configures the QPS value for tracing sampling.
-	// The exceeded request will be ingored.
+	// The exceeded request will be ignored.
 	SampleByQPS int32 `protobuf:"varint,2,opt,name=sampleByQPS,proto3" json:"sampleByQPS,omitempty"`
 	// Output configures the tracing output topic, queue and thread.
 	Output *ObservabilityTracingsOutputConfig `protobuf:"bytes,3,opt,name=output,proto3" json:"output,omitempty"`
@@ -1670,7 +1670,7 @@ type ObservabilityMetricsDetail struct {
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Interval configures the million seconds for metric reporting.
 	Interval int32 `protobuf:"varint,2,opt,name=interval,proto3" json:"interval,omitempty"`
-	// Topic configures the metric's reporting topic.
+	// Topic configures the metric's reporting Kafka topic.
 	Topic string `protobuf:"bytes,3,opt,name=topic,proto3" json:"topic,omitempty"`
 }
 
@@ -2004,7 +2004,7 @@ func (x *IngressPath) GetBackend() string {
 	return ""
 }
 
-// IngressRule is the rule for mesh ingress
+// IngressRule is the rule for mesh ingress.
 type IngressRule struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2068,9 +2068,9 @@ type Ingress struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name indicates the this Ingress.
+	// Name is the identify of this ingress.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Rules is an array of routing rules.
+	// Rules is an array of ingress routing rules.
 	Rules []*IngressRule `protobuf:"bytes,2,rep,name=rules,proto3" json:"rules,omitempty"`
 }
 
