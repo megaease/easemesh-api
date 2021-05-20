@@ -24,18 +24,99 @@ option go_package="easemesh/api/v1apha1";
 // It contains the basic configurations for the limiter, including the permission number,
 // the duration for request waiting and the permission count refreshing period. 
 message RateLimiterPolicy {
-    // the name of this policy 
+    // Name is the identify of this policy. 
     string name = 1; 
 
-    // The duration for one request should wait for a permission,e.g.,500ms.
+    // TimeoutDuration is the duration for one request should wait for a permission,e.g.,500ms.
     google.protobuf.Duration timeoutDuration = 2;  
 
-    // The period of a limit refresh. After each period the rate limiter sets 
-    // its permissions count back to the limitForPeriod value
+    // LimitRefreshPeriod is the period of a limit refresh. After each period the rate limiter sets 
+    // its permissions count back to the limitForPeriod value.
     google.protobuf.Duration limitRefreshPeriod = 3; 
     
-    // The number of permissions available during one limit refresh period
+    // limitForPeriod is the number of permissions available during one limit refresh period.
     int32 limitForPeriod = 4;  
+}
+
+// CircuitBreakerPolicy is the policy for describing Resilience component CircuitBreaker. 
+// It contains the basic configurations for the breaker, including the type of sliding window this 
+// breaker will use. Whether including network error or not and so on. 
+message CircuitBreakerPolicy {
+
+    //  Name is the identify of this policy. 
+    string name  = 1; 
+
+    // SlidingWindowType is the sliding window type of this break, only "COUNT_BASED" or "TIME_BASED" allowed.
+    string slidingWindowType = 2;  
+
+    // FailureRateThreshold configures the failure rate threshold in percentage. When the failure rate is equal 
+    // or greater than the threshold the CircuitBreaker transitions to open and starts short-circuiting calls.
+    uint32 failureRateThreshold = 3;
+
+    // SlowCallRateThreshold Configures a threshold in percentage. The CircuitBreaker considers a call as slow 
+    // when the call duration is greater than slowCallDurationThreshold When the percentage of slow calls is 
+    // equal or greater the threshold, the CircuitBreaker transitions to open and starts short-circuiting calls.
+    uint32 slowCallRateThreshold = 4;
+
+    // CountingNetworkError configures whether a network failure situation should active CircuitBreaker or not. .
+    bool countingNetworkError = 5;
+
+    // SlidingWindowSize configures the size of the sliding window which is used to record the outcome of 
+    // calls when the CircuitBreaker is closed. 
+    uint32 slidingWindowSize = 6;
+
+    // PermittedNumberOfCallsInHalfOpenState configures the number of permitted calls when the CircuitBreaker 
+    // is half open.
+    uint32 permittedNumberOfCallsInHalfOpenState = 7;
+
+    // MinimumNumberOfCalls configures the minimum number of calls which are required (per sliding window period) 
+    // before the CircuitBreaker can calculate the error rate or slow call rate.  For example, 
+    // if minimumNumberOfCalls is 10, then at least 10 calls must be recorded, before the failure rate can be 
+    // calculated. If only 9 calls have been recorded the CircuitBreaker will not transition to open 
+    // even if all 9 calls have failed.
+    uint32 minimumNumberOfCalls = 8;
+
+    // SlowCallDurationThreshold configures the duration threshold above which calls are considered as slow 
+    // and increase the rate of slow calls.
+    string slowCallDurationThreshold  = 9;
+
+    // MaxWaitDurationInHalfOpenState configures a maximum wait duration which controls the longest amount 
+    // of time a CircuitBreaker could stay in Half Open state, before it switches to open. Value 0 means 
+    // Circuit Breaker would wait infinitely in HalfOpen State until all permitted calls have been completed.
+    string  maxWaitDurationInHalfOpenState = 10;
+
+    // WaitDurationInOpenState configures the duration that the CircuitBreaker should wait before transitioning 
+    // from open to half-open,e.g.,60000ms.
+    google.protobuf.Duration waitDurationInOpenState = 11;
+
+    // FailureStatusCodes is the array for HTTP failure status code for this CircuitBreakerPolicy.
+    repeated int32 failureStatusCodes = 12;
+}
+
+// RetryerPolicy is the policy for describing Resilience component Retryer. 
+// It contains the basic configurations for the retryer, including the type of sliding window this 
+// breaker will use. Whether including network error or not and so on.  
+message RetryerPolicy {
+    // Name is the identify of this policy. 
+    string name = 1; 
+
+    // MaxAttempts configures the maximum number of attempts. (including the initial call as the first attempt)
+	int32 maxAttempts = 2;
+
+    // WaitDuration configures the based and fixed wait duration between retry attempts.
+	google.protobuf.Duration waitDuration = 3;
+
+    // BackOffPolicy configures the two kinds of policy, random and exponential.
+	string backOffPolicy = 4;
+
+    // RandomizationFactor configures the factor used for backoff, value between 0 and 1.
+	double randomizationFactor = 5;
+
+    // CountingNetworkError configures whether a network failure situation should retry or not. 
+	bool countingNetworkError = 6;
+
+	// FailureStatusCodes is the array for HTTP failure status code for this RetryPolicy.
+    repeated int32 failureStatusCodes = 7;
 }
 
 // StringMatch can be used to match string in different ways.
@@ -43,50 +124,82 @@ message RateLimiterPolicy {
 // then try to check has the same prefix, at last, it will use the regular expression to match the
 // string if it's provided
 message StringMatch {
-    // URL matching with exactly
+    // Exact configures the exactly URL value to match.
     string exact = 1;
 
-    // URL matching with prefix
+    // Prefix configures the prefix for URL to match.
     string prefix = 2;
 
-    // URL matching with regular expression
+    // Regex configures the regular expression for URL to match.
     string regex = 3;
 }
 
 // URLRule can be used to filter HTTP request by using HTTP method and URL. 
 message URLRule {
-    // Allowed HTTP method string, e.g. "GET","DELETE","POST"
+    // Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST"
     repeated string methods = 1;
 
-    // Describe how to match the HTTP request URL. 
+    // StringMatch configures how to match the HTTP request URL. 
     StringMatch url = 2;
 
-    // Which policy this URLRule references to. 
+    // PolicyRef configures which policy this URLRule references to. 
     string policyRef = 3;
 }
 
 // RateLimiter can establish your services' high availability and reliability, 
 // also it can be used for scaling APIs. Protect your servers from overwhelm by the peak traffic.
 message RateLimiter {
-    // RateLimiterPolicy contains different limiting configurations for this limiter to use.
+    // RateLimiterPolicy contains different limiting configurations for this RateLimiter to use.
     repeated RateLimiterPolicy policies  = 1;
 
     // DefaultPolicyRef is the default reference policy name.
     string defaultPolicyRef = 2;
 
-    // URLs descibs the HTTP requess matching schemes for this limiter to filter.
+    // URLs describe the HTTP request matching schemes for this limiter to filter.
     repeated URLRule urls = 3;
 }
 
-// message CircuitBreaker {
-//}
+// CircuitBreaker is used for blocking all in-coming requests when the the failure numbers 
+// reach the configured limitation. You can declare an CircuitBreaker with COUNT_BASED or 
+// TIME_BASED type.  It has three types of states, open, closed and half-close. One service 
+// can declare its desired CircuitBreaker, and the upstream clients will active the same CircuitBreaker 
+// locally when calling this service.
+message CircuitBreaker {
+    // Policies contain different breaker configurations for this CircuitBreaker to use.
+    repeated CircuitBreakerPolicy policies  = 1;
 
-// message Retryer {
-//}
+    // DefaultPolicyRef is the default reference policy name.
+    string defaultPolicyRef = 2;
 
-// message TimeLimiter {
+    // URLs describe the HTTP request matching schemes for this limiter to filter.
+    repeated URLRule urls = 3;
+}
 
-//}
+// Retryer can perform an API calling retry when the service HTTP response code indicated its in 
+// temporary unavailable states. The up-stream client should make sure this API is idempotent. 
+// The service can declare an Retryer for its desired APIs and active in client side. 
+message Retryer {
+    // Policies contain different retryer configurations for this Retryer to use.
+    repeated RetryerPolicy policies  = 1;
+
+    // DefaultPolicyRef is the default reference policy name.
+    string defaultPolicyRef = 2;
+
+    // URLs describe the HTTP request matching schemes for this limiter to filter.
+    repeated URLRule urls = 3;
+
+}
+
+// Timeout is the amount of time the client should wait for replies from a given service, 
+// it will be running in upstream clients and declared in downstream relied services.
+message TimeLimiter {
+    // DefaultTimeoutDuration configures the default duration for timeout, e.g.,500ms.
+    google.protobuf.Duration defaultTimeoutDuration = 1;
+
+    // URLs describe the HTTP request matching schemes for this limiter to filter.
+    repeated URLRule urls = 3;
+}
+
 
 // Service is the basic element in EaseMesh to describe a user's business microservices' 
 // name, belonging tenant, and governance specs.  
@@ -95,33 +208,25 @@ message Service {
     // Name is the mesh service's name.
     string name = 1; 
 
-    // registerTenant is the tenatn's ame this service belongs to.
+    // registerTenant is the tenant's name this service belongs to.
     string registerTenant = 2; 
-
-    // Resilience is the resilent configurations.
-    Resilience resilience = 3;
-
-    // Canary canary = 4;
-
-    //LoadBalance loadBalance = 5;
-
-    //Sidecar sidecar = 6;
-
-    //Observability observability = 7;
 }
 
-// Resilience includes four key types of resilience features, RateLimiter, CircuitBreaker, Retryer and Timeout.
-// Following the design of Resilience4j library.
+// Resilience includes four key types of resilience features, RateLimiter, CircuitBreaker, 
+// Retryer and Timeout.
 message Resilience {
 
-    // Limit and protect backend services.
+    // RateLimiter configuration. 
     RateLimiter rateLimiter  = 1;
 
-    //CircuitBreaker circuitBreaker = 2;
+    // CircuitBreaker configuration. 
+    CircuitBreaker circuitBreaker = 2;
 
-    //Retryer retryer = 3;
+    // Retryer configuration.
+    Retryer retryer = 3;
 
-    //TimeLimiter = 4; 
+    // TimeLimiter configuration
+    TimeLimiter timeLimiter = 4; 
 }
 
 //message Canary {
