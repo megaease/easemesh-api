@@ -1936,6 +1936,190 @@ func (x *Tenant) GetDescription() string {
 	return ""
 }
 
+// IngressPath is the path for a mesh ingress rule
+type IngressPath struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Path is a regular expression for matching the target HTTP URL.
+	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
+	// RewriteTarget is a regular expression for rewriting original URL when
+	// the HTTP URL path match the Path field.
+	RewriteTarget string `protobuf:"bytes,2,opt,name=rewriteTarget,proto3" json:"rewriteTarget,omitempty"`
+	// Backend is the mesh service's name.
+	Backend string `protobuf:"bytes,3,opt,name=backend,proto3" json:"backend,omitempty"`
+}
+
+func (x *IngressPath) Reset() {
+	*x = IngressPath{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[23]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IngressPath) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IngressPath) ProtoMessage() {}
+
+func (x *IngressPath) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[23]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IngressPath.ProtoReflect.Descriptor instead.
+func (*IngressPath) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *IngressPath) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+func (x *IngressPath) GetRewriteTarget() string {
+	if x != nil {
+		return x.RewriteTarget
+	}
+	return ""
+}
+
+func (x *IngressPath) GetBackend() string {
+	if x != nil {
+		return x.Backend
+	}
+	return ""
+}
+
+// IngressRule is the rule for mesh ingress
+type IngressRule struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Host is the RFC3986 defined host name.
+	Host string `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
+	// Paths is an array for mapping HTTP paths to mesh services.
+	Paths []*IngressPath `protobuf:"bytes,2,rep,name=paths,proto3" json:"paths,omitempty"`
+}
+
+func (x *IngressRule) Reset() {
+	*x = IngressRule{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[24]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IngressRule) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IngressRule) ProtoMessage() {}
+
+func (x *IngressRule) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[24]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IngressRule.ProtoReflect.Descriptor instead.
+func (*IngressRule) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *IngressRule) GetHost() string {
+	if x != nil {
+		return x.Host
+	}
+	return ""
+}
+
+func (x *IngressRule) GetPaths() []*IngressPath {
+	if x != nil {
+		return x.Paths
+	}
+	return nil
+}
+
+// Ingress is the spec of mesh ingress.
+type Ingress struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Name indicates the this Ingress.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Rules is an array of routing rules.
+	Rules []*IngressRule `protobuf:"bytes,2,rep,name=rules,proto3" json:"rules,omitempty"`
+}
+
+func (x *Ingress) Reset() {
+	*x = Ingress{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[25]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Ingress) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Ingress) ProtoMessage() {}
+
+func (x *Ingress) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[25]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Ingress.ProtoReflect.Descriptor instead.
+func (*Ingress) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *Ingress) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Ingress) GetRules() []*IngressRule {
+	if x != nil {
+		return x.Rules
+	}
+	return nil
+}
+
 var File_meshmodel_proto protoreflect.FileDescriptor
 
 var file_meshmodel_proto_rawDesc = []byte{
@@ -2312,9 +2496,26 @@ var file_meshmodel_proto_rawDesc = []byte{
 	0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x08, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x12,
 	0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f,
-	0x6e, 0x42, 0x16, 0x5a, 0x14, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x61, 0x70,
-	0x69, 0x2f, 0x76, 0x31, 0x61, 0x70, 0x68, 0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x6e, 0x22, 0x61, 0x0a, 0x0b, 0x49, 0x6e, 0x67, 0x72, 0x65, 0x73, 0x73, 0x50, 0x61, 0x74, 0x68,
+	0x12, 0x12, 0x0a, 0x04, 0x70, 0x61, 0x74, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x70, 0x61, 0x74, 0x68, 0x12, 0x24, 0x0a, 0x0d, 0x72, 0x65, 0x77, 0x72, 0x69, 0x74, 0x65, 0x54,
+	0x61, 0x72, 0x67, 0x65, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x72, 0x65, 0x77,
+	0x72, 0x69, 0x74, 0x65, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x62, 0x61,
+	0x63, 0x6b, 0x65, 0x6e, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x62, 0x61, 0x63,
+	0x6b, 0x65, 0x6e, 0x64, 0x22, 0x57, 0x0a, 0x0b, 0x49, 0x6e, 0x67, 0x72, 0x65, 0x73, 0x73, 0x52,
+	0x75, 0x6c, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x68, 0x6f, 0x73, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x04, 0x68, 0x6f, 0x73, 0x74, 0x12, 0x34, 0x0a, 0x05, 0x70, 0x61, 0x74, 0x68, 0x73,
+	0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73,
+	0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x49, 0x6e, 0x67, 0x72, 0x65,
+	0x73, 0x73, 0x50, 0x61, 0x74, 0x68, 0x52, 0x05, 0x70, 0x61, 0x74, 0x68, 0x73, 0x22, 0x53, 0x0a,
+	0x07, 0x49, 0x6e, 0x67, 0x72, 0x65, 0x73, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x34, 0x0a, 0x05,
+	0x72, 0x75, 0x6c, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x65, 0x61,
+	0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e,
+	0x49, 0x6e, 0x67, 0x72, 0x65, 0x73, 0x73, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x05, 0x72, 0x75, 0x6c,
+	0x65, 0x73, 0x42, 0x16, 0x5a, 0x14, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x61,
+	0x70, 0x69, 0x2f, 0x76, 0x31, 0x61, 0x70, 0x68, 0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -2329,7 +2530,7 @@ func file_meshmodel_proto_rawDescGZIP() []byte {
 	return file_meshmodel_proto_rawDescData
 }
 
-var file_meshmodel_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_meshmodel_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_meshmodel_proto_goTypes = []interface{}{
 	(*RateLimiterPolicy)(nil),                 // 0: easemesh.v1alpha1.RateLimiterPolicy
 	(*CircuitBreakerPolicy)(nil),              // 1: easemesh.v1alpha1.CircuitBreakerPolicy
@@ -2354,18 +2555,21 @@ var file_meshmodel_proto_goTypes = []interface{}{
 	(*ObservabilityMetricsDetail)(nil),        // 20: easemesh.v1alpha1.ObservabilityMetricsDetail
 	(*ObservabilityMetrics)(nil),              // 21: easemesh.v1alpha1.ObservabilityMetrics
 	(*Tenant)(nil),                            // 22: easemesh.v1alpha1.Tenant
-	nil,                                       // 23: easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
-	nil,                                       // 24: easemesh.v1alpha1.CanaryRule.HeadersEntry
-	(*durationpb.Duration)(nil),               // 25: google.protobuf.Duration
+	(*IngressPath)(nil),                       // 23: easemesh.v1alpha1.IngressPath
+	(*IngressRule)(nil),                       // 24: easemesh.v1alpha1.IngressRule
+	(*Ingress)(nil),                           // 25: easemesh.v1alpha1.Ingress
+	nil,                                       // 26: easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
+	nil,                                       // 27: easemesh.v1alpha1.CanaryRule.HeadersEntry
+	(*durationpb.Duration)(nil),               // 28: google.protobuf.Duration
 }
 var file_meshmodel_proto_depIdxs = []int32{
-	25, // 0: easemesh.v1alpha1.RateLimiterPolicy.timeoutDuration:type_name -> google.protobuf.Duration
-	25, // 1: easemesh.v1alpha1.RateLimiterPolicy.limitRefreshPeriod:type_name -> google.protobuf.Duration
-	25, // 2: easemesh.v1alpha1.CircuitBreakerPolicy.waitDurationInOpenState:type_name -> google.protobuf.Duration
-	25, // 3: easemesh.v1alpha1.RetryerPolicy.waitDuration:type_name -> google.protobuf.Duration
+	28, // 0: easemesh.v1alpha1.RateLimiterPolicy.timeoutDuration:type_name -> google.protobuf.Duration
+	28, // 1: easemesh.v1alpha1.RateLimiterPolicy.limitRefreshPeriod:type_name -> google.protobuf.Duration
+	28, // 2: easemesh.v1alpha1.CircuitBreakerPolicy.waitDurationInOpenState:type_name -> google.protobuf.Duration
+	28, // 3: easemesh.v1alpha1.RetryerPolicy.waitDuration:type_name -> google.protobuf.Duration
 	3,  // 4: easemesh.v1alpha1.URLRule.url:type_name -> easemesh.v1alpha1.StringMatch
-	23, // 5: easemesh.v1alpha1.CanaryRule.serviceInstanceLabels:type_name -> easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
-	24, // 6: easemesh.v1alpha1.CanaryRule.headers:type_name -> easemesh.v1alpha1.CanaryRule.HeadersEntry
+	26, // 5: easemesh.v1alpha1.CanaryRule.serviceInstanceLabels:type_name -> easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
+	27, // 6: easemesh.v1alpha1.CanaryRule.headers:type_name -> easemesh.v1alpha1.CanaryRule.HeadersEntry
 	4,  // 7: easemesh.v1alpha1.CanaryRule.urls:type_name -> easemesh.v1alpha1.URLRule
 	0,  // 8: easemesh.v1alpha1.RateLimiter.policies:type_name -> easemesh.v1alpha1.RateLimiterPolicy
 	4,  // 9: easemesh.v1alpha1.RateLimiter.urls:type_name -> easemesh.v1alpha1.URLRule
@@ -2373,7 +2577,7 @@ var file_meshmodel_proto_depIdxs = []int32{
 	4,  // 11: easemesh.v1alpha1.CircuitBreaker.urls:type_name -> easemesh.v1alpha1.URLRule
 	2,  // 12: easemesh.v1alpha1.Retryer.policies:type_name -> easemesh.v1alpha1.RetryerPolicy
 	4,  // 13: easemesh.v1alpha1.Retryer.urls:type_name -> easemesh.v1alpha1.URLRule
-	25, // 14: easemesh.v1alpha1.TimeLimiter.defaultTimeoutDuration:type_name -> google.protobuf.Duration
+	28, // 14: easemesh.v1alpha1.TimeLimiter.defaultTimeoutDuration:type_name -> google.protobuf.Duration
 	4,  // 15: easemesh.v1alpha1.TimeLimiter.urls:type_name -> easemesh.v1alpha1.URLRule
 	11, // 16: easemesh.v1alpha1.Service.resilience:type_name -> easemesh.v1alpha1.Resilience
 	12, // 17: easemesh.v1alpha1.Service.canary:type_name -> easemesh.v1alpha1.Canary
@@ -2405,12 +2609,14 @@ var file_meshmodel_proto_depIdxs = []int32{
 	20, // 43: easemesh.v1alpha1.ObservabilityMetrics.jvmGc:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
 	20, // 44: easemesh.v1alpha1.ObservabilityMetrics.jvmMemory:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
 	20, // 45: easemesh.v1alpha1.ObservabilityMetrics.md5Dictionary:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
-	3,  // 46: easemesh.v1alpha1.CanaryRule.HeadersEntry.value:type_name -> easemesh.v1alpha1.StringMatch
-	47, // [47:47] is the sub-list for method output_type
-	47, // [47:47] is the sub-list for method input_type
-	47, // [47:47] is the sub-list for extension type_name
-	47, // [47:47] is the sub-list for extension extendee
-	0,  // [0:47] is the sub-list for field type_name
+	23, // 46: easemesh.v1alpha1.IngressRule.paths:type_name -> easemesh.v1alpha1.IngressPath
+	24, // 47: easemesh.v1alpha1.Ingress.rules:type_name -> easemesh.v1alpha1.IngressRule
+	3,  // 48: easemesh.v1alpha1.CanaryRule.HeadersEntry.value:type_name -> easemesh.v1alpha1.StringMatch
+	49, // [49:49] is the sub-list for method output_type
+	49, // [49:49] is the sub-list for method input_type
+	49, // [49:49] is the sub-list for extension type_name
+	49, // [49:49] is the sub-list for extension extendee
+	0,  // [0:49] is the sub-list for field type_name
 }
 
 func init() { file_meshmodel_proto_init() }
@@ -2695,6 +2901,42 @@ func file_meshmodel_proto_init() {
 				return nil
 			}
 		}
+		file_meshmodel_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IngressPath); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meshmodel_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IngressRule); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meshmodel_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Ingress); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2702,7 +2944,7 @@ func file_meshmodel_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_meshmodel_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   25,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -451,3 +451,34 @@ message Tenant {
     // Descriptions for this tenant.
     string description = 3;
 }
+
+// IngressPath is the path for a mesh ingress rule
+message IngressPath {
+    // Path is a regular expression for matching the target HTTP URL.
+    string path = 1;
+
+    // RewriteTarget is a regular expression for rewriting original URL when 
+    // the HTTP URL path match the Path field.  
+    string rewriteTarget = 2;
+
+    // Backend is the mesh service's name.
+    string backend = 3;
+}
+
+// IngressRule is the rule for mesh ingress
+message IngressRule {
+    // Host is the RFC3986 defined host name. 
+    string  host = 1;
+
+    // Paths is an array for mapping HTTP paths to mesh services.
+    repeated IngressPath paths = 2;
+}
+
+// Ingress is the spec of mesh ingress.
+message Ingress {
+    // Name indicates the this Ingress.
+    string  name = 1;
+
+    // Rules is an array of routing rules.
+    repeated IngressRule rules = 2;
+}
