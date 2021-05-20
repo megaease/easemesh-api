@@ -316,7 +316,7 @@ message Observability {
 // ObservabilityOutputServer configures how to report observability data to Kafka.
 message ObservabilityOutputServer {
     // Enables configures to report observability data to Kafka or not.
-    bool Enabled  = 1; 
+    bool enabled  = 1; 
 
     // BootstrapServer configures the Kafka bootstrap address.
     string bootstrapServer = 2;
