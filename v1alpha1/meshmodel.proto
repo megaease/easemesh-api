@@ -20,7 +20,7 @@ package easemesh.v1alpha1;
 option go_package="easemesh/api/v1apha1";
 
 
-// RateLimiterPolicy is the limiting policy used for Resilience component RateLimiter.
+// RateLimiterPolicy configures the limiting policy used for Resilience component RateLimiter.
 // It contains the basic configurations for the limiter, including the permission number,
 // the duration for request waiting and the permission count refreshing period. 
 message RateLimiterPolicy {
@@ -93,7 +93,7 @@ message CircuitBreakerPolicy {
     repeated int32 failureStatusCodes = 12;
 }
 
-// RetryerPolicy is the policy for describing Resilience component Retryer. 
+// RetryerPolicy configures the policy for describing Resilience component Retryer. 
 // It contains the basic configurations for the retryer, including the type of sliding window this 
 // breaker will use. Whether including network error or not and so on.  
 message RetryerPolicy {
@@ -101,25 +101,25 @@ message RetryerPolicy {
     string name = 1; 
 
     // MaxAttempts configures the maximum number of attempts. (including the initial call as the first attempt)
-	int32 maxAttempts = 2;
+    int32 maxAttempts = 2;
 
     // WaitDuration configures the based and fixed wait duration between retry attempts.
-	google.protobuf.Duration waitDuration = 3;
+    google.protobuf.Duration waitDuration = 3;
 
     // BackOffPolicy configures the two kinds of policy, random and exponential.
-	string backOffPolicy = 4;
+    string backOffPolicy = 4;
 
     // RandomizationFactor configures the factor used for backoff, value between 0 and 1.
-	double randomizationFactor = 5;
+    double randomizationFactor = 5;
 
     // CountingNetworkError configures whether a network failure situation should retry or not. 
-	bool countingNetworkError = 6;
+    bool countingNetworkError = 6;
 
-	// FailureStatusCodes is the array for HTTP failure status code for this RetryPolicy.
+    // FailureStatusCodes is the array for HTTP failure status code for this RetryPolicy.
     repeated int32 failureStatusCodes = 7;
 }
 
-// StringMatch can be used to match string in different ways.
+// StringMatch configures how to match string in different ways.
 // Its priority is according to the field order. StringMatch will try exactly matching firstly,
 // then try to check has the same prefix, at last, it will use the regular expression to match the
 // string if it's provided
@@ -146,8 +146,24 @@ message URLRule {
     string policyRef = 3;
 }
 
-// RateLimiter can establish your services' high availability and reliability, 
-// also it can be used for scaling APIs. Protect your servers from overwhelm by the peak traffic.
+// CanaryRule define the rule for canary deployment. Including service instances labels, 
+// how to match colored traffic, which traffic is considered as coloring.
+message CanaryRule { 
+    // ServiceInstanceLabels configure the labels patched into the service instances. 
+    // Registry center will label it to corresponding instances during deployment. It's optional.
+    // It indicates the canary target service instances. The relation between elements in this map is "OR". 
+    map<string,string> serviceInstanceLabels = 1;
+
+    // Headers configure HTTP requests matching configurations with "OR" relation. Once
+    // HTTP requests match one element in this array, it will be regarded as the colored traffic.  
+    map<string, StringMatch> headers = 2;
+
+   // URLs describe the HTTP request matching schemes for this canary rule.
+    repeated URLRule urls  = 3;
+}
+
+// RateLimiter configures a limiter which can establish your services' high availability and reliability, 
+// also it can be used for scaling APIs. RateLimiter can protect servers from overwhelm by the peak traffic.
 message RateLimiter {
     // RateLimiterPolicy contains different limiting configurations for this RateLimiter to use.
     repeated RateLimiterPolicy policies  = 1;
@@ -190,7 +206,7 @@ message Retryer {
 
 }
 
-// Timeout is the amount of time the client should wait for replies from a given service, 
+// Timeout configures the amount of time the client should wait for replies from a given service, 
 // it will be running in upstream clients and declared in downstream relied services.
 message TimeLimiter {
     // DefaultTimeoutDuration configures the default duration for timeout, e.g.,500ms.
@@ -212,7 +228,7 @@ message Service {
     string registerTenant = 2; 
 }
 
-// Resilience includes four key types of resilience features, RateLimiter, CircuitBreaker, 
+// Resilience configures four key types of features, RateLimiter, CircuitBreaker, 
 // Retryer and Timeout.
 message Resilience {
 
@@ -229,11 +245,139 @@ message Resilience {
     TimeLimiter timeLimiter = 4; 
 }
 
-//message Canary {
-//    repeat CanaryRules canaryRule = 1;
-//}
+// Canary configures rules to implement canary deployment. It belongs to the traffic scheduling domain.
+// The developer can deploy a canary version of microservice and accept coloring test its stability before
+// rolling out to the whole instances. 
+message Canary {
+    repeated CanaryRule canaryRules = 1;
+}
 
+// LoadBalance configures how to distribute the traffic inside this mesh.
+message LoadBalance {
+    // Policy including four kinds of load balancing scheme, including random, weightedRandom,ipHash,
+    // headerHash
+    string policy = 1;
 
+    // HeaderHashKey configures the key in HTTP header when the policy is headerHash. 
+    string headerHashKey = 2;
+}
 
+// ObservabilityOutputServer configures how to report observability data to Kafka.
+message ObservabilityOutputServer {
+    // Enables configures to report observability data to Kafka or not.
+    bool Enabled  = 1; 
 
+    // BootstrapServer configures the Kafka bootstrap address.
+    string bootstrapServer = 2;
 
+    // Timeout configures the million second for Kafka's timeout. 
+    int32 timeout = 3; 
+}
+
+message ObservabilityTracingsDetail {
+    // 
+    bool  enabled = 1;
+
+    //
+    string servicePrefix  = 2;
+}
+
+message ObservabilityTracingsOutputConfig {
+    //
+    bool enabled = 1;
+
+    //
+    int32 reportThread = 2;
+
+    //  
+    string topic = 3;
+    
+    // 
+    int32 messageMaxBytes = 4;
+
+    //
+    int32 queuedMaxSpans = 5;
+
+    //
+    int32 queuedMaxSize = 6;
+
+    //
+    int32 messageTimeout = 7;
+}
+
+// ObservabilityTracings configure the tracings of observability.
+message ObservabilityTracings {
+    // 
+    bool enabled = 1;
+
+    // 
+    int32 sampleByQPS  = 2;
+
+    //
+    ObservabilityTracingsOutputConfig output = 3;
+
+    // 
+    ObservabilityTracingsDetail request = 4;
+
+    //
+    ObservabilityTracingsDetail remoteInvoke  = 5;
+
+    //
+    ObservabilityTracingsDetail kafka = 6;
+
+    // 
+    ObservabilityTracingsDetail jdbc = 7;
+
+    // 
+    ObservabilityTracingsDetail redis = 8;
+
+    //
+    ObservabilityTracingsDetail rabbit = 9;
+}
+
+// ObservabilityMetricsDetail is the metrics detail of observability.
+message ObservabilityMetricsDetail  {
+    //
+    bool enabled = 1;
+
+    //
+    int32 interval = 2;
+
+    //
+    string topic = 3;
+}
+
+message ObservabilityMetrics {
+    //
+    bool enabled = 1;
+
+    //
+    ObservabilityMetricsDetail access = 2;
+
+    //
+    ObservabilityMetricsDetail request = 3;
+    
+    //
+    ObservabilityMetricsDetail jdbcStatement = 4;
+
+    //
+    ObservabilityMetricsDetail jdbcConnection = 5;
+
+    //
+    ObservabilityMetricsDetail rabbit = 6;
+
+    //    
+    ObservabilityMetricsDetail kafka = 7;
+
+    //
+    ObservabilityMetricsDetail redis = 8;
+
+    //
+    ObservabilityMetricsDetail jvmGc = 9;
+
+    //
+    ObservabilityMetricsDetail jvmMemory = 10;
+
+    //
+    ObservabilityMetricsDetail md5Dictionary = 11;
+}
