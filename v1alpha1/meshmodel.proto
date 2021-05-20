@@ -42,7 +42,6 @@ message RateLimiterPolicy {
 // It contains the basic configurations for the breaker, including the type of sliding window this 
 // breaker will use. Whether including network error or not and so on. 
 message CircuitBreakerPolicy {
-
 	//  Name is the identify of this policy. 
 	string name  = 1; 
 
@@ -158,7 +157,7 @@ message CanaryRule {
 	// HTTP requests match one element in this array, it will be regarded as the colored traffic.  
 	map<string, StringMatch> headers = 2;
 
-   // Urls describe the HTTP request matching schemes for this canary rule.
+	// Urls describe the HTTP request matching schemes for this canary rule.
 	repeated URLRule urls  = 3;
 }
 
@@ -220,11 +219,10 @@ message TimeLimiter {
 // Service is the basic element in EaseMesh to describe a user's business microservices' 
 // name, belonging tenant, and governance specs.  
 message Service {
- 
 	// Name is the mesh service's name.
 	string name = 1; 
 
-	// registerTenant is the tenant's name this service belongs to.
+	// RegisterTenant is the tenant's name this service belongs to.
 	string registerTenant = 2; 
 
 	// Resilience configuration, optional.

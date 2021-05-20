@@ -865,7 +865,7 @@ type Service struct {
 
 	// Name is the mesh service's name.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// registerTenant is the tenant's name this service belongs to.
+	// RegisterTenant is the tenant's name this service belongs to.
 	RegisterTenant string `protobuf:"bytes,2,opt,name=registerTenant,proto3" json:"registerTenant,omitempty"`
 	// Resilience configuration, optional.
 	Resilience *Resilience `protobuf:"bytes,3,opt,name=resilience,proto3" json:"resilience,omitempty"`
