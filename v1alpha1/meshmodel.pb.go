@@ -867,6 +867,16 @@ type Service struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// registerTenant is the tenant's name this service belongs to.
 	RegisterTenant string `protobuf:"bytes,2,opt,name=registerTenant,proto3" json:"registerTenant,omitempty"`
+	// Resilience configuration, optional.
+	Resilience *Resilience `protobuf:"bytes,3,opt,name=resilience,proto3" json:"resilience,omitempty"`
+	// Canary configuration, optional.
+	Canary *Canary `protobuf:"bytes,4,opt,name=canary,proto3" json:"canary,omitempty"`
+	// LoadBalance configuration, optional.
+	LoadBalance *LoadBalance `protobuf:"bytes,5,opt,name=loadBalance,proto3" json:"loadBalance,omitempty"`
+	// Sidecar configuration, optional.
+	Sidecar *Sidecar `protobuf:"bytes,6,opt,name=sidecar,proto3" json:"sidecar,omitempty"`
+	// Observability configuration, optional.
+	Observability *Observability `protobuf:"bytes,7,opt,name=observability,proto3" json:"observability,omitempty"`
 }
 
 func (x *Service) Reset() {
@@ -913,6 +923,41 @@ func (x *Service) GetRegisterTenant() string {
 		return x.RegisterTenant
 	}
 	return ""
+}
+
+func (x *Service) GetResilience() *Resilience {
+	if x != nil {
+		return x.Resilience
+	}
+	return nil
+}
+
+func (x *Service) GetCanary() *Canary {
+	if x != nil {
+		return x.Canary
+	}
+	return nil
+}
+
+func (x *Service) GetLoadBalance() *LoadBalance {
+	if x != nil {
+		return x.LoadBalance
+	}
+	return nil
+}
+
+func (x *Service) GetSidecar() *Sidecar {
+	if x != nil {
+		return x.Sidecar
+	}
+	return nil
+}
+
+func (x *Service) GetObservability() *Observability {
+	if x != nil {
+		return x.Observability
+	}
+	return nil
 }
 
 // Resilience configures four key types of features, RateLimiter, CircuitBreaker,
@@ -1000,6 +1045,7 @@ type Canary struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// CanaryRules is the mesh service's all rules for canary deployment.
 	CanaryRules []*CanaryRule `protobuf:"bytes,1,rep,name=canaryRules,proto3" json:"canaryRules,omitempty"`
 }
 
@@ -1042,6 +1088,102 @@ func (x *Canary) GetCanaryRules() []*CanaryRule {
 	return nil
 }
 
+// Sidecar configures the sidecar for every mesh service instances. It works inside the same
+// pod with the workload instance.
+type Sidecar struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// DiscoveryType configures the type of service register/discovery type, its value are among
+	// "eureka","consul", and "nacos".
+	DiscoveryType string `protobuf:"bytes,1,opt,name=discoveryType,proto3" json:"discoveryType,omitempty"`
+	// Address is the registry center address for workload to visit.
+	Address string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+	// IngressPort is the port for ingress traffic.
+	IngressPort int32 `protobuf:"varint,3,opt,name=ingressPort,proto3" json:"ingressPort,omitempty"`
+	// IngressProtocol is the protocol for ingress traffic. Its value is "http".
+	IngressProtocol string `protobuf:"bytes,4,opt,name=ingressProtocol,proto3" json:"ingressProtocol,omitempty"`
+	// egressPort is the port for egress traffic.
+	EgressPort int32 `protobuf:"varint,5,opt,name=egressPort,proto3" json:"egressPort,omitempty"`
+	// egressProtocol is the protocol for egress traffic. Its value is "http"
+	EgressProtocol string `protobuf:"bytes,6,opt,name=egressProtocol,proto3" json:"egressProtocol,omitempty"`
+}
+
+func (x *Sidecar) Reset() {
+	*x = Sidecar{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Sidecar) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Sidecar) ProtoMessage() {}
+
+func (x *Sidecar) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Sidecar.ProtoReflect.Descriptor instead.
+func (*Sidecar) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *Sidecar) GetDiscoveryType() string {
+	if x != nil {
+		return x.DiscoveryType
+	}
+	return ""
+}
+
+func (x *Sidecar) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *Sidecar) GetIngressPort() int32 {
+	if x != nil {
+		return x.IngressPort
+	}
+	return 0
+}
+
+func (x *Sidecar) GetIngressProtocol() string {
+	if x != nil {
+		return x.IngressProtocol
+	}
+	return ""
+}
+
+func (x *Sidecar) GetEgressPort() int32 {
+	if x != nil {
+		return x.EgressPort
+	}
+	return 0
+}
+
+func (x *Sidecar) GetEgressProtocol() string {
+	if x != nil {
+		return x.EgressProtocol
+	}
+	return ""
+}
+
 // LoadBalance configures how to distribute the traffic inside this mesh.
 type LoadBalance struct {
 	state         protoimpl.MessageState
@@ -1058,7 +1200,7 @@ type LoadBalance struct {
 func (x *LoadBalance) Reset() {
 	*x = LoadBalance{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meshmodel_proto_msgTypes[13]
+		mi := &file_meshmodel_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1071,7 +1213,7 @@ func (x *LoadBalance) String() string {
 func (*LoadBalance) ProtoMessage() {}
 
 func (x *LoadBalance) ProtoReflect() protoreflect.Message {
-	mi := &file_meshmodel_proto_msgTypes[13]
+	mi := &file_meshmodel_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1084,7 +1226,7 @@ func (x *LoadBalance) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoadBalance.ProtoReflect.Descriptor instead.
 func (*LoadBalance) Descriptor() ([]byte, []int) {
-	return file_meshmodel_proto_rawDescGZIP(), []int{13}
+	return file_meshmodel_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *LoadBalance) GetPolicy() string {
@@ -1099,6 +1241,73 @@ func (x *LoadBalance) GetHeaderHashKey() string {
 		return x.HeaderHashKey
 	}
 	return ""
+}
+
+// Observability consists of three components, outputServer, tracing, and metrics.
+type Observability struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// OutputServer configures
+	OutputServer *ObservabilityOutputServer `protobuf:"bytes,1,opt,name=outputServer,proto3" json:"outputServer,omitempty"`
+	// Tracings configures whether JavaAgent should deal with tracing HTTP header or not.
+	Tracings *ObservabilityTracings `protobuf:"bytes,2,opt,name=tracings,proto3" json:"tracings,omitempty"`
+	// Metrics configures the metrics JavaAgent should collect.
+	Metrics *ObservabilityMetrics `protobuf:"bytes,3,opt,name=metrics,proto3" json:"metrics,omitempty"`
+}
+
+func (x *Observability) Reset() {
+	*x = Observability{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Observability) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Observability) ProtoMessage() {}
+
+func (x *Observability) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Observability.ProtoReflect.Descriptor instead.
+func (*Observability) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *Observability) GetOutputServer() *ObservabilityOutputServer {
+	if x != nil {
+		return x.OutputServer
+	}
+	return nil
+}
+
+func (x *Observability) GetTracings() *ObservabilityTracings {
+	if x != nil {
+		return x.Tracings
+	}
+	return nil
+}
+
+func (x *Observability) GetMetrics() *ObservabilityMetrics {
+	if x != nil {
+		return x.Metrics
+	}
+	return nil
 }
 
 // ObservabilityOutputServer configures how to report observability data to Kafka.
@@ -1118,7 +1327,7 @@ type ObservabilityOutputServer struct {
 func (x *ObservabilityOutputServer) Reset() {
 	*x = ObservabilityOutputServer{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meshmodel_proto_msgTypes[14]
+		mi := &file_meshmodel_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1131,7 +1340,7 @@ func (x *ObservabilityOutputServer) String() string {
 func (*ObservabilityOutputServer) ProtoMessage() {}
 
 func (x *ObservabilityOutputServer) ProtoReflect() protoreflect.Message {
-	mi := &file_meshmodel_proto_msgTypes[14]
+	mi := &file_meshmodel_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1144,7 +1353,7 @@ func (x *ObservabilityOutputServer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ObservabilityOutputServer.ProtoReflect.Descriptor instead.
 func (*ObservabilityOutputServer) Descriptor() ([]byte, []int) {
-	return file_meshmodel_proto_rawDescGZIP(), []int{14}
+	return file_meshmodel_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ObservabilityOutputServer) GetEnabled() bool {
@@ -1168,21 +1377,23 @@ func (x *ObservabilityOutputServer) GetTimeout() int32 {
 	return 0
 }
 
+// ObservabilityTracingsDetail
 type ObservabilityTracingsDetail struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//
+	// Enabled configures to enable this tracing component or not.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	//
+	// ServicePrefix is the prefix for tracing's remoteEndpoint's service name. It will
+	// combine with the tracing component's name.
 	ServicePrefix string `protobuf:"bytes,2,opt,name=servicePrefix,proto3" json:"servicePrefix,omitempty"`
 }
 
 func (x *ObservabilityTracingsDetail) Reset() {
 	*x = ObservabilityTracingsDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meshmodel_proto_msgTypes[15]
+		mi := &file_meshmodel_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1195,7 +1406,7 @@ func (x *ObservabilityTracingsDetail) String() string {
 func (*ObservabilityTracingsDetail) ProtoMessage() {}
 
 func (x *ObservabilityTracingsDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_meshmodel_proto_msgTypes[15]
+	mi := &file_meshmodel_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1208,7 +1419,7 @@ func (x *ObservabilityTracingsDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ObservabilityTracingsDetail.ProtoReflect.Descriptor instead.
 func (*ObservabilityTracingsDetail) Descriptor() ([]byte, []int) {
-	return file_meshmodel_proto_rawDescGZIP(), []int{15}
+	return file_meshmodel_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ObservabilityTracingsDetail) GetEnabled() bool {
@@ -1230,26 +1441,26 @@ type ObservabilityTracingsOutputConfig struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//
+	// Enabled configures to enable this tracing component's output or not.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	//
+	// ReportThread configures the thread number for JavaAgent to report.
 	ReportThread int32 `protobuf:"varint,2,opt,name=reportThread,proto3" json:"reportThread,omitempty"`
-	//
+	// Topic configures the Kafka topic for tracing output target.
 	Topic string `protobuf:"bytes,3,opt,name=topic,proto3" json:"topic,omitempty"`
-	//
+	// MessageMaxBytes configures the max bytes for one tracing report message.
 	MessageMaxBytes int32 `protobuf:"varint,4,opt,name=messageMaxBytes,proto3" json:"messageMaxBytes,omitempty"`
-	//
+	// QueuedMaxSpans configures the max spans number for reporting queued.
 	QueuedMaxSpans int32 `protobuf:"varint,5,opt,name=queuedMaxSpans,proto3" json:"queuedMaxSpans,omitempty"`
-	//
+	// QueuedMaxSize configures the max size of reporting queue.
 	QueuedMaxSize int32 `protobuf:"varint,6,opt,name=queuedMaxSize,proto3" json:"queuedMaxSize,omitempty"`
-	//
+	// MessageTimeout configures the timeout for the message queue.
 	MessageTimeout int32 `protobuf:"varint,7,opt,name=messageTimeout,proto3" json:"messageTimeout,omitempty"`
 }
 
 func (x *ObservabilityTracingsOutputConfig) Reset() {
 	*x = ObservabilityTracingsOutputConfig{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meshmodel_proto_msgTypes[16]
+		mi := &file_meshmodel_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1262,7 +1473,7 @@ func (x *ObservabilityTracingsOutputConfig) String() string {
 func (*ObservabilityTracingsOutputConfig) ProtoMessage() {}
 
 func (x *ObservabilityTracingsOutputConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_meshmodel_proto_msgTypes[16]
+	mi := &file_meshmodel_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1275,7 +1486,7 @@ func (x *ObservabilityTracingsOutputConfig) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ObservabilityTracingsOutputConfig.ProtoReflect.Descriptor instead.
 func (*ObservabilityTracingsOutputConfig) Descriptor() ([]byte, []int) {
-	return file_meshmodel_proto_rawDescGZIP(), []int{16}
+	return file_meshmodel_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ObservabilityTracingsOutputConfig) GetEnabled() bool {
@@ -1333,30 +1544,31 @@ type ObservabilityTracings struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//
+	// Enabled
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	//
+	// SampleByQPS configures the QPS value for tracing sampling.
+	// The exceeded request will be ingored.
 	SampleByQPS int32 `protobuf:"varint,2,opt,name=sampleByQPS,proto3" json:"sampleByQPS,omitempty"`
-	//
+	// Output configures the tracing output topic, queue and thread.
 	Output *ObservabilityTracingsOutputConfig `protobuf:"bytes,3,opt,name=output,proto3" json:"output,omitempty"`
-	//
+	// Request configures the tracing switch for HTTP request.
 	Request *ObservabilityTracingsDetail `protobuf:"bytes,4,opt,name=request,proto3" json:"request,omitempty"`
-	//
+	// RemoteInvoke configures the tracing switch for remove calling.
 	RemoteInvoke *ObservabilityTracingsDetail `protobuf:"bytes,5,opt,name=remoteInvoke,proto3" json:"remoteInvoke,omitempty"`
-	//
+	// Kafka configures the tracing switch for Kafka.
 	Kafka *ObservabilityTracingsDetail `protobuf:"bytes,6,opt,name=kafka,proto3" json:"kafka,omitempty"`
-	//
+	// Jdbc configures the tracing switch for JDBC.
 	Jdbc *ObservabilityTracingsDetail `protobuf:"bytes,7,opt,name=jdbc,proto3" json:"jdbc,omitempty"`
-	//
+	// Redis configures the tracing switch for redis.
 	Redis *ObservabilityTracingsDetail `protobuf:"bytes,8,opt,name=redis,proto3" json:"redis,omitempty"`
-	//
+	// Rabbit configures the tracing switch for rabbitMQ.
 	Rabbit *ObservabilityTracingsDetail `protobuf:"bytes,9,opt,name=rabbit,proto3" json:"rabbit,omitempty"`
 }
 
 func (x *ObservabilityTracings) Reset() {
 	*x = ObservabilityTracings{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meshmodel_proto_msgTypes[17]
+		mi := &file_meshmodel_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1369,7 +1581,7 @@ func (x *ObservabilityTracings) String() string {
 func (*ObservabilityTracings) ProtoMessage() {}
 
 func (x *ObservabilityTracings) ProtoReflect() protoreflect.Message {
-	mi := &file_meshmodel_proto_msgTypes[17]
+	mi := &file_meshmodel_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1382,7 +1594,7 @@ func (x *ObservabilityTracings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ObservabilityTracings.ProtoReflect.Descriptor instead.
 func (*ObservabilityTracings) Descriptor() ([]byte, []int) {
-	return file_meshmodel_proto_rawDescGZIP(), []int{17}
+	return file_meshmodel_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ObservabilityTracings) GetEnabled() bool {
@@ -1454,18 +1666,18 @@ type ObservabilityMetricsDetail struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//
+	// Enabled configures the switch for one kind metric.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	//
+	// Interval configures the million seconds for metric reporting.
 	Interval int32 `protobuf:"varint,2,opt,name=interval,proto3" json:"interval,omitempty"`
-	//
+	// Topic configures the metric's reporting topic.
 	Topic string `protobuf:"bytes,3,opt,name=topic,proto3" json:"topic,omitempty"`
 }
 
 func (x *ObservabilityMetricsDetail) Reset() {
 	*x = ObservabilityMetricsDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meshmodel_proto_msgTypes[18]
+		mi := &file_meshmodel_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1478,7 +1690,7 @@ func (x *ObservabilityMetricsDetail) String() string {
 func (*ObservabilityMetricsDetail) ProtoMessage() {}
 
 func (x *ObservabilityMetricsDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_meshmodel_proto_msgTypes[18]
+	mi := &file_meshmodel_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1491,7 +1703,7 @@ func (x *ObservabilityMetricsDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ObservabilityMetricsDetail.ProtoReflect.Descriptor instead.
 func (*ObservabilityMetricsDetail) Descriptor() ([]byte, []int) {
-	return file_meshmodel_proto_rawDescGZIP(), []int{18}
+	return file_meshmodel_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ObservabilityMetricsDetail) GetEnabled() bool {
@@ -1520,33 +1732,34 @@ type ObservabilityMetrics struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//
+	// Enabled configures the global switch for this mesh service.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	//
+	// Access configures the access log about metric.
 	Access *ObservabilityMetricsDetail `protobuf:"bytes,2,opt,name=access,proto3" json:"access,omitempty"`
-	//
+	// Request configures the HTTP request about metric.
 	Request *ObservabilityMetricsDetail `protobuf:"bytes,3,opt,name=request,proto3" json:"request,omitempty"`
-	//
+	// JdbcStatement configures the JDBC statement metric.
 	JdbcStatement *ObservabilityMetricsDetail `protobuf:"bytes,4,opt,name=jdbcStatement,proto3" json:"jdbcStatement,omitempty"`
-	//
+	// JdbcConnection configures the JDBC connection about metric.
 	JdbcConnection *ObservabilityMetricsDetail `protobuf:"bytes,5,opt,name=jdbcConnection,proto3" json:"jdbcConnection,omitempty"`
-	//
+	// Rabbit configures the RabbitMQ metric.
 	Rabbit *ObservabilityMetricsDetail `protobuf:"bytes,6,opt,name=rabbit,proto3" json:"rabbit,omitempty"`
-	Kafka  *ObservabilityMetricsDetail `protobuf:"bytes,7,opt,name=kafka,proto3" json:"kafka,omitempty"`
-	//
+	// Kafka configures the Kafka about metric.
+	Kafka *ObservabilityMetricsDetail `protobuf:"bytes,7,opt,name=kafka,proto3" json:"kafka,omitempty"`
+	// Redis configures the redis about metric.
 	Redis *ObservabilityMetricsDetail `protobuf:"bytes,8,opt,name=redis,proto3" json:"redis,omitempty"`
-	//
+	// JvmGc configures the JVM GC about metric.
 	JvmGc *ObservabilityMetricsDetail `protobuf:"bytes,9,opt,name=jvmGc,proto3" json:"jvmGc,omitempty"`
-	//
+	// JvmMemory configures the Jvm memory about metric.
 	JvmMemory *ObservabilityMetricsDetail `protobuf:"bytes,10,opt,name=jvmMemory,proto3" json:"jvmMemory,omitempty"`
-	//
+	// Md5Dictionary configures the md5Dictionary about metric.
 	Md5Dictionary *ObservabilityMetricsDetail `protobuf:"bytes,11,opt,name=md5Dictionary,proto3" json:"md5Dictionary,omitempty"`
 }
 
 func (x *ObservabilityMetrics) Reset() {
 	*x = ObservabilityMetrics{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meshmodel_proto_msgTypes[19]
+		mi := &file_meshmodel_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1559,7 +1772,7 @@ func (x *ObservabilityMetrics) String() string {
 func (*ObservabilityMetrics) ProtoMessage() {}
 
 func (x *ObservabilityMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_meshmodel_proto_msgTypes[19]
+	mi := &file_meshmodel_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1572,7 +1785,7 @@ func (x *ObservabilityMetrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ObservabilityMetrics.ProtoReflect.Descriptor instead.
 func (*ObservabilityMetrics) Descriptor() ([]byte, []int) {
-	return file_meshmodel_proto_rawDescGZIP(), []int{19}
+	return file_meshmodel_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ObservabilityMetrics) GetEnabled() bool {
@@ -1650,6 +1863,77 @@ func (x *ObservabilityMetrics) GetMd5Dictionary() *ObservabilityMetricsDetail {
 		return x.Md5Dictionary
 	}
 	return nil
+}
+
+// Tenant is the logic group of mesh services. Inside the same tenant,
+// services can visit each other directly. There are two kinds of tenant, one is the  common type
+// of tenants and the other is system reserved "global" tenant which's access scope is globally
+// inside the mesh . If one mesh service is created with "global" tenant filed, it can be visible
+// to all the service inside the mesh.
+type Tenant struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Name is the identify of this tenant.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Services are the array of mesh service name in this tenant.
+	Services []string `protobuf:"bytes,2,rep,name=services,proto3" json:"services,omitempty"`
+	// Descriptions for this tenant.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+}
+
+func (x *Tenant) Reset() {
+	*x = Tenant{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[22]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Tenant) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Tenant) ProtoMessage() {}
+
+func (x *Tenant) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[22]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Tenant.ProtoReflect.Descriptor instead.
+func (*Tenant) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *Tenant) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Tenant) GetServices() []string {
+	if x != nil {
+		return x.Services
+	}
+	return nil
+}
+
+func (x *Tenant) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
 }
 
 var File_meshmodel_proto protoreflect.FileDescriptor
@@ -1817,38 +2101,86 @@ var file_meshmodel_proto_rawDesc = []byte{
 	0x69, 0x6f, 0x6e, 0x12, 0x2e, 0x0a, 0x04, 0x75, 0x72, 0x6c, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28,
 	0x0b, 0x32, 0x1a, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61,
 	0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x55, 0x52, 0x4c, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x04, 0x75,
-	0x72, 0x6c, 0x73, 0x22, 0x45, 0x0a, 0x07, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x12,
-	0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61,
-	0x6d, 0x65, 0x12, 0x26, 0x0a, 0x0e, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x54, 0x65,
-	0x6e, 0x61, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x72, 0x65, 0x67, 0x69,
-	0x73, 0x74, 0x65, 0x72, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x22, 0x91, 0x02, 0x0a, 0x0a, 0x52,
-	0x65, 0x73, 0x69, 0x6c, 0x69, 0x65, 0x6e, 0x63, 0x65, 0x12, 0x40, 0x0a, 0x0b, 0x72, 0x61, 0x74,
-	0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e,
-	0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68,
-	0x61, 0x31, 0x2e, 0x52, 0x61, 0x74, 0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x65, 0x72, 0x52, 0x0b,
-	0x72, 0x61, 0x74, 0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x65, 0x72, 0x12, 0x49, 0x0a, 0x0e, 0x63,
-	0x69, 0x72, 0x63, 0x75, 0x69, 0x74, 0x42, 0x72, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76,
-	0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x43, 0x69, 0x72, 0x63, 0x75, 0x69, 0x74, 0x42,
-	0x72, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x52, 0x0e, 0x63, 0x69, 0x72, 0x63, 0x75, 0x69, 0x74, 0x42,
-	0x72, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x12, 0x34, 0x0a, 0x07, 0x72, 0x65, 0x74, 0x72, 0x79, 0x65,
-	0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65,
-	0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x52, 0x65, 0x74, 0x72,
-	0x79, 0x65, 0x72, 0x52, 0x07, 0x72, 0x65, 0x74, 0x72, 0x79, 0x65, 0x72, 0x12, 0x40, 0x0a, 0x0b,
-	0x74, 0x69, 0x6d, 0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x65, 0x72, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x72, 0x6c, 0x73, 0x22, 0xf7, 0x02, 0x0a, 0x07, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
+	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x12, 0x26, 0x0a, 0x0e, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x54,
+	0x65, 0x6e, 0x61, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x72, 0x65, 0x67,
+	0x69, 0x73, 0x74, 0x65, 0x72, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x12, 0x3d, 0x0a, 0x0a, 0x72,
+	0x65, 0x73, 0x69, 0x6c, 0x69, 0x65, 0x6e, 0x63, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x1d, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70,
+	0x68, 0x61, 0x31, 0x2e, 0x52, 0x65, 0x73, 0x69, 0x6c, 0x69, 0x65, 0x6e, 0x63, 0x65, 0x52, 0x0a,
+	0x72, 0x65, 0x73, 0x69, 0x6c, 0x69, 0x65, 0x6e, 0x63, 0x65, 0x12, 0x31, 0x0a, 0x06, 0x63, 0x61,
+	0x6e, 0x61, 0x72, 0x79, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x65, 0x61, 0x73,
+	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x43,
+	0x61, 0x6e, 0x61, 0x72, 0x79, 0x52, 0x06, 0x63, 0x61, 0x6e, 0x61, 0x72, 0x79, 0x12, 0x40, 0x0a,
+	0x0b, 0x6c, 0x6f, 0x61, 0x64, 0x42, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x18, 0x05, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31,
+	0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x4c, 0x6f, 0x61, 0x64, 0x42, 0x61, 0x6c, 0x61, 0x6e,
+	0x63, 0x65, 0x52, 0x0b, 0x6c, 0x6f, 0x61, 0x64, 0x42, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x12,
+	0x34, 0x0a, 0x07, 0x73, 0x69, 0x64, 0x65, 0x63, 0x61, 0x72, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1a, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c,
+	0x70, 0x68, 0x61, 0x31, 0x2e, 0x53, 0x69, 0x64, 0x65, 0x63, 0x61, 0x72, 0x52, 0x07, 0x73, 0x69,
+	0x64, 0x65, 0x63, 0x61, 0x72, 0x12, 0x46, 0x0a, 0x0d, 0x6f, 0x62, 0x73, 0x65, 0x72, 0x76, 0x61,
+	0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x65,
+	0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31,
+	0x2e, 0x4f, 0x62, 0x73, 0x65, 0x72, 0x76, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x52, 0x0d,
+	0x6f, 0x62, 0x73, 0x65, 0x72, 0x76, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x22, 0x91, 0x02,
+	0x0a, 0x0a, 0x52, 0x65, 0x73, 0x69, 0x6c, 0x69, 0x65, 0x6e, 0x63, 0x65, 0x12, 0x40, 0x0a, 0x0b,
+	0x72, 0x61, 0x74, 0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x1e, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61,
-	0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x65,
-	0x72, 0x52, 0x0b, 0x74, 0x69, 0x6d, 0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x65, 0x72, 0x22, 0x49,
-	0x0a, 0x06, 0x43, 0x61, 0x6e, 0x61, 0x72, 0x79, 0x12, 0x3f, 0x0a, 0x0b, 0x63, 0x61, 0x6e, 0x61,
-	0x72, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1d, 0x2e,
-	0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61,
-	0x31, 0x2e, 0x43, 0x61, 0x6e, 0x61, 0x72, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x0b, 0x63, 0x61,
-	0x6e, 0x61, 0x72, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x73, 0x22, 0x4b, 0x0a, 0x0b, 0x4c, 0x6f, 0x61,
-	0x64, 0x42, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x6f, 0x6c, 0x69,
-	0x63, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x6f, 0x6c, 0x69, 0x63, 0x79,
-	0x12, 0x24, 0x0a, 0x0d, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x48, 0x61, 0x73, 0x68, 0x4b, 0x65,
-	0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x48,
-	0x61, 0x73, 0x68, 0x4b, 0x65, 0x79, 0x22, 0x79, 0x0a, 0x19, 0x4f, 0x62, 0x73, 0x65, 0x72, 0x76,
+	0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x52, 0x61, 0x74, 0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x65,
+	0x72, 0x52, 0x0b, 0x72, 0x61, 0x74, 0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x65, 0x72, 0x12, 0x49,
+	0x0a, 0x0e, 0x63, 0x69, 0x72, 0x63, 0x75, 0x69, 0x74, 0x42, 0x72, 0x65, 0x61, 0x6b, 0x65, 0x72,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73,
+	0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x43, 0x69, 0x72, 0x63, 0x75,
+	0x69, 0x74, 0x42, 0x72, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x52, 0x0e, 0x63, 0x69, 0x72, 0x63, 0x75,
+	0x69, 0x74, 0x42, 0x72, 0x65, 0x61, 0x6b, 0x65, 0x72, 0x12, 0x34, 0x0a, 0x07, 0x72, 0x65, 0x74,
+	0x72, 0x79, 0x65, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x65, 0x61, 0x73,
+	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x52,
+	0x65, 0x74, 0x72, 0x79, 0x65, 0x72, 0x52, 0x07, 0x72, 0x65, 0x74, 0x72, 0x79, 0x65, 0x72, 0x12,
+	0x40, 0x0a, 0x0b, 0x74, 0x69, 0x6d, 0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x65, 0x72, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e,
+	0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x4c, 0x69, 0x6d,
+	0x69, 0x74, 0x65, 0x72, 0x52, 0x0b, 0x74, 0x69, 0x6d, 0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x65,
+	0x72, 0x22, 0x49, 0x0a, 0x06, 0x43, 0x61, 0x6e, 0x61, 0x72, 0x79, 0x12, 0x3f, 0x0a, 0x0b, 0x63,
+	0x61, 0x6e, 0x61, 0x72, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x1d, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c,
+	0x70, 0x68, 0x61, 0x31, 0x2e, 0x43, 0x61, 0x6e, 0x61, 0x72, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x52,
+	0x0b, 0x63, 0x61, 0x6e, 0x61, 0x72, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x73, 0x22, 0xdd, 0x01, 0x0a,
+	0x07, 0x53, 0x69, 0x64, 0x65, 0x63, 0x61, 0x72, 0x12, 0x24, 0x0a, 0x0d, 0x64, 0x69, 0x73, 0x63,
+	0x6f, 0x76, 0x65, 0x72, 0x79, 0x54, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0d, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x79, 0x54, 0x79, 0x70, 0x65, 0x12, 0x18,
+	0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x20, 0x0a, 0x0b, 0x69, 0x6e, 0x67, 0x72,
+	0x65, 0x73, 0x73, 0x50, 0x6f, 0x72, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0b, 0x69,
+	0x6e, 0x67, 0x72, 0x65, 0x73, 0x73, 0x50, 0x6f, 0x72, 0x74, 0x12, 0x28, 0x0a, 0x0f, 0x69, 0x6e,
+	0x67, 0x72, 0x65, 0x73, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0f, 0x69, 0x6e, 0x67, 0x72, 0x65, 0x73, 0x73, 0x50, 0x72, 0x6f, 0x74,
+	0x6f, 0x63, 0x6f, 0x6c, 0x12, 0x1e, 0x0a, 0x0a, 0x65, 0x67, 0x72, 0x65, 0x73, 0x73, 0x50, 0x6f,
+	0x72, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x65, 0x67, 0x72, 0x65, 0x73, 0x73,
+	0x50, 0x6f, 0x72, 0x74, 0x12, 0x26, 0x0a, 0x0e, 0x65, 0x67, 0x72, 0x65, 0x73, 0x73, 0x50, 0x72,
+	0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x65, 0x67,
+	0x72, 0x65, 0x73, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x22, 0x4b, 0x0a, 0x0b,
+	0x4c, 0x6f, 0x61, 0x64, 0x42, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x70,
+	0x6f, 0x6c, 0x69, 0x63, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x6f, 0x6c,
+	0x69, 0x63, 0x79, 0x12, 0x24, 0x0a, 0x0d, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x48, 0x61, 0x73,
+	0x68, 0x4b, 0x65, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x68, 0x65, 0x61, 0x64,
+	0x65, 0x72, 0x48, 0x61, 0x73, 0x68, 0x4b, 0x65, 0x79, 0x22, 0xea, 0x01, 0x0a, 0x0d, 0x4f, 0x62,
+	0x73, 0x65, 0x72, 0x76, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x12, 0x50, 0x0a, 0x0c, 0x6f,
+	0x75, 0x74, 0x70, 0x75, 0x74, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x2c, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61,
+	0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x4f, 0x62, 0x73, 0x65, 0x72, 0x76, 0x61, 0x62, 0x69, 0x6c,
+	0x69, 0x74, 0x79, 0x4f, 0x75, 0x74, 0x70, 0x75, 0x74, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x52,
+	0x0c, 0x6f, 0x75, 0x74, 0x70, 0x75, 0x74, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x12, 0x44, 0x0a,
+	0x08, 0x74, 0x72, 0x61, 0x63, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x28, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70,
+	0x68, 0x61, 0x31, 0x2e, 0x4f, 0x62, 0x73, 0x65, 0x72, 0x76, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74,
+	0x79, 0x54, 0x72, 0x61, 0x63, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x08, 0x74, 0x72, 0x61, 0x63, 0x69,
+	0x6e, 0x67, 0x73, 0x12, 0x41, 0x0a, 0x07, 0x6d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e,
+	0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x4f, 0x62, 0x73, 0x65, 0x72, 0x76, 0x61,
+	0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73, 0x52, 0x07, 0x6d,
+	0x65, 0x74, 0x72, 0x69, 0x63, 0x73, 0x22, 0x79, 0x0a, 0x19, 0x4f, 0x62, 0x73, 0x65, 0x72, 0x76,
 	0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x4f, 0x75, 0x74, 0x70, 0x75, 0x74, 0x53, 0x65, 0x72,
 	0x76, 0x65, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x28, 0x0a,
@@ -1974,9 +2306,15 @@ var file_meshmodel_proto_rawDesc = []byte{
 	0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x4f, 0x62, 0x73, 0x65,
 	0x72, 0x76, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73,
 	0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x52, 0x0d, 0x6d, 0x64, 0x35, 0x44, 0x69, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x61, 0x72, 0x79, 0x42, 0x16, 0x5a, 0x14, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73,
-	0x68, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x61, 0x70, 0x68, 0x61, 0x31, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x6e, 0x61, 0x72, 0x79, 0x22, 0x5a, 0x0a, 0x06, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x12,
+	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x18,
+	0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x08, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x12,
+	0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f,
+	0x6e, 0x42, 0x16, 0x5a, 0x14, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x61, 0x70,
+	0x69, 0x2f, 0x76, 0x31, 0x61, 0x70, 0x68, 0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -1991,7 +2329,7 @@ func file_meshmodel_proto_rawDescGZIP() []byte {
 	return file_meshmodel_proto_rawDescData
 }
 
-var file_meshmodel_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_meshmodel_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_meshmodel_proto_goTypes = []interface{}{
 	(*RateLimiterPolicy)(nil),                 // 0: easemesh.v1alpha1.RateLimiterPolicy
 	(*CircuitBreakerPolicy)(nil),              // 1: easemesh.v1alpha1.CircuitBreakerPolicy
@@ -2006,25 +2344,28 @@ var file_meshmodel_proto_goTypes = []interface{}{
 	(*Service)(nil),                           // 10: easemesh.v1alpha1.Service
 	(*Resilience)(nil),                        // 11: easemesh.v1alpha1.Resilience
 	(*Canary)(nil),                            // 12: easemesh.v1alpha1.Canary
-	(*LoadBalance)(nil),                       // 13: easemesh.v1alpha1.LoadBalance
-	(*ObservabilityOutputServer)(nil),         // 14: easemesh.v1alpha1.ObservabilityOutputServer
-	(*ObservabilityTracingsDetail)(nil),       // 15: easemesh.v1alpha1.ObservabilityTracingsDetail
-	(*ObservabilityTracingsOutputConfig)(nil), // 16: easemesh.v1alpha1.ObservabilityTracingsOutputConfig
-	(*ObservabilityTracings)(nil),             // 17: easemesh.v1alpha1.ObservabilityTracings
-	(*ObservabilityMetricsDetail)(nil),        // 18: easemesh.v1alpha1.ObservabilityMetricsDetail
-	(*ObservabilityMetrics)(nil),              // 19: easemesh.v1alpha1.ObservabilityMetrics
-	nil,                                       // 20: easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
-	nil,                                       // 21: easemesh.v1alpha1.CanaryRule.HeadersEntry
-	(*durationpb.Duration)(nil),               // 22: google.protobuf.Duration
+	(*Sidecar)(nil),                           // 13: easemesh.v1alpha1.Sidecar
+	(*LoadBalance)(nil),                       // 14: easemesh.v1alpha1.LoadBalance
+	(*Observability)(nil),                     // 15: easemesh.v1alpha1.Observability
+	(*ObservabilityOutputServer)(nil),         // 16: easemesh.v1alpha1.ObservabilityOutputServer
+	(*ObservabilityTracingsDetail)(nil),       // 17: easemesh.v1alpha1.ObservabilityTracingsDetail
+	(*ObservabilityTracingsOutputConfig)(nil), // 18: easemesh.v1alpha1.ObservabilityTracingsOutputConfig
+	(*ObservabilityTracings)(nil),             // 19: easemesh.v1alpha1.ObservabilityTracings
+	(*ObservabilityMetricsDetail)(nil),        // 20: easemesh.v1alpha1.ObservabilityMetricsDetail
+	(*ObservabilityMetrics)(nil),              // 21: easemesh.v1alpha1.ObservabilityMetrics
+	(*Tenant)(nil),                            // 22: easemesh.v1alpha1.Tenant
+	nil,                                       // 23: easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
+	nil,                                       // 24: easemesh.v1alpha1.CanaryRule.HeadersEntry
+	(*durationpb.Duration)(nil),               // 25: google.protobuf.Duration
 }
 var file_meshmodel_proto_depIdxs = []int32{
-	22, // 0: easemesh.v1alpha1.RateLimiterPolicy.timeoutDuration:type_name -> google.protobuf.Duration
-	22, // 1: easemesh.v1alpha1.RateLimiterPolicy.limitRefreshPeriod:type_name -> google.protobuf.Duration
-	22, // 2: easemesh.v1alpha1.CircuitBreakerPolicy.waitDurationInOpenState:type_name -> google.protobuf.Duration
-	22, // 3: easemesh.v1alpha1.RetryerPolicy.waitDuration:type_name -> google.protobuf.Duration
+	25, // 0: easemesh.v1alpha1.RateLimiterPolicy.timeoutDuration:type_name -> google.protobuf.Duration
+	25, // 1: easemesh.v1alpha1.RateLimiterPolicy.limitRefreshPeriod:type_name -> google.protobuf.Duration
+	25, // 2: easemesh.v1alpha1.CircuitBreakerPolicy.waitDurationInOpenState:type_name -> google.protobuf.Duration
+	25, // 3: easemesh.v1alpha1.RetryerPolicy.waitDuration:type_name -> google.protobuf.Duration
 	3,  // 4: easemesh.v1alpha1.URLRule.url:type_name -> easemesh.v1alpha1.StringMatch
-	20, // 5: easemesh.v1alpha1.CanaryRule.serviceInstanceLabels:type_name -> easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
-	21, // 6: easemesh.v1alpha1.CanaryRule.headers:type_name -> easemesh.v1alpha1.CanaryRule.HeadersEntry
+	23, // 5: easemesh.v1alpha1.CanaryRule.serviceInstanceLabels:type_name -> easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
+	24, // 6: easemesh.v1alpha1.CanaryRule.headers:type_name -> easemesh.v1alpha1.CanaryRule.HeadersEntry
 	4,  // 7: easemesh.v1alpha1.CanaryRule.urls:type_name -> easemesh.v1alpha1.URLRule
 	0,  // 8: easemesh.v1alpha1.RateLimiter.policies:type_name -> easemesh.v1alpha1.RateLimiterPolicy
 	4,  // 9: easemesh.v1alpha1.RateLimiter.urls:type_name -> easemesh.v1alpha1.URLRule
@@ -2032,36 +2373,44 @@ var file_meshmodel_proto_depIdxs = []int32{
 	4,  // 11: easemesh.v1alpha1.CircuitBreaker.urls:type_name -> easemesh.v1alpha1.URLRule
 	2,  // 12: easemesh.v1alpha1.Retryer.policies:type_name -> easemesh.v1alpha1.RetryerPolicy
 	4,  // 13: easemesh.v1alpha1.Retryer.urls:type_name -> easemesh.v1alpha1.URLRule
-	22, // 14: easemesh.v1alpha1.TimeLimiter.defaultTimeoutDuration:type_name -> google.protobuf.Duration
+	25, // 14: easemesh.v1alpha1.TimeLimiter.defaultTimeoutDuration:type_name -> google.protobuf.Duration
 	4,  // 15: easemesh.v1alpha1.TimeLimiter.urls:type_name -> easemesh.v1alpha1.URLRule
-	6,  // 16: easemesh.v1alpha1.Resilience.rateLimiter:type_name -> easemesh.v1alpha1.RateLimiter
-	7,  // 17: easemesh.v1alpha1.Resilience.circuitBreaker:type_name -> easemesh.v1alpha1.CircuitBreaker
-	8,  // 18: easemesh.v1alpha1.Resilience.retryer:type_name -> easemesh.v1alpha1.Retryer
-	9,  // 19: easemesh.v1alpha1.Resilience.timeLimiter:type_name -> easemesh.v1alpha1.TimeLimiter
-	5,  // 20: easemesh.v1alpha1.Canary.canaryRules:type_name -> easemesh.v1alpha1.CanaryRule
-	16, // 21: easemesh.v1alpha1.ObservabilityTracings.output:type_name -> easemesh.v1alpha1.ObservabilityTracingsOutputConfig
-	15, // 22: easemesh.v1alpha1.ObservabilityTracings.request:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
-	15, // 23: easemesh.v1alpha1.ObservabilityTracings.remoteInvoke:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
-	15, // 24: easemesh.v1alpha1.ObservabilityTracings.kafka:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
-	15, // 25: easemesh.v1alpha1.ObservabilityTracings.jdbc:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
-	15, // 26: easemesh.v1alpha1.ObservabilityTracings.redis:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
-	15, // 27: easemesh.v1alpha1.ObservabilityTracings.rabbit:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
-	18, // 28: easemesh.v1alpha1.ObservabilityMetrics.access:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
-	18, // 29: easemesh.v1alpha1.ObservabilityMetrics.request:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
-	18, // 30: easemesh.v1alpha1.ObservabilityMetrics.jdbcStatement:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
-	18, // 31: easemesh.v1alpha1.ObservabilityMetrics.jdbcConnection:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
-	18, // 32: easemesh.v1alpha1.ObservabilityMetrics.rabbit:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
-	18, // 33: easemesh.v1alpha1.ObservabilityMetrics.kafka:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
-	18, // 34: easemesh.v1alpha1.ObservabilityMetrics.redis:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
-	18, // 35: easemesh.v1alpha1.ObservabilityMetrics.jvmGc:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
-	18, // 36: easemesh.v1alpha1.ObservabilityMetrics.jvmMemory:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
-	18, // 37: easemesh.v1alpha1.ObservabilityMetrics.md5Dictionary:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
-	3,  // 38: easemesh.v1alpha1.CanaryRule.HeadersEntry.value:type_name -> easemesh.v1alpha1.StringMatch
-	39, // [39:39] is the sub-list for method output_type
-	39, // [39:39] is the sub-list for method input_type
-	39, // [39:39] is the sub-list for extension type_name
-	39, // [39:39] is the sub-list for extension extendee
-	0,  // [0:39] is the sub-list for field type_name
+	11, // 16: easemesh.v1alpha1.Service.resilience:type_name -> easemesh.v1alpha1.Resilience
+	12, // 17: easemesh.v1alpha1.Service.canary:type_name -> easemesh.v1alpha1.Canary
+	14, // 18: easemesh.v1alpha1.Service.loadBalance:type_name -> easemesh.v1alpha1.LoadBalance
+	13, // 19: easemesh.v1alpha1.Service.sidecar:type_name -> easemesh.v1alpha1.Sidecar
+	15, // 20: easemesh.v1alpha1.Service.observability:type_name -> easemesh.v1alpha1.Observability
+	6,  // 21: easemesh.v1alpha1.Resilience.rateLimiter:type_name -> easemesh.v1alpha1.RateLimiter
+	7,  // 22: easemesh.v1alpha1.Resilience.circuitBreaker:type_name -> easemesh.v1alpha1.CircuitBreaker
+	8,  // 23: easemesh.v1alpha1.Resilience.retryer:type_name -> easemesh.v1alpha1.Retryer
+	9,  // 24: easemesh.v1alpha1.Resilience.timeLimiter:type_name -> easemesh.v1alpha1.TimeLimiter
+	5,  // 25: easemesh.v1alpha1.Canary.canaryRules:type_name -> easemesh.v1alpha1.CanaryRule
+	16, // 26: easemesh.v1alpha1.Observability.outputServer:type_name -> easemesh.v1alpha1.ObservabilityOutputServer
+	19, // 27: easemesh.v1alpha1.Observability.tracings:type_name -> easemesh.v1alpha1.ObservabilityTracings
+	21, // 28: easemesh.v1alpha1.Observability.metrics:type_name -> easemesh.v1alpha1.ObservabilityMetrics
+	18, // 29: easemesh.v1alpha1.ObservabilityTracings.output:type_name -> easemesh.v1alpha1.ObservabilityTracingsOutputConfig
+	17, // 30: easemesh.v1alpha1.ObservabilityTracings.request:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
+	17, // 31: easemesh.v1alpha1.ObservabilityTracings.remoteInvoke:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
+	17, // 32: easemesh.v1alpha1.ObservabilityTracings.kafka:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
+	17, // 33: easemesh.v1alpha1.ObservabilityTracings.jdbc:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
+	17, // 34: easemesh.v1alpha1.ObservabilityTracings.redis:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
+	17, // 35: easemesh.v1alpha1.ObservabilityTracings.rabbit:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
+	20, // 36: easemesh.v1alpha1.ObservabilityMetrics.access:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
+	20, // 37: easemesh.v1alpha1.ObservabilityMetrics.request:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
+	20, // 38: easemesh.v1alpha1.ObservabilityMetrics.jdbcStatement:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
+	20, // 39: easemesh.v1alpha1.ObservabilityMetrics.jdbcConnection:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
+	20, // 40: easemesh.v1alpha1.ObservabilityMetrics.rabbit:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
+	20, // 41: easemesh.v1alpha1.ObservabilityMetrics.kafka:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
+	20, // 42: easemesh.v1alpha1.ObservabilityMetrics.redis:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
+	20, // 43: easemesh.v1alpha1.ObservabilityMetrics.jvmGc:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
+	20, // 44: easemesh.v1alpha1.ObservabilityMetrics.jvmMemory:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
+	20, // 45: easemesh.v1alpha1.ObservabilityMetrics.md5Dictionary:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
+	3,  // 46: easemesh.v1alpha1.CanaryRule.HeadersEntry.value:type_name -> easemesh.v1alpha1.StringMatch
+	47, // [47:47] is the sub-list for method output_type
+	47, // [47:47] is the sub-list for method input_type
+	47, // [47:47] is the sub-list for extension type_name
+	47, // [47:47] is the sub-list for extension extendee
+	0,  // [0:47] is the sub-list for field type_name
 }
 
 func init() { file_meshmodel_proto_init() }
@@ -2227,7 +2576,7 @@ func file_meshmodel_proto_init() {
 			}
 		}
 		file_meshmodel_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*LoadBalance); i {
+			switch v := v.(*Sidecar); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2239,7 +2588,7 @@ func file_meshmodel_proto_init() {
 			}
 		}
 		file_meshmodel_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ObservabilityOutputServer); i {
+			switch v := v.(*LoadBalance); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2251,7 +2600,7 @@ func file_meshmodel_proto_init() {
 			}
 		}
 		file_meshmodel_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ObservabilityTracingsDetail); i {
+			switch v := v.(*Observability); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2263,7 +2612,7 @@ func file_meshmodel_proto_init() {
 			}
 		}
 		file_meshmodel_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ObservabilityTracingsOutputConfig); i {
+			switch v := v.(*ObservabilityOutputServer); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2275,7 +2624,7 @@ func file_meshmodel_proto_init() {
 			}
 		}
 		file_meshmodel_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ObservabilityTracings); i {
+			switch v := v.(*ObservabilityTracingsDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2287,7 +2636,7 @@ func file_meshmodel_proto_init() {
 			}
 		}
 		file_meshmodel_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ObservabilityMetricsDetail); i {
+			switch v := v.(*ObservabilityTracingsOutputConfig); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2299,7 +2648,43 @@ func file_meshmodel_proto_init() {
 			}
 		}
 		file_meshmodel_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ObservabilityTracings); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meshmodel_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ObservabilityMetricsDetail); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meshmodel_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ObservabilityMetrics); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meshmodel_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Tenant); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2317,7 +2702,7 @@ func file_meshmodel_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_meshmodel_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

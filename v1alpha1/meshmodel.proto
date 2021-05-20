@@ -226,12 +226,27 @@ message Service {
 
     // registerTenant is the tenant's name this service belongs to.
     string registerTenant = 2; 
+
+    // Resilience configuration, optional.
+    Resilience resilience  = 3;
+
+    // Canary configuration, optional.
+    Canary canary = 4; 
+
+    // LoadBalance configuration, optional.
+    LoadBalance loadBalance  = 5; 
+
+    // Sidecar configuration, optional.
+    Sidecar sidecar  = 6;
+
+    // Observability configuration, optional.
+    Observability observability  = 7;
+
 }
 
 // Resilience configures four key types of features, RateLimiter, CircuitBreaker, 
 // Retryer and Timeout.
 message Resilience {
-
     // RateLimiter configuration. 
     RateLimiter rateLimiter  = 1;
 
@@ -249,7 +264,31 @@ message Resilience {
 // The developer can deploy a canary version of microservice and accept coloring test its stability before
 // rolling out to the whole instances. 
 message Canary {
+    // CanaryRules is the mesh service's all rules for canary deployment. 
     repeated CanaryRule canaryRules = 1;
+}
+
+// Sidecar configures the sidecar for every mesh service instances. It works inside the same
+// pod with the workload instance. 
+message Sidecar {
+    // DiscoveryType configures the type of service register/discovery type, its value are among 
+    // "eureka","consul", and "nacos".
+    string discoveryType = 1;
+
+    // Address is the registry center address for workload to visit. 
+	string address = 2; 
+
+    // IngressPort is the port for ingress traffic.
+	int32 ingressPort = 3;
+
+    // IngressProtocol is the protocol for ingress traffic. Its value is "http".
+	string ingressProtocol = 4;
+
+    // egressPort is the port for egress traffic.
+	int32 egressPort = 5;
+
+    // egressProtocol is the protocol for egress traffic. Its value is "http"
+	string egressProtocol = 6;
 }
 
 // LoadBalance configures how to distribute the traffic inside this mesh.
@@ -260,6 +299,18 @@ message LoadBalance {
 
     // HeaderHashKey configures the key in HTTP header when the policy is headerHash. 
     string headerHashKey = 2;
+}
+
+// Observability consists of three components, outputServer, tracing, and metrics. 
+message Observability {
+    // OutputServer configures 
+    ObservabilityOutputServer outputServer = 1;
+
+    // Tracings configures whether JavaAgent should deal with tracing HTTP header or not. 
+    ObservabilityTracings  tracings = 2;
+
+    // Metrics configures the metrics JavaAgent should collect. 
+    ObservabilityMetrics    metrics = 3;
 }
 
 // ObservabilityOutputServer configures how to report observability data to Kafka.
@@ -274,110 +325,129 @@ message ObservabilityOutputServer {
     int32 timeout = 3; 
 }
 
+// ObservabilityTracingsDetail 
 message ObservabilityTracingsDetail {
-    // 
+    // Enabled configures to enable this tracing component or not. 
     bool  enabled = 1;
 
-    //
+    // ServicePrefix is the prefix for tracing's remoteEndpoint's service name. It will
+    // combine with the tracing component's name. 
     string servicePrefix  = 2;
 }
 
 message ObservabilityTracingsOutputConfig {
-    //
+    // Enabled configures to enable this tracing component's output or not.  
     bool enabled = 1;
 
-    //
+    // ReportThread configures the thread number for JavaAgent to report. 
     int32 reportThread = 2;
 
-    //  
+    // Topic configures the Kafka topic for tracing output target. 
     string topic = 3;
     
-    // 
+    // MessageMaxBytes configures the max bytes for one tracing report message.
     int32 messageMaxBytes = 4;
 
-    //
+    // QueuedMaxSpans configures the max spans number for reporting queued.
     int32 queuedMaxSpans = 5;
 
-    //
+    // QueuedMaxSize configures the max size of reporting queue.
     int32 queuedMaxSize = 6;
 
-    //
+    // MessageTimeout configures the timeout for the message queue.
     int32 messageTimeout = 7;
 }
 
 // ObservabilityTracings configure the tracings of observability.
 message ObservabilityTracings {
-    // 
+    // Enabled
     bool enabled = 1;
 
-    // 
+    // SampleByQPS configures the QPS value for tracing sampling. 
+    // The exceeded request will be ingored. 
     int32 sampleByQPS  = 2;
 
-    //
+    // Output configures the tracing output topic, queue and thread.
     ObservabilityTracingsOutputConfig output = 3;
 
-    // 
+    // Request configures the tracing switch for HTTP request.
     ObservabilityTracingsDetail request = 4;
 
-    //
+    // RemoteInvoke configures the tracing switch for remove calling. 
     ObservabilityTracingsDetail remoteInvoke  = 5;
 
-    //
+    // Kafka configures the tracing switch for Kafka. 
     ObservabilityTracingsDetail kafka = 6;
 
-    // 
+    // Jdbc configures the tracing switch for JDBC. 
     ObservabilityTracingsDetail jdbc = 7;
 
-    // 
+    // Redis configures the tracing switch for redis. 
     ObservabilityTracingsDetail redis = 8;
 
-    //
+    // Rabbit configures the tracing switch for rabbitMQ.
     ObservabilityTracingsDetail rabbit = 9;
 }
 
 // ObservabilityMetricsDetail is the metrics detail of observability.
 message ObservabilityMetricsDetail  {
-    //
+    // Enabled configures the switch for one kind metric.
     bool enabled = 1;
 
-    //
+    // Interval configures the million seconds for metric reporting.
     int32 interval = 2;
 
-    //
+    // Topic configures the metric's reporting topic.
     string topic = 3;
 }
 
 message ObservabilityMetrics {
-    //
+    // Enabled configures the global switch for this mesh service.
     bool enabled = 1;
 
-    //
+    // Access configures the access log about metric.
     ObservabilityMetricsDetail access = 2;
 
-    //
+    // Request configures the HTTP request about metric.
     ObservabilityMetricsDetail request = 3;
     
-    //
+    // JdbcStatement configures the JDBC statement metric.
     ObservabilityMetricsDetail jdbcStatement = 4;
 
-    //
+    // JdbcConnection configures the JDBC connection about metric.
     ObservabilityMetricsDetail jdbcConnection = 5;
 
-    //
+    // Rabbit configures the RabbitMQ metric.
     ObservabilityMetricsDetail rabbit = 6;
 
-    //    
+    // Kafka configures the Kafka about metric.   
     ObservabilityMetricsDetail kafka = 7;
 
-    //
+    // Redis configures the redis about metric.
     ObservabilityMetricsDetail redis = 8;
 
-    //
+    // JvmGc configures the JVM GC about metric.
     ObservabilityMetricsDetail jvmGc = 9;
 
-    //
+    // JvmMemory configures the Jvm memory about metric.
     ObservabilityMetricsDetail jvmMemory = 10;
 
-    //
+    // Md5Dictionary configures the md5Dictionary about metric.
     ObservabilityMetricsDetail md5Dictionary = 11;
+}
+
+// Tenant is the logic group of mesh services. Inside the same tenant,
+// services can visit each other directly. There are two kinds of tenant, one is the  common type 
+// of tenants and the other is system reserved "global" tenant which's access scope is globally 
+// inside the mesh . If one mesh service is created with "global" tenant filed, it can be visible 
+// to all the service inside the mesh. 
+message Tenant {
+    // Name is the identify of this tenant. 
+    string name = 1;
+
+    // Services are the array of mesh service name in this tenant.
+    repeated string services  = 2;
+
+    // Descriptions for this tenant.
+    string description = 3;
 }
