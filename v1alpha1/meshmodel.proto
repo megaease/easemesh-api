@@ -12,8 +12,6 @@
 //   limitations under the License.
 syntax = "proto3";
 
-import "google/protobuf/duration.proto";
-
 
 package easemesh.v1alpha1;
  
@@ -28,11 +26,11 @@ message RateLimiterPolicy {
 	string name = 1; 
 
 	// TimeoutDuration is the duration for one request should wait for a permission,e.g.,500ms.
-	google.protobuf.Duration timeoutDuration = 2;  
+	string timeoutDuration = 2;  
 
 	// LimitRefreshPeriod is the period of a limit refresh. After each period the rate limiter sets 
 	// its permissions count back to the limitForPeriod value.
-	google.protobuf.Duration limitRefreshPeriod = 3; 
+	string limitRefreshPeriod = 3; 
 	
 	// LimitForPeriod is the number of permissions available during one limit refresh period.
 	int32 limitForPeriod = 4;  
@@ -86,7 +84,7 @@ message CircuitBreakerPolicy {
 
 	// WaitDurationInOpenState configures the duration that the CircuitBreaker should wait before transitioning 
 	// from open to half-open,e.g.,60000ms.
-	google.protobuf.Duration waitDurationInOpenState = 11;
+	string waitDurationInOpenState = 11;
 
 	// FailureStatusCodes is the array for HTTP failure status code for this CircuitBreakerPolicy.
 	repeated int32 failureStatusCodes = 12;
@@ -103,7 +101,7 @@ message RetryerPolicy {
 	int32 maxAttempts = 2;
 
 	// WaitDuration configures the based and fixed wait duration between retry attempts.
-	google.protobuf.Duration waitDuration = 3;
+	string waitDuration = 3;
 
 	// BackOffPolicy configures the two kinds of policy, random and exponential.
 	string backOffPolicy = 4;
@@ -209,7 +207,7 @@ message Retryer {
 // it will be running in upstream clients and declared in downstream relied services.
 message TimeLimiter {
 	// DefaultTimeoutDuration configures the default duration for timeout, e.g.,500ms.
-	google.protobuf.Duration defaultTimeoutDuration = 1;
+	string defaultTimeoutDuration = 1;
 
 	// Urls describe the HTTP request matching schemes for this limiter to filter.
 	repeated URLRule urls = 3;
