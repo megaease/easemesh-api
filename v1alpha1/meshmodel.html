@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Protocol Documentation</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic"/>
+    <style>
+      body {
+        width: 60em;
+        margin: 1em auto;
+        color: #222;
+        font-family: "Ubuntu", sans-serif;
+        padding-bottom: 4em;
+      }
+
+      h1 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      h2 {
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+        margin: 1.5em 0;
+      }
+
+      h3 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      a {
+        text-decoration: none;
+        color: #567e25;
+      }
+
+      table {
+        width: 100%;
+        font-size: 80%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        font-weight: 700;
+        background-color: #dcdcdc;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #fbfbfb;
+      }
+
+      td {
+        border: 1px solid #ccc;
+        padding: 0.5ex 2ex;
+      }
+
+      td p {
+        text-indent: 1em;
+        margin: 0;
+      }
+
+      td p:nth-child(1) {
+        text-indent: 0;  
+      }
+
+       
+      .field-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(3) {  
+        width: 6em;
+      }
+      .field-table td:nth-child(4) {  
+        width: auto;
+      }
+
+       
+      .extension-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(3) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(4) {  
+        width: 5em;
+      }
+      .extension-table td:nth-child(5) {  
+        width: auto;
+      }
+
+       
+      .enum-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(3) {  
+        width: auto;
+      }
+
+       
+      .scalar-value-types-table tr {
+        height: 3em;
+      }
+
+       
+      #toc-container ul {
+        list-style-type: none;
+        padding-left: 1em;
+        line-height: 180%;
+        margin: 0;
+      }
+      #toc > li > a {
+        font-weight: bold;
+      }
+
+       
+      .file-heading {
+        width: 100%;
+        display: table;
+        border-bottom: 1px solid #aaa;
+        margin: 4em 0 1.5em 0;
+      }
+      .file-heading h2 {
+        border: none;
+        display: table-cell;
+      }
+      .file-heading a {
+        text-align: right;
+        display: table-cell;
+      }
+
+       
+      .badge {
+        width: 1.6em;
+        height: 1.6em;
+        display: inline-block;
+
+        line-height: 1.6em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 60%;
+
+        color: #89ba48;
+        background-color: #dff0c8;
+
+        margin: 0.5ex 1em 0.5ex -1em;
+        border: 1px solid #fbfbfb;
+        border-radius: 1ex;
+      }
+    </style>
+
+    
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+  </head>
+
+  <body>
+
+    <h1 id="title">Protocol Documentation</h1>
+
+    <h2>Table of Contents</h2>
+
+    <div id="toc-container">
+      <ul id="toc">
+        
+          
+          <li>
+            <a href="#meshmodel.proto">meshmodel.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.Canary"><span class="badge">M</span>Canary</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.CanaryRule"><span class="badge">M</span>CanaryRule</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.CanaryRule.HeadersEntry"><span class="badge">M</span>CanaryRule.HeadersEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry"><span class="badge">M</span>CanaryRule.ServiceInstanceLabelsEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.CircuitBreaker"><span class="badge">M</span>CircuitBreaker</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.CircuitBreakerPolicy"><span class="badge">M</span>CircuitBreakerPolicy</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.Ingress"><span class="badge">M</span>Ingress</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.IngressPath"><span class="badge">M</span>IngressPath</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.IngressRule"><span class="badge">M</span>IngressRule</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.LoadBalance"><span class="badge">M</span>LoadBalance</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.Observability"><span class="badge">M</span>Observability</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ObservabilityMetrics"><span class="badge">M</span>ObservabilityMetrics</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ObservabilityMetricsDetail"><span class="badge">M</span>ObservabilityMetricsDetail</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ObservabilityOutputServer"><span class="badge">M</span>ObservabilityOutputServer</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ObservabilityTracings"><span class="badge">M</span>ObservabilityTracings</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ObservabilityTracingsDetail"><span class="badge">M</span>ObservabilityTracingsDetail</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ObservabilityTracingsOutputConfig"><span class="badge">M</span>ObservabilityTracingsOutputConfig</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.RateLimiter"><span class="badge">M</span>RateLimiter</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.RateLimiterPolicy"><span class="badge">M</span>RateLimiterPolicy</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.Resilience"><span class="badge">M</span>Resilience</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.Retryer"><span class="badge">M</span>Retryer</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.RetryerPolicy"><span class="badge">M</span>RetryerPolicy</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.Service"><span class="badge">M</span>Service</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.Sidecar"><span class="badge">M</span>Sidecar</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.StringMatch"><span class="badge">M</span>StringMatch</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.Tenant"><span class="badge">M</span>Tenant</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.TimeLimiter"><span class="badge">M</span>TimeLimiter</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.URLRule"><span class="badge">M</span>URLRule</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+        <li><a href="#scalar-value-types">Scalar Value Types</a></li>
+      </ul>
+    </div>
+
+    
+      
+      <div class="file-heading">
+        <h2 id="meshmodel.proto">meshmodel.proto</h2><a href="#title">Top</a>
+      </div>
+      <p>Copyright 2021 MegaEase </p><p>Licensed under the Apache License, Version 2.0 (the "License");</p><p>you may not use this file except in compliance with the License.</p><p>You may obtain a copy of the License at</p><p>http://www.apache.org/licenses/LICENSE-2.0</p><p>Unless required by applicable law or agreed to in writing, software</p><p>distributed under the License is distributed on an "AS IS" BASIS,</p><p>WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</p><p>See the License for the specific language governing permissions and</p><p>limitations under the License.</p>
+
+      
+        <h3 id="easemesh.v1alpha1.Canary">Canary</h3>
+        <p>Canary configures rules to implement canary deployment. It belongs to the traffic scheduling domain.</p><p>The developer can deploy a canary version of microservice and accept coloring test its stability before</p><p>rolling out to the whole instances.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>canaryRules</td>
+                  <td><a href="#easemesh.v1alpha1.CanaryRule">CanaryRule</a></td>
+                  <td>repeated</td>
+                  <td><p>CanaryRules is the mesh service&#39;s all rules for canary deployment. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.CanaryRule">CanaryRule</h3>
+        <p>CanaryRule define the rule for canary deployment. Including service instances labels, </p><p>how to match colored traffic, which traffic is considered as coloring.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>serviceInstanceLabels</td>
+                  <td><a href="#easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry">CanaryRule.ServiceInstanceLabelsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>ServiceInstanceLabels configure the labels patched into the service instances. 
+Registry center will label it to corresponding instances during deployment. It&#39;s optional.
+It indicates the canary target service instances. The relation between elements in this map is &#34;OR&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>headers</td>
+                  <td><a href="#easemesh.v1alpha1.CanaryRule.HeadersEntry">CanaryRule.HeadersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Headers configure HTTP requests matching configurations with &#34;OR&#34; relation. Once
+HTTP requests match one element in this array, it will be regarded as the colored traffic. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>urls</td>
+                  <td><a href="#easemesh.v1alpha1.URLRule">URLRule</a></td>
+                  <td>repeated</td>
+                  <td><p>Urls describe the HTTP request matching schemes for this canary rule. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.CanaryRule.HeadersEntry">CanaryRule.HeadersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#easemesh.v1alpha1.StringMatch">StringMatch</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry">CanaryRule.ServiceInstanceLabelsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.CircuitBreaker">CircuitBreaker</h3>
+        <p>CircuitBreaker is used for blocking all in-coming requests when the the failure numbers </p><p>reach the configured limitation. You can declare an CircuitBreaker with COUNT_BASED or </p><p>TIME_BASED type.  It has three types of states, open, closed and half-close. One service </p><p>can declare its desired CircuitBreaker, and the upstream clients will active the same CircuitBreaker </p><p>locally when calling this service.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>policies</td>
+                  <td><a href="#easemesh.v1alpha1.CircuitBreakerPolicy">CircuitBreakerPolicy</a></td>
+                  <td>repeated</td>
+                  <td><p>Policies contain different breaker configurations for this CircuitBreaker to use. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>defaultPolicyRef</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>DefaultPolicyRef is the default reference policy name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>urls</td>
+                  <td><a href="#easemesh.v1alpha1.URLRule">URLRule</a></td>
+                  <td>repeated</td>
+                  <td><p>URLs describe the HTTP request matching schemes for this limiter to filter. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.CircuitBreakerPolicy">CircuitBreakerPolicy</h3>
+        <p>CircuitBreakerPolicy is the policy for describing Resilience component CircuitBreaker. </p><p>It contains the basic configurations for the breaker, including the type of sliding window this </p><p>breaker will use. Whether including network error or not and so on.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name is the identify of this policy. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>slidingWindowType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>SlidingWindowType is the sliding window type of this break, only &#34;COUNT_BASED&#34; or &#34;TIME_BASED&#34; allowed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>failureRateThreshold</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>FailureRateThreshold configures the failure rate threshold in percentage. When the failure rate is equal 
+or greater than the threshold the CircuitBreaker transitions to open and starts short-circuiting calls. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>slowCallRateThreshold</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>SlowCallRateThreshold Configures a threshold in percentage. The CircuitBreaker considers a call as slow 
+when the call duration is greater than slowCallDurationThreshold When the percentage of slow calls is 
+equal or greater the threshold, the CircuitBreaker transitions to open and starts short-circuiting calls. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>countingNetworkError</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>CountingNetworkError configures whether a network failure situation should active CircuitBreaker or not. . </p></td>
+                </tr>
+              
+                <tr>
+                  <td>slidingWindowSize</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>SlidingWindowSize configures the size of the sliding window which is used to record the outcome of 
+calls when the CircuitBreaker is closed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>permittedNumberOfCallsInHalfOpenState</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>PermittedNumberOfCallsInHalfOpenState configures the number of permitted calls when the CircuitBreaker 
+is half open. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>minimumNumberOfCalls</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>MinimumNumberOfCalls configures the minimum number of calls which are required (per sliding window period) 
+before the CircuitBreaker can calculate the error rate or slow call rate.  For example, 
+if minimumNumberOfCalls is 10, then at least 10 calls must be recorded, before the failure rate can be 
+calculated. If only 9 calls have been recorded the CircuitBreaker will not transition to open 
+even if all 9 calls have failed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>slowCallDurationThreshold</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>SlowCallDurationThreshold configures the duration threshold above which calls are considered as slow 
+and increase the rate of slow calls. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>maxWaitDurationInHalfOpenState</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>MaxWaitDurationInHalfOpenState configures a maximum wait duration which controls the longest amount 
+of time a CircuitBreaker could stay in Half Open state, before it switches to open. Value 0 means 
+Circuit Breaker would wait infinitely in HalfOpen State until all permitted calls have been completed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>waitDurationInOpenState</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>WaitDurationInOpenState configures the duration that the CircuitBreaker should wait before transitioning 
+from open to half-open,e.g.,60000ms. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>failureStatusCodes</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>repeated</td>
+                  <td><p>FailureStatusCodes is the array for HTTP failure status code for this CircuitBreakerPolicy. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.Ingress">Ingress</h3>
+        <p>Ingress is the spec of mesh ingress.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name is the identify of this ingress. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rules</td>
+                  <td><a href="#easemesh.v1alpha1.IngressRule">IngressRule</a></td>
+                  <td>repeated</td>
+                  <td><p>Rules is an array of ingress routing rules. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.IngressPath">IngressPath</h3>
+        <p>IngressPath is the path for a mesh ingress rule</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>path</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Path is a regular expression for matching the target HTTP URL. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rewriteTarget</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>RewriteTarget is a regular expression for rewriting original URL when 
+the HTTP URL path match the Path field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>backend</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Backend is the mesh service&#39;s name. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.IngressRule">IngressRule</h3>
+        <p>IngressRule is the rule for mesh ingress.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>host</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Host is the RFC3986 defined host name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paths</td>
+                  <td><a href="#easemesh.v1alpha1.IngressPath">IngressPath</a></td>
+                  <td>repeated</td>
+                  <td><p>Paths is an array for mapping HTTP paths to mesh services. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.LoadBalance">LoadBalance</h3>
+        <p>LoadBalance configures how to distribute the traffic inside this mesh.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>policy</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Policy including four kinds of load balancing scheme, including random, weightedRandom,ipHash,
+headerHash </p></td>
+                </tr>
+              
+                <tr>
+                  <td>headerHashKey</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>HeaderHashKey configures the key in HTTP header when the policy is headerHash. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.Observability">Observability</h3>
+        <p>Observability consists of three components, outputServer, tracing, and metrics.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>outputServer</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityOutputServer">ObservabilityOutputServer</a></td>
+                  <td></td>
+                  <td><p>OutputServer configures JavaAgent&#39;s tracing output target. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tracings</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityTracings">ObservabilityTracings</a></td>
+                  <td></td>
+                  <td><p>Tracings configures whether JavaAgent should deal with tracing HTTP header or not. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>metrics</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityMetrics">ObservabilityMetrics</a></td>
+                  <td></td>
+                  <td><p>Metrics configures the metrics JavaAgent should collect. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ObservabilityMetrics">ObservabilityMetrics</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Enabled configures the global switch for this mesh service. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>access</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
+                  <td></td>
+                  <td><p>Access configures the access log about metric. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>request</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
+                  <td></td>
+                  <td><p>Request configures the HTTP request about metric. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>jdbcStatement</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
+                  <td></td>
+                  <td><p>JdbcStatement configures the JDBC statement metric. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>jdbcConnection</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
+                  <td></td>
+                  <td><p>JdbcConnection configures the JDBC connection about metric. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rabbit</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
+                  <td></td>
+                  <td><p>Rabbit configures the RabbitMQ metric. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>kafka</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
+                  <td></td>
+                  <td><p>Kafka configures the Kafka about metric. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>redis</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
+                  <td></td>
+                  <td><p>Redis configures the redis about metric. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>jvmGc</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
+                  <td></td>
+                  <td><p>JvmGc configures the JVM GC about metric. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>jvmMemory</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
+                  <td></td>
+                  <td><p>JvmMemory configures the Jvm memory about metric. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>md5Dictionary</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
+                  <td></td>
+                  <td><p>Md5Dictionary configures the md5Dictionary about metric. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</h3>
+        <p>ObservabilityMetricsDetail is the metrics detail of observability.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Enabled configures the switch for one kind metric. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>interval</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Interval configures the million seconds for metric reporting. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>topic</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Topic configures the metric&#39;s reporting Kafka topic. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ObservabilityOutputServer">ObservabilityOutputServer</h3>
+        <p>ObservabilityOutputServer configures how to report observability data to Kafka.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Enables configures whether reporting observability data to Kafka or not. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bootstrapServer</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>BootstrapServer configures the Kafka bootstrap address. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>timeout</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Timeout configures the million second for Kafka&#39;s timeout. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ObservabilityTracings">ObservabilityTracings</h3>
+        <p>ObservabilityTracings configure the tracings of observability.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Enable configures this mesh service&#39;s global tracing switch. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sampleByQPS</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>SampleByQPS configures the QPS value for tracing sampling. 
+The exceeded request will be ignored. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>output</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityTracingsOutputConfig">ObservabilityTracingsOutputConfig</a></td>
+                  <td></td>
+                  <td><p>Output configures the tracing output topic, queue and thread. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>request</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
+                  <td></td>
+                  <td><p>Request configures the tracing switch for HTTP request. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>remoteInvoke</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
+                  <td></td>
+                  <td><p>RemoteInvoke configures the tracing switch for remove calling. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>kafka</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
+                  <td></td>
+                  <td><p>Kafka configures the tracing switch for Kafka. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>jdbc</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
+                  <td></td>
+                  <td><p>Jdbc configures the tracing switch for JDBC. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>redis</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
+                  <td></td>
+                  <td><p>Redis configures the tracing switch for redis. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rabbit</td>
+                  <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
+                  <td></td>
+                  <td><p>Rabbit configures the tracing switch for rabbitMQ. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</h3>
+        <p>ObservabilityTracingsDetail</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Enabled configures whether reporting this tracing component or not. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>servicePrefix</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>ServicePrefix is the prefix for tracing&#39;s remoteEndpoint&#39;s service name. It will
+combine with the tracing component&#39;s name. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ObservabilityTracingsOutputConfig">ObservabilityTracingsOutputConfig</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Enabled configures whether reporting to tracing output or not. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reportThread</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>ReportThread configures the thread number for JavaAgent to report. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>topic</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Topic configures the Kafka topic for tracing output target. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>messageMaxBytes</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>MessageMaxBytes configures the max bytes for one tracing report message. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>queuedMaxSpans</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>QueuedMaxSpans configures the max spans number for reporting queued. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>queuedMaxSize</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>QueuedMaxSize configures the max size of reporting queue. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>messageTimeout</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>MessageTimeout configures the timeout for the message queue. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.RateLimiter">RateLimiter</h3>
+        <p>RateLimiter configures a limiter which can establish your services' high availability and reliability, </p><p>also it can be used for scaling APIs. RateLimiter can protect servers from overwhelm by the peak traffic.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>policies</td>
+                  <td><a href="#easemesh.v1alpha1.RateLimiterPolicy">RateLimiterPolicy</a></td>
+                  <td>repeated</td>
+                  <td><p>Policies contains different limiting configurations for this RateLimiter to use. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>defaultPolicyRef</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>DefaultPolicyRef is the default reference policy name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>urls</td>
+                  <td><a href="#easemesh.v1alpha1.URLRule">URLRule</a></td>
+                  <td>repeated</td>
+                  <td><p>Urls describe the HTTP request matching schemes for this limiter to filter. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.RateLimiterPolicy">RateLimiterPolicy</h3>
+        <p>RateLimiterPolicy configures the limiting policy used for Resilience component RateLimiter.</p><p>It contains the basic configurations for the limiter, including the permission number,</p><p>the duration for request waiting and the permission count refreshing period.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name is the identify of this policy. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>timeoutDuration</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>TimeoutDuration is the duration for one request should wait for a permission,e.g.,500ms. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>limitRefreshPeriod</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>LimitRefreshPeriod is the period of a limit refresh. After each period the rate limiter sets 
+its permissions count back to the limitForPeriod value. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>limitForPeriod</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>LimitForPeriod is the number of permissions available during one limit refresh period. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.Resilience">Resilience</h3>
+        <p>Resilience configures four key types of features, RateLimiter, CircuitBreaker, </p><p>Retryer and Timeout.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>rateLimiter</td>
+                  <td><a href="#easemesh.v1alpha1.RateLimiter">RateLimiter</a></td>
+                  <td></td>
+                  <td><p>RateLimiter configuration. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>circuitBreaker</td>
+                  <td><a href="#easemesh.v1alpha1.CircuitBreaker">CircuitBreaker</a></td>
+                  <td></td>
+                  <td><p>CircuitBreaker configuration. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>retryer</td>
+                  <td><a href="#easemesh.v1alpha1.Retryer">Retryer</a></td>
+                  <td></td>
+                  <td><p>Retryer configuration. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>timeLimiter</td>
+                  <td><a href="#easemesh.v1alpha1.TimeLimiter">TimeLimiter</a></td>
+                  <td></td>
+                  <td><p>TimeLimiter configuration </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.Retryer">Retryer</h3>
+        <p>Retryer can perform an API calling retry when the service HTTP response code indicated its in </p><p>temporary unavailable states. The up-stream client should make sure this API is idempotent. </p><p>The service can declare an Retryer for its desired APIs and active in client side.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>policies</td>
+                  <td><a href="#easemesh.v1alpha1.RetryerPolicy">RetryerPolicy</a></td>
+                  <td>repeated</td>
+                  <td><p>Policies contain different retryer configurations for this Retryer to use. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>defaultPolicyRef</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>DefaultPolicyRef is the default reference policy name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>urls</td>
+                  <td><a href="#easemesh.v1alpha1.URLRule">URLRule</a></td>
+                  <td>repeated</td>
+                  <td><p>Urls describe the HTTP request matching schemes for this limiter to filter. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.RetryerPolicy">RetryerPolicy</h3>
+        <p>RetryerPolicy configures the policy for describing Resilience component Retryer. </p><p>It contains the basic configurations for the retryer, including the type of sliding window this </p><p>breaker will use. Whether including network error or not and so on.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name is the identify of this policy. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>maxAttempts</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>MaxAttempts configures the maximum number of attempts. (including the initial call as the first attempt) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>waitDuration</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>WaitDuration configures the based and fixed wait duration between retry attempts. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>backOffPolicy</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>BackOffPolicy configures the two kinds of policy, random and exponential. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>randomizationFactor</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>RandomizationFactor configures the factor used for backoff, value between 0 and 1. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>countingNetworkError</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>CountingNetworkError configures whether a network failure situation should retry or not. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>failureStatusCodes</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>repeated</td>
+                  <td><p>FailureStatusCodes is the array for HTTP failure status code for this RetryPolicy. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.Service">Service</h3>
+        <p>Service is the basic element in EaseMesh to describe a user's business microservices' </p><p>name, belonging tenant, and governance specs. One service should belongs to a dedicated </p><p>tenant.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name is the mesh service&#39;s name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>registerTenant</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>RegisterTenant is the tenant&#39;s name this service belongs to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resilience</td>
+                  <td><a href="#easemesh.v1alpha1.Resilience">Resilience</a></td>
+                  <td></td>
+                  <td><p>Resilience configuration, optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>canary</td>
+                  <td><a href="#easemesh.v1alpha1.Canary">Canary</a></td>
+                  <td></td>
+                  <td><p>Canary configuration, optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>loadBalance</td>
+                  <td><a href="#easemesh.v1alpha1.LoadBalance">LoadBalance</a></td>
+                  <td></td>
+                  <td><p>LoadBalance configuration, optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sidecar</td>
+                  <td><a href="#easemesh.v1alpha1.Sidecar">Sidecar</a></td>
+                  <td></td>
+                  <td><p>Sidecar configuration, optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>observability</td>
+                  <td><a href="#easemesh.v1alpha1.Observability">Observability</a></td>
+                  <td></td>
+                  <td><p>Observability configuration, optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.Sidecar">Sidecar</h3>
+        <p>Sidecar configures the sidecar for every mesh service instances. It works inside the same</p><p>pod with the workload instance.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>discoveryType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>DiscoveryType configures the type of service register/discovery type, its value are among 
+&#34;eureka&#34;,&#34;consul&#34;, and &#34;nacos&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>address</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Address is the registry center address for workload to visit. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ingressPort</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>IngressPort is the port for ingress traffic. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ingressProtocol</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>IngressProtocol is the protocol for ingress traffic. Its value is &#34;http&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>egressPort</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>EgressPort is the port for egress traffic. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>egressProtocol</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>EgressProtocol is the protocol for egress traffic. Its value is &#34;http&#34; </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.StringMatch">StringMatch</h3>
+        <p>StringMatch configures how to match string in different ways.</p><p>Its priority is according to the field order. StringMatch will try exactly matching firstly,</p><p>then try to check has the same prefix, at last, it will use the regular expression to match the</p><p>string if it's provided</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>exact</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Exact configures the exactly URL value to match. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prefix</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Prefix configures the prefix for URL to match. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>regex</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Regex configures the regular expression for URL to match. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.Tenant">Tenant</h3>
+        <p>Tenant is the logic group of mesh services. Inside the same tenant,</p><p>services can visit each other directly. There are two kinds of tenant, one is the  common type </p><p>of tenants and the other is system reserved "global" tenant which's access scope is globally </p><p>inside the mesh . If one mesh service is created with "global" tenant filed, it can be visible </p><p>to all the service inside the mesh.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name is the identify of this tenant. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>services</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Services are the array of mesh service name in this tenant. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Descriptions for this tenant. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.TimeLimiter">TimeLimiter</h3>
+        <p>Timeout configures the amount of time the client should wait for replies from a given service, </p><p>it will be running in upstream clients and declared in downstream relied services.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>defaultTimeoutDuration</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>DefaultTimeoutDuration configures the default duration for timeout, e.g.,500ms. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>urls</td>
+                  <td><a href="#easemesh.v1alpha1.URLRule">URLRule</a></td>
+                  <td>repeated</td>
+                  <td><p>Urls describe the HTTP request matching schemes for this limiter to filter. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.URLRule">URLRule</h3>
+        <p>URLRule can be used to filter HTTP request by using HTTP method and URL.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>methods</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Methods configures allowed HTTP method string, e.g. &#34;GET&#34;,&#34;DELETE&#34;,&#34;POST&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>url</td>
+                  <td><a href="#easemesh.v1alpha1.StringMatch">StringMatch</a></td>
+                  <td></td>
+                  <td><p>Url configures how to match the HTTP request URL. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>policyRef</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>PolicyRef configures which policy this URLRule references to. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+    
+
+    <h2 id="scalar-value-types">Scalar Value Types</h2>
+    <table class="scalar-value-types-table">
+      <thead>
+        <tr><td>.proto Type</td><td>Notes</td><td>C++</td><td>Java</td><td>Python</td><td>Go</td><td>C#</td><td>PHP</td><td>Ruby</td></tr>
+      </thead>
+      <tbody>
+        
+          <tr id="double">
+            <td>double</td>
+            <td></td>
+            <td>double</td>
+            <td>double</td>
+            <td>float</td>
+            <td>float64</td>
+            <td>double</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="float">
+            <td>float</td>
+            <td></td>
+            <td>float</td>
+            <td>float</td>
+            <td>float</td>
+            <td>float32</td>
+            <td>float</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="int32">
+            <td>int32</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="int64">
+            <td>int64</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="uint32">
+            <td>uint32</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int/long</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="uint64">
+            <td>uint64</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint32">
+            <td>sint32</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint64">
+            <td>sint64</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="fixed32">
+            <td>fixed32</td>
+            <td>Always four bytes. More efficient than uint32 if values are often greater than 2^28.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="fixed64">
+            <td>fixed64</td>
+            <td>Always eight bytes. More efficient than uint64 if values are often greater than 2^56.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="sfixed32">
+            <td>sfixed32</td>
+            <td>Always four bytes.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sfixed64">
+            <td>sfixed64</td>
+            <td>Always eight bytes.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="bool">
+            <td>bool</td>
+            <td></td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>boolean</td>
+            <td>bool</td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>TrueClass/FalseClass</td>
+          </tr>
+        
+          <tr id="string">
+            <td>string</td>
+            <td>A string must always contain UTF-8 encoded or 7-bit ASCII text.</td>
+            <td>string</td>
+            <td>String</td>
+            <td>str/unicode</td>
+            <td>string</td>
+            <td>string</td>
+            <td>string</td>
+            <td>String (UTF-8)</td>
+          </tr>
+        
+          <tr id="bytes">
+            <td>bytes</td>
+            <td>May contain any arbitrary sequence of bytes.</td>
+            <td>string</td>
+            <td>ByteString</td>
+            <td>str</td>
+            <td>[]byte</td>
+            <td>ByteString</td>
+            <td>string</td>
+            <td>String (ASCII-8BIT)</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  </body>
+</html>
+
