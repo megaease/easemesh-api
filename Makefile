@@ -1,5 +1,5 @@
 SHELL:=/bin/bash
-.PHONY: all go md html clean 
+.PHONY: all go json md html clean 
 
 # Path Related
 MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
@@ -15,6 +15,7 @@ TMP_DIR := ${TMP_GO_PACKAGE}/api/${RELEASE}
 MD_FILENAME := meshmodel.md
 HTML_FILENAME := meshmodel.html
 GO_FILENAME := meshmodel.pb.go
+JSON_FILENAME := meshmodel.json
 
 PROTO := $(shell find ${MKFILE_DIR}${RELEASE} -type f -name "*.proto") 
 
@@ -35,12 +36,18 @@ html: ${PROTO}
 		@echo ""
 	protoc -I ${MKFILE_DIR}${RELEASE} --doc_out=${MKFILE_DIR}${RELEASE}/ ${PROTO} --doc_opt=html,${HTML_FILENAME}
 
-all: go md html
+json: ${PROTO}
+	@echo "generate json from proto: ${PROTO} "
+	@echo ""
+	protoc -I ${MKFILE_DIR}${RELEASE} --doc_out=${MKFILE_DIR}${RELEASE}/ ${PROTO} --doc_opt=json,${JSON_FILENAME}
+
+all: go json md html
 
 clean: 
 	@echo "clean temporary directory, and generated golang and doc files"
 	rm -rf ${TMP_GO_PACKAGE} &&\
 	rm ${MKFILE_DIR}${RELEASE}/${MD_FILENAME} && \
 	rm ${MKFILE_DIR}${RELEASE}/${HTML_FILENAME} && \
-	rm ${MKFILE_DIR}${RELEASE}/${GO_FILENAME}
+	rm ${MKFILE_DIR}${RELEASE}/${GO_FILENAME} && \
+	rm ${MKFILE_DIR}${RELEASE}/${JSON_FILENAME} 
 
