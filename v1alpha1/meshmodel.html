@@ -779,70 +779,70 @@ headerHash </p></td>
                   <td>access</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>Access configures the access log about metric. </p></td>
+                  <td><p>Access configures the access log about metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>request</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>Request configures the HTTP request about metric. </p></td>
+                  <td><p>Request configures this mesh service&#39;s HTTP APIs metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>jdbcStatement</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>JdbcStatement configures the JDBC statement metric. </p></td>
+                  <td><p>JdbcStatement configures this mesh service&#39;s JDBC statement metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>jdbcConnection</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>JdbcConnection configures the JDBC connection about metric. </p></td>
+                  <td><p>JdbcConnection configures this mesh service&#39;s JDBC connection related metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>rabbit</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>Rabbit configures the RabbitMQ metric. </p></td>
+                  <td><p>Rabbit configures this mesh serivce&#39;s RabbitMQ requesting metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>kafka</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>Kafka configures the Kafka about metric. </p></td>
+                  <td><p>Kafka configures this mesh serivce&#39;s Kafka requesting metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>redis</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>Redis configures the redis about metric. </p></td>
+                  <td><p>Redis configures this mesh serivce&#39;s redis requesting metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>jvmGc</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>JvmGc configures the JVM GC about metric. </p></td>
+                  <td><p>JvmGc configures this mesh serivce&#39;s JVM GC related metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>jvmMemory</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>JvmMemory configures the Jvm memory about metric. </p></td>
+                  <td><p>JvmMemory configures this mesh serivce&#39;s JVM memory usage related metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>md5Dictionary</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>Md5Dictionary configures the md5Dictionary about metric. </p></td>
+                  <td><p>Md5Dictionary configures this serivce&#39;s md5Dictionary for reporting complete SQL Sentence and signature. </p></td>
                 </tr>
               
             </tbody>
@@ -880,7 +880,7 @@ headerHash </p></td>
                   <td>topic</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Topic configures the metric&#39;s reporting Kafka topic. </p></td>
+                  <td><p>Topic configures the metrics&#39; reporting Kafka topic. </p></td>
                 </tr>
               
             </tbody>
@@ -904,21 +904,21 @@ headerHash </p></td>
                   <td>enabled</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p>Enables configures whether reporting observability data to Kafka or not. </p></td>
+                  <td><p>Enabled configures whether reporting observability data to Kafka or not. </p></td>
                 </tr>
               
                 <tr>
                   <td>bootstrapServer</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>BootstrapServer configures the Kafka bootstrap address. </p></td>
+                  <td><p>BootstrapServer configures the Kafka bootstrap servers. </p></td>
                 </tr>
               
                 <tr>
                   <td>timeout</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Timeout configures the million second for Kafka&#39;s timeout. </p></td>
+                  <td><p>Timeout configures the timeout million second for requesting Kafka. </p></td>
                 </tr>
               
             </tbody>
@@ -949,7 +949,7 @@ headerHash </p></td>
                   <td>sampleByQPS</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>SampleByQPS configures the QPS value for tracing sampling. 
+                  <td><p>SampleByQPS configures the QPS value for tracing sampling.
 The exceeded request will be ignored. </p></td>
                 </tr>
               
@@ -964,42 +964,42 @@ The exceeded request will be ignored. </p></td>
                   <td>request</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
                   <td></td>
-                  <td><p>Request configures the tracing switch for HTTP request. </p></td>
+                  <td><p>Request configures the tracing switch for this mesh service&#39;s HTTP APIs. </p></td>
                 </tr>
               
                 <tr>
                   <td>remoteInvoke</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
                   <td></td>
-                  <td><p>RemoteInvoke configures the tracing switch for remove calling. </p></td>
+                  <td><p>RemoteInvoke configures the tracing switch for this mesh service&#39;s HTTP RPC tracing. </p></td>
                 </tr>
               
                 <tr>
                   <td>kafka</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
                   <td></td>
-                  <td><p>Kafka configures the tracing switch for Kafka. </p></td>
+                  <td><p>Kafka configures the tracing switch for this mesh service&#39;s Kafka requesting. </p></td>
                 </tr>
               
                 <tr>
                   <td>jdbc</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
                   <td></td>
-                  <td><p>Jdbc configures the tracing switch for JDBC. </p></td>
+                  <td><p>Jdbc configures the tracing switch for this mesh serivce&#39;s JDBC requesting. </p></td>
                 </tr>
               
                 <tr>
                   <td>redis</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
                   <td></td>
-                  <td><p>Redis configures the tracing switch for redis. </p></td>
+                  <td><p>Redis configures the tracing switch for this mehs services&#39;s redis requesting. </p></td>
                 </tr>
               
                 <tr>
                   <td>rabbit</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
                   <td></td>
-                  <td><p>Rabbit configures the tracing switch for rabbitMQ. </p></td>
+                  <td><p>Rabbit configures the tracing switch for this mesh service&#39;s rabbitMQ requesting. </p></td>
                 </tr>
               
             </tbody>
@@ -1030,8 +1030,7 @@ The exceeded request will be ignored. </p></td>
                   <td>servicePrefix</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>ServicePrefix is the prefix for tracing&#39;s remoteEndpoint&#39;s service name. It will
-combine with the tracing component&#39;s name. </p></td>
+                  <td><p>ServicePrefix is used to be combined with the tracing component&#39;s. </p></td>
                 </tr>
               
             </tbody>
@@ -1062,7 +1061,7 @@ combine with the tracing component&#39;s name. </p></td>
                   <td>reportThread</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>ReportThread configures the thread number for JavaAgent to report. </p></td>
+                  <td><p>ReportThread configures the thread number for JavaAgent&#39;s reporting process. </p></td>
                 </tr>
               
                 <tr>

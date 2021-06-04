@@ -262,16 +262,16 @@ Observability consists of three components, outputServer, tracing, and metrics.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Enabled configures the global switch for this mesh service. |
-| access | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Access configures the access log about metric. |
-| request | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Request configures the HTTP request about metric. |
-| jdbcStatement | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JdbcStatement configures the JDBC statement metric. |
-| jdbcConnection | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JdbcConnection configures the JDBC connection about metric. |
-| rabbit | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Rabbit configures the RabbitMQ metric. |
-| kafka | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Kafka configures the Kafka about metric. |
-| redis | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Redis configures the redis about metric. |
-| jvmGc | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JvmGc configures the JVM GC about metric. |
-| jvmMemory | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JvmMemory configures the Jvm memory about metric. |
-| md5Dictionary | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Md5Dictionary configures the md5Dictionary about metric. |
+| access | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Access configures the access log about metrics. |
+| request | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Request configures this mesh service&#39;s HTTP APIs metrics. |
+| jdbcStatement | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JdbcStatement configures this mesh service&#39;s JDBC statement metrics. |
+| jdbcConnection | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JdbcConnection configures this mesh service&#39;s JDBC connection related metrics. |
+| rabbit | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Rabbit configures this mesh serivce&#39;s RabbitMQ requesting metrics. |
+| kafka | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Kafka configures this mesh serivce&#39;s Kafka requesting metrics. |
+| redis | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Redis configures this mesh serivce&#39;s redis requesting metrics. |
+| jvmGc | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JvmGc configures this mesh serivce&#39;s JVM GC related metrics. |
+| jvmMemory | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JvmMemory configures this mesh serivce&#39;s JVM memory usage related metrics. |
+| md5Dictionary | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Md5Dictionary configures this serivce&#39;s md5Dictionary for reporting complete SQL Sentence and signature. |
 
 
 
@@ -288,7 +288,7 @@ ObservabilityMetricsDetail is the metrics detail of observability.
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Enabled configures the switch for one kind metric. |
 | interval | [int32](#int32) |  | Interval configures the million seconds for metric reporting. |
-| topic | [string](#string) |  | Topic configures the metric&#39;s reporting Kafka topic. |
+| topic | [string](#string) |  | Topic configures the metrics&#39; reporting Kafka topic. |
 
 
 
@@ -303,9 +303,9 @@ ObservabilityOutputServer configures how to report observability data to Kafka.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  | Enables configures whether reporting observability data to Kafka or not. |
-| bootstrapServer | [string](#string) |  | BootstrapServer configures the Kafka bootstrap address. |
-| timeout | [int32](#int32) |  | Timeout configures the million second for Kafka&#39;s timeout. |
+| enabled | [bool](#bool) |  | Enabled configures whether reporting observability data to Kafka or not. |
+| bootstrapServer | [string](#string) |  | BootstrapServer configures the Kafka bootstrap servers. |
+| timeout | [int32](#int32) |  | Timeout configures the timeout million second for requesting Kafka. |
 
 
 
@@ -323,12 +323,12 @@ ObservabilityTracings configure the tracings of observability.
 | enabled | [bool](#bool) |  | Enable configures this mesh service&#39;s global tracing switch. |
 | sampleByQPS | [int32](#int32) |  | SampleByQPS configures the QPS value for tracing sampling. The exceeded request will be ignored. |
 | output | [ObservabilityTracingsOutputConfig](#easemesh.v1alpha1.ObservabilityTracingsOutputConfig) |  | Output configures the tracing output topic, queue and thread. |
-| request | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Request configures the tracing switch for HTTP request. |
-| remoteInvoke | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | RemoteInvoke configures the tracing switch for remove calling. |
-| kafka | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Kafka configures the tracing switch for Kafka. |
-| jdbc | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Jdbc configures the tracing switch for JDBC. |
-| redis | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Redis configures the tracing switch for redis. |
-| rabbit | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Rabbit configures the tracing switch for rabbitMQ. |
+| request | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Request configures the tracing switch for this mesh service&#39;s HTTP APIs. |
+| remoteInvoke | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | RemoteInvoke configures the tracing switch for this mesh service&#39;s HTTP RPC tracing. |
+| kafka | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Kafka configures the tracing switch for this mesh service&#39;s Kafka requesting. |
+| jdbc | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Jdbc configures the tracing switch for this mesh serivce&#39;s JDBC requesting. |
+| redis | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Redis configures the tracing switch for this mehs services&#39;s redis requesting. |
+| rabbit | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Rabbit configures the tracing switch for this mesh service&#39;s rabbitMQ requesting. |
 
 
 
@@ -344,7 +344,7 @@ ObservabilityTracingsDetail
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Enabled configures whether reporting this tracing component or not. |
-| servicePrefix | [string](#string) |  | ServicePrefix is the prefix for tracing&#39;s remoteEndpoint&#39;s service name. It will combine with the tracing component&#39;s name. |
+| servicePrefix | [string](#string) |  | ServicePrefix is used to be combined with the tracing component&#39;s. |
 
 
 
@@ -360,7 +360,7 @@ ObservabilityTracingsDetail
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  | Enabled configures whether reporting to tracing output or not. |
-| reportThread | [int32](#int32) |  | ReportThread configures the thread number for JavaAgent to report. |
+| reportThread | [int32](#int32) |  | ReportThread configures the thread number for JavaAgent&#39;s reporting process. |
 | topic | [string](#string) |  | Topic configures the Kafka topic for tracing output target. |
 | messageMaxBytes | [int32](#int32) |  | MessageMaxBytes configures the max bytes for one tracing report message. |
 | queuedMaxSpans | [int32](#int32) |  | QueuedMaxSpans configures the max spans number for reporting queued. |

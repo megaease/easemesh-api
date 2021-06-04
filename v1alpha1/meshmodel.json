@@ -587,7 +587,7 @@
             },
             {
               "name": "access",
-              "description": "Access configures the access log about metric.",
+              "description": "Access configures the access log about metrics.",
               "label": "",
               "type": "ObservabilityMetricsDetail",
               "longType": "ObservabilityMetricsDetail",
@@ -599,7 +599,7 @@
             },
             {
               "name": "request",
-              "description": "Request configures the HTTP request about metric.",
+              "description": "Request configures this mesh service's HTTP APIs metrics.",
               "label": "",
               "type": "ObservabilityMetricsDetail",
               "longType": "ObservabilityMetricsDetail",
@@ -611,7 +611,7 @@
             },
             {
               "name": "jdbcStatement",
-              "description": "JdbcStatement configures the JDBC statement metric.",
+              "description": "JdbcStatement configures this mesh service's JDBC statement metrics.",
               "label": "",
               "type": "ObservabilityMetricsDetail",
               "longType": "ObservabilityMetricsDetail",
@@ -623,7 +623,7 @@
             },
             {
               "name": "jdbcConnection",
-              "description": "JdbcConnection configures the JDBC connection about metric.",
+              "description": "JdbcConnection configures this mesh service's JDBC connection related metrics.",
               "label": "",
               "type": "ObservabilityMetricsDetail",
               "longType": "ObservabilityMetricsDetail",
@@ -635,7 +635,7 @@
             },
             {
               "name": "rabbit",
-              "description": "Rabbit configures the RabbitMQ metric.",
+              "description": "Rabbit configures this mesh serivce's RabbitMQ requesting metrics.",
               "label": "",
               "type": "ObservabilityMetricsDetail",
               "longType": "ObservabilityMetricsDetail",
@@ -647,7 +647,7 @@
             },
             {
               "name": "kafka",
-              "description": "Kafka configures the Kafka about metric.",
+              "description": "Kafka configures this mesh serivce's Kafka requesting metrics.",
               "label": "",
               "type": "ObservabilityMetricsDetail",
               "longType": "ObservabilityMetricsDetail",
@@ -659,7 +659,7 @@
             },
             {
               "name": "redis",
-              "description": "Redis configures the redis about metric.",
+              "description": "Redis configures this mesh serivce's redis requesting metrics.",
               "label": "",
               "type": "ObservabilityMetricsDetail",
               "longType": "ObservabilityMetricsDetail",
@@ -671,7 +671,7 @@
             },
             {
               "name": "jvmGc",
-              "description": "JvmGc configures the JVM GC about metric.",
+              "description": "JvmGc configures this mesh serivce's JVM GC related metrics.",
               "label": "",
               "type": "ObservabilityMetricsDetail",
               "longType": "ObservabilityMetricsDetail",
@@ -683,7 +683,7 @@
             },
             {
               "name": "jvmMemory",
-              "description": "JvmMemory configures the Jvm memory about metric.",
+              "description": "JvmMemory configures this mesh serivce's JVM memory usage related metrics.",
               "label": "",
               "type": "ObservabilityMetricsDetail",
               "longType": "ObservabilityMetricsDetail",
@@ -695,7 +695,7 @@
             },
             {
               "name": "md5Dictionary",
-              "description": "Md5Dictionary configures the md5Dictionary about metric.",
+              "description": "Md5Dictionary configures this serivce's md5Dictionary for reporting complete SQL Sentence and signature.",
               "label": "",
               "type": "ObservabilityMetricsDetail",
               "longType": "ObservabilityMetricsDetail",
@@ -743,7 +743,7 @@
             },
             {
               "name": "topic",
-              "description": "Topic configures the metric's reporting Kafka topic.",
+              "description": "Topic configures the metrics' reporting Kafka topic.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -767,7 +767,7 @@
           "fields": [
             {
               "name": "enabled",
-              "description": "Enables configures whether reporting observability data to Kafka or not.",
+              "description": "Enabled configures whether reporting observability data to Kafka or not.",
               "label": "",
               "type": "bool",
               "longType": "bool",
@@ -779,7 +779,7 @@
             },
             {
               "name": "bootstrapServer",
-              "description": "BootstrapServer configures the Kafka bootstrap address.",
+              "description": "BootstrapServer configures the Kafka bootstrap servers.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -791,7 +791,7 @@
             },
             {
               "name": "timeout",
-              "description": "Timeout configures the million second for Kafka's timeout.",
+              "description": "Timeout configures the timeout million second for requesting Kafka.",
               "label": "",
               "type": "int32",
               "longType": "int32",
@@ -827,7 +827,7 @@
             },
             {
               "name": "sampleByQPS",
-              "description": "SampleByQPS configures the QPS value for tracing sampling. \nThe exceeded request will be ignored.",
+              "description": "SampleByQPS configures the QPS value for tracing sampling.\nThe exceeded request will be ignored.",
               "label": "",
               "type": "int32",
               "longType": "int32",
@@ -851,7 +851,7 @@
             },
             {
               "name": "request",
-              "description": "Request configures the tracing switch for HTTP request.",
+              "description": "Request configures the tracing switch for this mesh service's HTTP APIs.",
               "label": "",
               "type": "ObservabilityTracingsDetail",
               "longType": "ObservabilityTracingsDetail",
@@ -863,7 +863,7 @@
             },
             {
               "name": "remoteInvoke",
-              "description": "RemoteInvoke configures the tracing switch for remove calling.",
+              "description": "RemoteInvoke configures the tracing switch for this mesh service's HTTP RPC tracing.",
               "label": "",
               "type": "ObservabilityTracingsDetail",
               "longType": "ObservabilityTracingsDetail",
@@ -875,7 +875,7 @@
             },
             {
               "name": "kafka",
-              "description": "Kafka configures the tracing switch for Kafka.",
+              "description": "Kafka configures the tracing switch for this mesh service's Kafka requesting.",
               "label": "",
               "type": "ObservabilityTracingsDetail",
               "longType": "ObservabilityTracingsDetail",
@@ -887,7 +887,7 @@
             },
             {
               "name": "jdbc",
-              "description": "Jdbc configures the tracing switch for JDBC.",
+              "description": "Jdbc configures the tracing switch for this mesh serivce's JDBC requesting.",
               "label": "",
               "type": "ObservabilityTracingsDetail",
               "longType": "ObservabilityTracingsDetail",
@@ -899,7 +899,7 @@
             },
             {
               "name": "redis",
-              "description": "Redis configures the tracing switch for redis.",
+              "description": "Redis configures the tracing switch for this mehs services's redis requesting.",
               "label": "",
               "type": "ObservabilityTracingsDetail",
               "longType": "ObservabilityTracingsDetail",
@@ -911,7 +911,7 @@
             },
             {
               "name": "rabbit",
-              "description": "Rabbit configures the tracing switch for rabbitMQ.",
+              "description": "Rabbit configures the tracing switch for this mesh service's rabbitMQ requesting.",
               "label": "",
               "type": "ObservabilityTracingsDetail",
               "longType": "ObservabilityTracingsDetail",
@@ -947,7 +947,7 @@
             },
             {
               "name": "servicePrefix",
-              "description": "ServicePrefix is the prefix for tracing's remoteEndpoint's service name. It will\ncombine with the tracing component's name.",
+              "description": "ServicePrefix is used to be combined with the tracing component's.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -983,7 +983,7 @@
             },
             {
               "name": "reportThread",
-              "description": "ReportThread configures the thread number for JavaAgent to report.",
+              "description": "ReportThread configures the thread number for JavaAgent's reporting process.",
               "label": "",
               "type": "int32",
               "longType": "int32",
