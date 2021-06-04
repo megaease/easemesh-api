@@ -1308,11 +1308,11 @@ type ObservabilityOutputServer struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Enables configures whether reporting observability data to Kafka or not.
+	// Enabled configures whether reporting observability data to Kafka or not.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// BootstrapServer configures the Kafka bootstrap address.
+	// BootstrapServer configures the Kafka bootstrap servers.
 	BootstrapServer string `protobuf:"bytes,2,opt,name=bootstrapServer,proto3" json:"bootstrapServer,omitempty"`
-	// Timeout configures the million second for Kafka's timeout.
+	// Timeout configures the timeout million second for requesting Kafka.
 	Timeout int32 `protobuf:"varint,3,opt,name=timeout,proto3" json:"timeout,omitempty"`
 }
 
@@ -1377,8 +1377,7 @@ type ObservabilityTracingsDetail struct {
 
 	// Enabled configures whether reporting this tracing component or not.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// ServicePrefix is the prefix for tracing's remoteEndpoint's service name. It will
-	// combine with the tracing component's name.
+	// ServicePrefix is used to be combined with the tracing component's.
 	ServicePrefix string `protobuf:"bytes,2,opt,name=servicePrefix,proto3" json:"servicePrefix,omitempty"`
 }
 
@@ -1435,7 +1434,7 @@ type ObservabilityTracingsOutputConfig struct {
 
 	// Enabled configures whether reporting to tracing output or not.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// ReportThread configures the thread number for JavaAgent to report.
+	// ReportThread configures the thread number for JavaAgent's reporting process.
 	ReportThread int32 `protobuf:"varint,2,opt,name=reportThread,proto3" json:"reportThread,omitempty"`
 	// Topic configures the Kafka topic for tracing output target.
 	Topic string `protobuf:"bytes,3,opt,name=topic,proto3" json:"topic,omitempty"`
@@ -1543,17 +1542,17 @@ type ObservabilityTracings struct {
 	SampleByQPS int32 `protobuf:"varint,2,opt,name=sampleByQPS,proto3" json:"sampleByQPS,omitempty"`
 	// Output configures the tracing output topic, queue and thread.
 	Output *ObservabilityTracingsOutputConfig `protobuf:"bytes,3,opt,name=output,proto3" json:"output,omitempty"`
-	// Request configures the tracing switch for HTTP request.
+	// Request configures the tracing switch for this mesh service's HTTP APIs.
 	Request *ObservabilityTracingsDetail `protobuf:"bytes,4,opt,name=request,proto3" json:"request,omitempty"`
-	// RemoteInvoke configures the tracing switch for remove calling.
+	// RemoteInvoke configures the tracing switch for this mesh service's HTTP RPC tracing.
 	RemoteInvoke *ObservabilityTracingsDetail `protobuf:"bytes,5,opt,name=remoteInvoke,proto3" json:"remoteInvoke,omitempty"`
-	// Kafka configures the tracing switch for Kafka.
+	// Kafka configures the tracing switch for this mesh service's Kafka requesting.
 	Kafka *ObservabilityTracingsDetail `protobuf:"bytes,6,opt,name=kafka,proto3" json:"kafka,omitempty"`
-	// Jdbc configures the tracing switch for JDBC.
+	// Jdbc configures the tracing switch for this mesh serivce's JDBC requesting.
 	Jdbc *ObservabilityTracingsDetail `protobuf:"bytes,7,opt,name=jdbc,proto3" json:"jdbc,omitempty"`
-	// Redis configures the tracing switch for redis.
+	// Redis configures the tracing switch for this mehs services's redis requesting.
 	Redis *ObservabilityTracingsDetail `protobuf:"bytes,8,opt,name=redis,proto3" json:"redis,omitempty"`
-	// Rabbit configures the tracing switch for rabbitMQ.
+	// Rabbit configures the tracing switch for this mesh service's rabbitMQ requesting.
 	Rabbit *ObservabilityTracingsDetail `protobuf:"bytes,9,opt,name=rabbit,proto3" json:"rabbit,omitempty"`
 }
 
@@ -1662,7 +1661,7 @@ type ObservabilityMetricsDetail struct {
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Interval configures the million seconds for metric reporting.
 	Interval int32 `protobuf:"varint,2,opt,name=interval,proto3" json:"interval,omitempty"`
-	// Topic configures the metric's reporting Kafka topic.
+	// Topic configures the metrics' reporting Kafka topic.
 	Topic string `protobuf:"bytes,3,opt,name=topic,proto3" json:"topic,omitempty"`
 }
 
@@ -1726,25 +1725,25 @@ type ObservabilityMetrics struct {
 
 	// Enabled configures the global switch for this mesh service.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// Access configures the access log about metric.
+	// Access configures the access log about metrics.
 	Access *ObservabilityMetricsDetail `protobuf:"bytes,2,opt,name=access,proto3" json:"access,omitempty"`
-	// Request configures the HTTP request about metric.
+	// Request configures this mesh service's HTTP APIs metrics.
 	Request *ObservabilityMetricsDetail `protobuf:"bytes,3,opt,name=request,proto3" json:"request,omitempty"`
-	// JdbcStatement configures the JDBC statement metric.
+	// JdbcStatement configures this mesh service's JDBC statement metrics.
 	JdbcStatement *ObservabilityMetricsDetail `protobuf:"bytes,4,opt,name=jdbcStatement,proto3" json:"jdbcStatement,omitempty"`
-	// JdbcConnection configures the JDBC connection about metric.
+	// JdbcConnection configures this mesh service's JDBC connection related metrics.
 	JdbcConnection *ObservabilityMetricsDetail `protobuf:"bytes,5,opt,name=jdbcConnection,proto3" json:"jdbcConnection,omitempty"`
-	// Rabbit configures the RabbitMQ metric.
+	// Rabbit configures this mesh serivce's RabbitMQ requesting metrics.
 	Rabbit *ObservabilityMetricsDetail `protobuf:"bytes,6,opt,name=rabbit,proto3" json:"rabbit,omitempty"`
-	// Kafka configures the Kafka about metric.
+	// Kafka configures this mesh serivce's Kafka requesting metrics.
 	Kafka *ObservabilityMetricsDetail `protobuf:"bytes,7,opt,name=kafka,proto3" json:"kafka,omitempty"`
-	// Redis configures the redis about metric.
+	// Redis configures this mesh serivce's redis requesting metrics.
 	Redis *ObservabilityMetricsDetail `protobuf:"bytes,8,opt,name=redis,proto3" json:"redis,omitempty"`
-	// JvmGc configures the JVM GC about metric.
+	// JvmGc configures this mesh serivce's JVM GC related metrics.
 	JvmGc *ObservabilityMetricsDetail `protobuf:"bytes,9,opt,name=jvmGc,proto3" json:"jvmGc,omitempty"`
-	// JvmMemory configures the Jvm memory about metric.
+	// JvmMemory configures this mesh serivce's JVM memory usage related metrics.
 	JvmMemory *ObservabilityMetricsDetail `protobuf:"bytes,10,opt,name=jvmMemory,proto3" json:"jvmMemory,omitempty"`
-	// Md5Dictionary configures the md5Dictionary about metric.
+	// Md5Dictionary configures this serivce's md5Dictionary for reporting complete SQL Sentence and signature.
 	Md5Dictionary *ObservabilityMetricsDetail `protobuf:"bytes,11,opt,name=md5Dictionary,proto3" json:"md5Dictionary,omitempty"`
 }
 

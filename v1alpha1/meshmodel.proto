@@ -310,13 +310,13 @@ message CanaryRule {
 
 // ObservabilityOutputServer configures how to report observability data to Kafka.
 message ObservabilityOutputServer {
-	// Enables configures whether reporting observability data to Kafka or not.
+	// Enabled configures whether reporting observability data to Kafka or not.
 	bool enabled  = 1; 
 
-	// BootstrapServer configures the Kafka bootstrap address.
+	// BootstrapServer configures the Kafka bootstrap servers.
 	string bootstrapServer = 2;
 
-	// Timeout configures the million second for Kafka's timeout. 
+	// Timeout configures the timeout million second for requesting Kafka.
 	int32 timeout = 3; 
 }
 
@@ -325,19 +325,18 @@ message ObservabilityTracingsDetail {
 	// Enabled configures whether reporting this tracing component or not. 
 	bool  enabled = 1;
 
-	// ServicePrefix is the prefix for tracing's remoteEndpoint's service name. It will
-	// combine with the tracing component's name. 
+	// ServicePrefix is used to be combined with the tracing component's.  
 	string servicePrefix  = 2;
 }
 
 message ObservabilityTracingsOutputConfig {
-	// Enabled configures whether reporting to tracing output or not.  
+	// Enabled configures whether reporting to tracing output or not.
 	bool enabled = 1;
 
-	// ReportThread configures the thread number for JavaAgent to report. 
+	// ReportThread configures the thread number for JavaAgent's reporting process.
 	int32 reportThread = 2;
 
-	// Topic configures the Kafka topic for tracing output target. 
+	// Topic configures the Kafka topic for tracing output target.
 	string topic = 3;
 	
 	// MessageMaxBytes configures the max bytes for one tracing report message.
@@ -358,29 +357,29 @@ message ObservabilityTracings {
 	// Enable configures this mesh service's global tracing switch.
 	bool enabled = 1;
 
-	// SampleByQPS configures the QPS value for tracing sampling. 
+	// SampleByQPS configures the QPS value for tracing sampling.
 	// The exceeded request will be ignored. 
 	int32 sampleByQPS  = 2;
 
 	// Output configures the tracing output topic, queue and thread.
 	ObservabilityTracingsOutputConfig output = 3;
 
-	// Request configures the tracing switch for HTTP request.
+	// Request configures the tracing switch for this mesh service's HTTP APIs.
 	ObservabilityTracingsDetail request = 4;
 
-	// RemoteInvoke configures the tracing switch for remove calling. 
+	// RemoteInvoke configures the tracing switch for this mesh service's HTTP RPC tracing.
 	ObservabilityTracingsDetail remoteInvoke  = 5;
 
-	// Kafka configures the tracing switch for Kafka. 
+	// Kafka configures the tracing switch for this mesh service's Kafka requesting.
 	ObservabilityTracingsDetail kafka = 6;
 
-	// Jdbc configures the tracing switch for JDBC. 
+	// Jdbc configures the tracing switch for this mesh serivce's JDBC requesting.
 	ObservabilityTracingsDetail jdbc = 7;
 
-	// Redis configures the tracing switch for redis. 
+	// Redis configures the tracing switch for this mehs services's redis requesting.
 	ObservabilityTracingsDetail redis = 8;
 
-	// Rabbit configures the tracing switch for rabbitMQ.
+	// Rabbit configures the tracing switch for this mesh service's rabbitMQ requesting.
 	ObservabilityTracingsDetail rabbit = 9;
 }
 
@@ -392,7 +391,7 @@ message ObservabilityMetricsDetail  {
 	// Interval configures the million seconds for metric reporting.
 	int32 interval = 2;
 
-	// Topic configures the metric's reporting Kafka topic.
+	// Topic configures the metrics' reporting Kafka topic.
 	string topic = 3;
 }
 
@@ -400,34 +399,34 @@ message ObservabilityMetrics {
 	// Enabled configures the global switch for this mesh service.
 	bool enabled = 1;
 
-	// Access configures the access log about metric.
+	// Access configures the access log about metrics.
 	ObservabilityMetricsDetail access = 2;
 
-	// Request configures the HTTP request about metric.
+	// Request configures this mesh service's HTTP APIs metrics.
 	ObservabilityMetricsDetail request = 3;
 	
-	// JdbcStatement configures the JDBC statement metric.
+	// JdbcStatement configures this mesh service's JDBC statement metrics.
 	ObservabilityMetricsDetail jdbcStatement = 4;
 
-	// JdbcConnection configures the JDBC connection about metric.
+	// JdbcConnection configures this mesh service's JDBC connection related metrics.
 	ObservabilityMetricsDetail jdbcConnection = 5;
 
-	// Rabbit configures the RabbitMQ metric.
+	// Rabbit configures this mesh serivce's RabbitMQ requesting metrics.
 	ObservabilityMetricsDetail rabbit = 6;
 
-	// Kafka configures the Kafka about metric.   
+	// Kafka configures this mesh serivce's Kafka requesting metrics.
 	ObservabilityMetricsDetail kafka = 7;
 
-	// Redis configures the redis about metric.
+	// Redis configures this mesh serivce's redis requesting metrics.
 	ObservabilityMetricsDetail redis = 8;
 
-	// JvmGc configures the JVM GC about metric.
+	// JvmGc configures this mesh serivce's JVM GC related metrics.
 	ObservabilityMetricsDetail jvmGc = 9;
 
-	// JvmMemory configures the Jvm memory about metric.
+	// JvmMemory configures this mesh serivce's JVM memory usage related metrics.
 	ObservabilityMetricsDetail jvmMemory = 10;
 
-	// Md5Dictionary configures the md5Dictionary about metric.
+	// Md5Dictionary configures this serivce's md5Dictionary for reporting complete SQL Sentence and signature.
 	ObservabilityMetricsDetail md5Dictionary = 11;
 }
 
