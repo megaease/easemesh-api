@@ -271,6 +271,14 @@
                 </li>
               
                 <li>
+                  <a href="#easemesh.v1alpha1.ServiceInstance"><span class="badge">M</span>ServiceInstance</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ServiceInstance.LabelsEntry"><span class="badge">M</span>ServiceInstance.LabelsEntry</a>
+                </li>
+              
+                <li>
                   <a href="#easemesh.v1alpha1.Sidecar"><span class="badge">M</span>Sidecar</a>
                 </li>
               
@@ -1396,6 +1404,103 @@ its permissions count back to the limitForPeriod value. </p></td>
                   <td><a href="#easemesh.v1alpha1.Observability">Observability</a></td>
                   <td></td>
                   <td><p>Observability configuration, optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ServiceInstance">ServiceInstance</h3>
+        <p>ServiceInstance is the runnable entity of a Mesh Service.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>serviceName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>ServiceName is the name of service this instance belongs to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instanceID</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>InstanceID is the identity of this instance. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ip</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>IP is this instance&#39;s address in EaseMesh. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>port</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Port is the port this instance listening to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>registryTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>RegistryTime is the time this instance registered. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>labels</td>
+                  <td><a href="#easemesh.v1alpha1.ServiceInstance.LabelsEntry">ServiceInstance.LabelsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Labels is a map for storing service labels. This field is used for Canary Deployment. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Status is the status of this mesh service instance. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ServiceInstance.LabelsEntry">ServiceInstance.LabelsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
