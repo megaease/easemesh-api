@@ -27,6 +27,8 @@
     - [Retryer](#easemesh.v1alpha1.Retryer)
     - [RetryerPolicy](#easemesh.v1alpha1.RetryerPolicy)
     - [Service](#easemesh.v1alpha1.Service)
+    - [ServiceInstance](#easemesh.v1alpha1.ServiceInstance)
+    - [ServiceInstance.LabelsEntry](#easemesh.v1alpha1.ServiceInstance.LabelsEntry)
     - [Sidecar](#easemesh.v1alpha1.Sidecar)
     - [StringMatch](#easemesh.v1alpha1.StringMatch)
     - [Tenant](#easemesh.v1alpha1.Tenant)
@@ -488,6 +490,43 @@ tenant.
 | loadBalance | [LoadBalance](#easemesh.v1alpha1.LoadBalance) |  | LoadBalance configuration, optional. |
 | sidecar | [Sidecar](#easemesh.v1alpha1.Sidecar) |  | Sidecar configuration, optional. |
 | observability | [Observability](#easemesh.v1alpha1.Observability) |  | Observability configuration, optional. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.ServiceInstance"></a>
+
+### ServiceInstance
+ServiceInstance is the runnable entity of a Mesh Service.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| serviceName | [string](#string) |  | ServiceName is the name of service this instance belongs to. |
+| instanceID | [string](#string) |  | InstanceID is the identity of this instance. |
+| ip | [string](#string) |  | IP is this instance&#39;s address in EaseMesh. |
+| port | [int32](#int32) |  | Port is the port this instance listening to. |
+| registryTime | [string](#string) |  | RegistryTime is the time this instance registered. |
+| labels | [ServiceInstance.LabelsEntry](#easemesh.v1alpha1.ServiceInstance.LabelsEntry) | repeated | Labels is a map for storing service labels. This field is used for Canary Deployment. |
+| status | [string](#string) |  | Status is the status of this mesh service instance. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.ServiceInstance.LabelsEntry"></a>
+
+### ServiceInstance.LabelsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
