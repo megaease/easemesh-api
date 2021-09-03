@@ -29,6 +29,12 @@
     - [Service](#easemesh.v1alpha1.Service)
     - [ServiceInstance](#easemesh.v1alpha1.ServiceInstance)
     - [ServiceInstance.LabelsEntry](#easemesh.v1alpha1.ServiceInstance.LabelsEntry)
+    - [ShadowService](#easemesh.v1alpha1.ShadowService)
+    - [ShadowServiceElasticSearch](#easemesh.v1alpha1.ShadowServiceElasticSearch)
+    - [ShadowServiceKafka](#easemesh.v1alpha1.ShadowServiceKafka)
+    - [ShadowServiceMySQL](#easemesh.v1alpha1.ShadowServiceMySQL)
+    - [ShadowServiceRabbitMQ](#easemesh.v1alpha1.ShadowServiceRabbitMQ)
+    - [ShadowServiceRedis](#easemesh.v1alpha1.ShadowServiceRedis)
     - [Sidecar](#easemesh.v1alpha1.Sidecar)
     - [StringMatch](#easemesh.v1alpha1.StringMatch)
     - [Tenant](#easemesh.v1alpha1.Tenant)
@@ -268,12 +274,12 @@ Observability consists of three components, outputServer, tracing, and metrics.
 | request | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Request configures this mesh service&#39;s HTTP APIs metrics. |
 | jdbcStatement | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JdbcStatement configures this mesh service&#39;s JDBC statement metrics. |
 | jdbcConnection | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JdbcConnection configures this mesh service&#39;s JDBC connection related metrics. |
-| rabbit | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Rabbit configures this mesh serivce&#39;s RabbitMQ requesting metrics. |
-| kafka | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Kafka configures this mesh serivce&#39;s Kafka requesting metrics. |
-| redis | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Redis configures this mesh serivce&#39;s redis requesting metrics. |
-| jvmGc | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JvmGc configures this mesh serivce&#39;s JVM GC related metrics. |
-| jvmMemory | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JvmMemory configures this mesh serivce&#39;s JVM memory usage related metrics. |
-| md5Dictionary | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Md5Dictionary configures this serivce&#39;s md5Dictionary for reporting complete SQL Sentence and signature. |
+| rabbit | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Rabbit configures this mesh service&#39;s RabbitMQ requesting metrics. |
+| kafka | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Kafka configures this mesh service&#39;s Kafka requesting metrics. |
+| redis | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Redis configures this mesh service&#39;s redis requesting metrics. |
+| jvmGc | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JvmGc configures this mesh service&#39;s JVM GC related metrics. |
+| jvmMemory | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | JvmMemory configures this mesh service&#39;s JVM memory usage related metrics. |
+| md5Dictionary | [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail) |  | Md5Dictionary configures this service&#39;s md5Dictionary for reporting complete SQL Sentence and signature. |
 
 
 
@@ -328,8 +334,8 @@ ObservabilityTracings configure the tracings of observability.
 | request | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Request configures the tracing switch for this mesh service&#39;s HTTP APIs. |
 | remoteInvoke | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | RemoteInvoke configures the tracing switch for this mesh service&#39;s HTTP RPC tracing. |
 | kafka | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Kafka configures the tracing switch for this mesh service&#39;s Kafka requesting. |
-| jdbc | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Jdbc configures the tracing switch for this mesh serivce&#39;s JDBC requesting. |
-| redis | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Redis configures the tracing switch for this mehs services&#39;s redis requesting. |
+| jdbc | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Jdbc configures the tracing switch for this mesh service&#39;s JDBC requesting. |
+| redis | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Redis configures the tracing switch for this mesh service&#39;s redis requesting. |
 | rabbit | [ObservabilityTracingsDetail](#easemesh.v1alpha1.ObservabilityTracingsDetail) |  | Rabbit configures the tracing switch for this mesh service&#39;s rabbitMQ requesting. |
 
 
@@ -527,6 +533,110 @@ ServiceInstance is the runnable entity of a Mesh Service.
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.ShadowService"></a>
+
+### ShadowService
+Shadow Service is a copy of an existing easemesh service. The test traffic can be scheduled to the shadow service for the test.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Name is the mesh service&#39;s name. |
+| Namespace | [string](#string) |  | Namespace is kubernetes namespace where the service is deployed. |
+| mysql | [ShadowServiceMySQL](#easemesh.v1alpha1.ShadowServiceMySQL) |  | MySQL configuration, optional. |
+| kafka | [ShadowServiceKafka](#easemesh.v1alpha1.ShadowServiceKafka) |  | Kafka configuration, optional. |
+| redis | [ShadowServiceRedis](#easemesh.v1alpha1.ShadowServiceRedis) |  | Redis configuration, optional. |
+| rabbitmq | [ShadowServiceRabbitMQ](#easemesh.v1alpha1.ShadowServiceRabbitMQ) |  | RabbitMQ configuration, optional. |
+| elasticsearch | [ShadowServiceElasticSearch](#easemesh.v1alpha1.ShadowServiceElasticSearch) |  | ElasticSearch configuration, optional. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.ShadowServiceElasticSearch"></a>
+
+### ShadowServiceElasticSearch
+ShadowServiceElasticSearch is the elasticsearch configuration for shadow service.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hosts | [string](#string) | repeated | Host is the server addresses for ElasticSearch cluster. |
+| userName | [string](#string) |  | Username for access ElasticSearch cluster. |
+| password | [string](#string) |  | Password for access ElasticSearch cluster. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.ShadowServiceKafka"></a>
+
+### ShadowServiceKafka
+ShadowServiceKafka is the kafka configuration for shadow service.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hosts | [string](#string) | repeated | Hosts is the broker server for Kafka. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.ShadowServiceMySQL"></a>
+
+### ShadowServiceMySQL
+ShadowServiceMySQL is the mysql configuration for shadow service.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hosts | [string](#string) | repeated | Hosts is the jdbc address for MySQL databases. |
+| userName | [string](#string) |  | Username for access MySQL databases. |
+| password | [string](#string) |  | Password for access MySQL databases. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.ShadowServiceRabbitMQ"></a>
+
+### ShadowServiceRabbitMQ
+ShadowServiceRabbitMQ is the rabbitmq configuration for shadow service.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hosts | [string](#string) | repeated | Host is the server addresses for RabbitMQ server. |
+| userName | [string](#string) |  | Username for access RabbitMQ server. |
+| password | [string](#string) |  | Password for access RabbitMQ server. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.ShadowServiceRedis"></a>
+
+### ShadowServiceRedis
+ShadowServiceRedis is the redis configuration for shadow service.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hosts | [string](#string) | repeated | Host is the server addresses for Redis. |
+| userName | [string](#string) |  | Username for access Redis server. |
+| password | [string](#string) |  | Password for access Redis server. |
 
 
 

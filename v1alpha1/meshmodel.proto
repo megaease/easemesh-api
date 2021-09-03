@@ -397,10 +397,10 @@ message ObservabilityTracings {
 	// Kafka configures the tracing switch for this mesh service's Kafka requesting.
 	ObservabilityTracingsDetail kafka = 6;
 
-	// Jdbc configures the tracing switch for this mesh serivce's JDBC requesting.
+	// Jdbc configures the tracing switch for this mesh service's JDBC requesting.
 	ObservabilityTracingsDetail jdbc = 7;
 
-	// Redis configures the tracing switch for this mehs services's redis requesting.
+	// Redis configures the tracing switch for this mesh service's redis requesting.
 	ObservabilityTracingsDetail redis = 8;
 
 	// Rabbit configures the tracing switch for this mesh service's rabbitMQ requesting.
@@ -435,22 +435,22 @@ message ObservabilityMetrics {
 	// JdbcConnection configures this mesh service's JDBC connection related metrics.
 	ObservabilityMetricsDetail jdbcConnection = 5;
 
-	// Rabbit configures this mesh serivce's RabbitMQ requesting metrics.
+	// Rabbit configures this mesh service's RabbitMQ requesting metrics.
 	ObservabilityMetricsDetail rabbit = 6;
 
-	// Kafka configures this mesh serivce's Kafka requesting metrics.
+	// Kafka configures this mesh service's Kafka requesting metrics.
 	ObservabilityMetricsDetail kafka = 7;
 
-	// Redis configures this mesh serivce's redis requesting metrics.
+	// Redis configures this mesh service's redis requesting metrics.
 	ObservabilityMetricsDetail redis = 8;
 
-	// JvmGc configures this mesh serivce's JVM GC related metrics.
+	// JvmGc configures this mesh service's JVM GC related metrics.
 	ObservabilityMetricsDetail jvmGc = 9;
 
-	// JvmMemory configures this mesh serivce's JVM memory usage related metrics.
+	// JvmMemory configures this mesh service's JVM memory usage related metrics.
 	ObservabilityMetricsDetail jvmMemory = 10;
 
-	// Md5Dictionary configures this serivce's md5Dictionary for reporting complete SQL Sentence and signature.
+	// Md5Dictionary configures this service's md5Dictionary for reporting complete SQL Sentence and signature.
 	ObservabilityMetricsDetail md5Dictionary = 11;
 }
 
@@ -501,4 +501,83 @@ message URLRule {
 
 	// PolicyRef configures which policy this URLRule references to. 
 	string policyRef = 3;
+}
+
+// Shadow Service is a copy of an existing easemesh service. The test traffic can be scheduled to the shadow service for the test.
+message ShadowService {
+	// Name is the mesh service's name.
+	string name = 1;
+
+	// Namespace is kubernetes namespace where the service is deployed.
+    string Namespace = 2;
+
+	// MySQL configuration, optional.
+	ShadowServiceMySQL mysql  = 3;
+
+	// Kafka configuration, optional.
+	ShadowServiceKafka kafka  = 4;
+
+	// Redis configuration, optional.
+	ShadowServiceRedis redis = 5;
+
+	// RabbitMQ configuration, optional.
+	ShadowServiceRabbitMQ rabbitmq  = 6;
+
+	// ElasticSearch configuration, optional.
+	ShadowServiceElasticSearch elasticsearch  = 7;
+}
+
+
+// ShadowServiceMySQL is the mysql configuration for shadow service.
+message ShadowServiceMySQL {
+	// Hosts is the jdbc address for MySQL databases.
+	repeated string  hosts = 1;
+
+    // Username for access MySQL databases.
+	string userName = 2;
+
+    // Password for access MySQL databases.
+	string password = 3;
+}
+
+// ShadowServiceKafka is the kafka configuration for shadow service.
+message ShadowServiceKafka {
+	// Hosts is the broker server for Kafka.
+	repeated string  hosts = 1;
+}
+
+// ShadowServiceRedis is the redis configuration for shadow service.
+message ShadowServiceRedis {
+	// Host is the server addresses for Redis.
+	repeated string  hosts = 1;
+
+    // Username for access Redis server.
+	string userName = 2;
+
+    // Password for access Redis server.
+	string password = 3;
+}
+
+// ShadowServiceRabbitMQ is the rabbitmq configuration for shadow service.
+message ShadowServiceRabbitMQ {
+	// Host is the server addresses for RabbitMQ server.
+	repeated string  hosts = 1;
+
+    // Username for access RabbitMQ server.
+	string userName = 2;
+
+    // Password for access RabbitMQ server.
+	string password = 3;
+}
+
+// ShadowServiceElasticSearch is the elasticsearch configuration for shadow service.
+message ShadowServiceElasticSearch {
+	// Host is the server addresses for ElasticSearch cluster.
+	repeated string  hosts = 1;
+
+    // Username for access ElasticSearch cluster.
+	string userName = 2;
+
+    // Password for access ElasticSearch cluster.
+	string password = 3;
 }
