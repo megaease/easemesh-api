@@ -509,7 +509,7 @@ message ShadowService {
 	string name = 1;
 
 	// Namespace is kubernetes namespace where the service is deployed.
-    string Namespace = 2;
+	string Namespace = 2;
 
 	// MySQL configuration, optional.
 	ShadowServiceMySQL mysql  = 3;
@@ -533,10 +533,10 @@ message ShadowServiceMySQL {
 	// Hosts is the jdbc address for MySQL databases.
 	repeated string  hosts = 1;
 
-    // Username for access MySQL databases.
+	// Username for access MySQL databases.
 	string userName = 2;
 
-    // Password for access MySQL databases.
+	// Password for access MySQL databases.
 	string password = 3;
 }
 
@@ -551,10 +551,10 @@ message ShadowServiceRedis {
 	// Host is the server addresses for Redis.
 	repeated string  hosts = 1;
 
-    // Username for access Redis server.
+	// Username for access Redis server.
 	string userName = 2;
 
-    // Password for access Redis server.
+	// Password for access Redis server.
 	string password = 3;
 }
 
@@ -563,10 +563,10 @@ message ShadowServiceRabbitMQ {
 	// Host is the server addresses for RabbitMQ server.
 	repeated string  hosts = 1;
 
-    // Username for access RabbitMQ server.
+	// Username for access RabbitMQ server.
 	string userName = 2;
 
-    // Password for access RabbitMQ server.
+	// Password for access RabbitMQ server.
 	string password = 3;
 }
 
@@ -575,9 +575,9 @@ message ShadowServiceElasticSearch {
 	// Host is the server addresses for ElasticSearch cluster.
 	repeated string  hosts = 1;
 
-    // Username for access ElasticSearch cluster.
+	// Username for access ElasticSearch cluster.
 	string userName = 2;
 
-    // Password for access ElasticSearch cluster.
+	// Password for access ElasticSearch cluster.
 	string password = 3;
 }
