@@ -548,11 +548,12 @@ Shadow Service is a copy of an existing easemesh service. The test traffic can b
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Name is the mesh service&#39;s name. |
+| serviceName | [string](#string) |  | ServiceName is the name of original service used to create the shadow service. |
 | Namespace | [string](#string) |  | Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default. |
-| mySQL | [ShadowServiceMySQL](#easemesh.v1alpha1.ShadowServiceMySQL) |  | MySQL configuration, optional. |
+| mysql | [ShadowServiceMySQL](#easemesh.v1alpha1.ShadowServiceMySQL) |  | MySQL configuration, optional. |
 | kafka | [ShadowServiceKafka](#easemesh.v1alpha1.ShadowServiceKafka) |  | Kafka configuration, optional. |
 | redis | [ShadowServiceRedis](#easemesh.v1alpha1.ShadowServiceRedis) |  | Redis configuration, optional. |
-| rabbitMQ | [ShadowServiceRabbitMQ](#easemesh.v1alpha1.ShadowServiceRabbitMQ) |  | RabbitMQ configuration, optional. |
+| rabbitMq | [ShadowServiceRabbitMQ](#easemesh.v1alpha1.ShadowServiceRabbitMQ) |  | RabbitMQ configuration, optional. |
 | elasticSearch | [ShadowServiceElasticSearch](#easemesh.v1alpha1.ShadowServiceElasticSearch) |  | ElasticSearch configuration, optional. |
 
 
