@@ -279,6 +279,30 @@
                 </li>
               
                 <li>
+                  <a href="#easemesh.v1alpha1.ShadowService"><span class="badge">M</span>ShadowService</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ShadowServiceElasticSearch"><span class="badge">M</span>ShadowServiceElasticSearch</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ShadowServiceKafka"><span class="badge">M</span>ShadowServiceKafka</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ShadowServiceMySQL"><span class="badge">M</span>ShadowServiceMySQL</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ShadowServiceRabbitMQ"><span class="badge">M</span>ShadowServiceRabbitMQ</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ShadowServiceRedis"><span class="badge">M</span>ShadowServiceRedis</a>
+                </li>
+              
+                <li>
                   <a href="#easemesh.v1alpha1.Sidecar"><span class="badge">M</span>Sidecar</a>
                 </li>
               
@@ -815,42 +839,42 @@ headerHash </p></td>
                   <td>rabbit</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>Rabbit configures this mesh serivce&#39;s RabbitMQ requesting metrics. </p></td>
+                  <td><p>Rabbit configures this mesh service&#39;s RabbitMQ requesting metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>kafka</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>Kafka configures this mesh serivce&#39;s Kafka requesting metrics. </p></td>
+                  <td><p>Kafka configures this mesh service&#39;s Kafka requesting metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>redis</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>Redis configures this mesh serivce&#39;s redis requesting metrics. </p></td>
+                  <td><p>Redis configures this mesh service&#39;s redis requesting metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>jvmGc</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>JvmGc configures this mesh serivce&#39;s JVM GC related metrics. </p></td>
+                  <td><p>JvmGc configures this mesh service&#39;s JVM GC related metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>jvmMemory</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>JvmMemory configures this mesh serivce&#39;s JVM memory usage related metrics. </p></td>
+                  <td><p>JvmMemory configures this mesh service&#39;s JVM memory usage related metrics. </p></td>
                 </tr>
               
                 <tr>
                   <td>md5Dictionary</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityMetricsDetail">ObservabilityMetricsDetail</a></td>
                   <td></td>
-                  <td><p>Md5Dictionary configures this serivce&#39;s md5Dictionary for reporting complete SQL Sentence and signature. </p></td>
+                  <td><p>Md5Dictionary configures this service&#39;s md5Dictionary for reporting complete SQL Sentence and signature. </p></td>
                 </tr>
               
             </tbody>
@@ -993,14 +1017,14 @@ The exceeded request will be ignored. </p></td>
                   <td>jdbc</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
                   <td></td>
-                  <td><p>Jdbc configures the tracing switch for this mesh serivce&#39;s JDBC requesting. </p></td>
+                  <td><p>Jdbc configures the tracing switch for this mesh service&#39;s JDBC requesting. </p></td>
                 </tr>
               
                 <tr>
                   <td>redis</td>
                   <td><a href="#easemesh.v1alpha1.ObservabilityTracingsDetail">ObservabilityTracingsDetail</a></td>
                   <td></td>
-                  <td><p>Redis configures the tracing switch for this mehs services&#39;s redis requesting. </p></td>
+                  <td><p>Redis configures the tracing switch for this mesh service&#39;s redis requesting. </p></td>
                 </tr>
               
                 <tr>
@@ -1501,6 +1525,248 @@ its permissions count back to the limitForPeriod value. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ShadowService">ShadowService</h3>
+        <p>Shadow Service is a copy of an existing easemesh service. The test traffic can be scheduled to the shadow service for the test.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name is the mesh service&#39;s name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>Namespace</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>mysql</td>
+                  <td><a href="#easemesh.v1alpha1.ShadowServiceMySQL">ShadowServiceMySQL</a></td>
+                  <td></td>
+                  <td><p>MySQL configuration, optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>kafka</td>
+                  <td><a href="#easemesh.v1alpha1.ShadowServiceKafka">ShadowServiceKafka</a></td>
+                  <td></td>
+                  <td><p>Kafka configuration, optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>redis</td>
+                  <td><a href="#easemesh.v1alpha1.ShadowServiceRedis">ShadowServiceRedis</a></td>
+                  <td></td>
+                  <td><p>Redis configuration, optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rabbitmq</td>
+                  <td><a href="#easemesh.v1alpha1.ShadowServiceRabbitMQ">ShadowServiceRabbitMQ</a></td>
+                  <td></td>
+                  <td><p>RabbitMQ configuration, optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>elasticsearch</td>
+                  <td><a href="#easemesh.v1alpha1.ShadowServiceElasticSearch">ShadowServiceElasticSearch</a></td>
+                  <td></td>
+                  <td><p>ElasticSearch configuration, optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ShadowServiceElasticSearch">ShadowServiceElasticSearch</h3>
+        <p>ShadowServiceElasticSearch is the elasticsearch configuration for shadow service.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>uris</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Uris is the server addresses for ElasticSearch cluster, such as 192.168.0.1:9200. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>userName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Username for access ElasticSearch cluster. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>password</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Password for access ElasticSearch cluster. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ShadowServiceKafka">ShadowServiceKafka</h3>
+        <p>ShadowServiceKafka is the kafka configuration for shadow service.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>uris</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Uris is the broker server for Kafka, such as 192.168.0.1:9092. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ShadowServiceMySQL">ShadowServiceMySQL</h3>
+        <p>ShadowServiceMySQL is the mysql configuration for shadow service.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>uris</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Uris is the jdbc address for MySQL databases, such as jdbc:mysql://localhost:330611/db_demo. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>userName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Username for access MySQL databases. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>password</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Password for access MySQL databases. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ShadowServiceRabbitMQ">ShadowServiceRabbitMQ</h3>
+        <p>ShadowServiceRabbitMQ is the rabbitmq configuration for shadow service.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>uris</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Uris is the server addresses for RabbitMQ, such as 192.168.0.1:5672. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>userName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Username for access RabbitMQ server. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>password</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Password for access RabbitMQ server. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ShadowServiceRedis">ShadowServiceRedis</h3>
+        <p>ShadowServiceRedis is the redis configuration for shadow service.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>uris</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Uris is the server addresses for Redis, such as 192.168.0.1:6379. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>userName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Username for access Redis server. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>password</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Password for access Redis server. </p></td>
                 </tr>
               
             </tbody>
