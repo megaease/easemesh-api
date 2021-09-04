@@ -1555,7 +1555,7 @@ its permissions count back to the limitForPeriod value. </p></td>
                   <td>Namespace</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Namespace is kubernetes namespace where the service is deployed. </p></td>
+                  <td><p>Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default. </p></td>
                 </tr>
               
                 <tr>
@@ -1611,10 +1611,10 @@ its permissions count back to the limitForPeriod value. </p></td>
             <tbody>
               
                 <tr>
-                  <td>hosts</td>
+                  <td>uris</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Host is the server addresses for ElasticSearch cluster. </p></td>
+                  <td><p>Uris is the server addresses for ElasticSearch cluster, such as 192.168.0.1:9200. </p></td>
                 </tr>
               
                 <tr>
@@ -1649,10 +1649,10 @@ its permissions count back to the limitForPeriod value. </p></td>
             <tbody>
               
                 <tr>
-                  <td>hosts</td>
+                  <td>uris</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Hosts is the broker server for Kafka. </p></td>
+                  <td><p>Uris is the broker server for Kafka, such as 192.168.0.1:9092. </p></td>
                 </tr>
               
             </tbody>
@@ -1673,10 +1673,10 @@ its permissions count back to the limitForPeriod value. </p></td>
             <tbody>
               
                 <tr>
-                  <td>hosts</td>
+                  <td>uris</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Hosts is the jdbc address for MySQL databases. </p></td>
+                  <td><p>Uris is the jdbc address for MySQL databases, such as jdbc:mysql://localhost:330611/db_demo. </p></td>
                 </tr>
               
                 <tr>
@@ -1711,10 +1711,10 @@ its permissions count back to the limitForPeriod value. </p></td>
             <tbody>
               
                 <tr>
-                  <td>hosts</td>
+                  <td>uris</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Host is the server addresses for RabbitMQ server. </p></td>
+                  <td><p>Uris is the server addresses for RabbitMQ, such as 192.168.0.1:5672. </p></td>
                 </tr>
               
                 <tr>
@@ -1749,10 +1749,10 @@ its permissions count back to the limitForPeriod value. </p></td>
             <tbody>
               
                 <tr>
-                  <td>hosts</td>
+                  <td>uris</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Host is the server addresses for Redis. </p></td>
+                  <td><p>Uris is the server addresses for Redis, such as 192.168.0.1:6379. </p></td>
                 </tr>
               
                 <tr>

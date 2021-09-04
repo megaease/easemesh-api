@@ -548,7 +548,7 @@ Shadow Service is a copy of an existing easemesh service. The test traffic can b
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Name is the mesh service&#39;s name. |
-| Namespace | [string](#string) |  | Namespace is kubernetes namespace where the service is deployed. |
+| Namespace | [string](#string) |  | Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default. |
 | mysql | [ShadowServiceMySQL](#easemesh.v1alpha1.ShadowServiceMySQL) |  | MySQL configuration, optional. |
 | kafka | [ShadowServiceKafka](#easemesh.v1alpha1.ShadowServiceKafka) |  | Kafka configuration, optional. |
 | redis | [ShadowServiceRedis](#easemesh.v1alpha1.ShadowServiceRedis) |  | Redis configuration, optional. |
@@ -568,7 +568,7 @@ ShadowServiceElasticSearch is the elasticsearch configuration for shadow service
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| hosts | [string](#string) | repeated | Host is the server addresses for ElasticSearch cluster. |
+| uris | [string](#string) | repeated | Uris is the server addresses for ElasticSearch cluster, such as 192.168.0.1:9200. |
 | userName | [string](#string) |  | Username for access ElasticSearch cluster. |
 | password | [string](#string) |  | Password for access ElasticSearch cluster. |
 
@@ -585,7 +585,7 @@ ShadowServiceKafka is the kafka configuration for shadow service.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| hosts | [string](#string) | repeated | Hosts is the broker server for Kafka. |
+| uris | [string](#string) | repeated | Uris is the broker server for Kafka, such as 192.168.0.1:9092. |
 
 
 
@@ -600,7 +600,7 @@ ShadowServiceMySQL is the mysql configuration for shadow service.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| hosts | [string](#string) | repeated | Hosts is the jdbc address for MySQL databases. |
+| uris | [string](#string) | repeated | Uris is the jdbc address for MySQL databases, such as jdbc:mysql://localhost:330611/db_demo. |
 | userName | [string](#string) |  | Username for access MySQL databases. |
 | password | [string](#string) |  | Password for access MySQL databases. |
 
@@ -617,7 +617,7 @@ ShadowServiceRabbitMQ is the rabbitmq configuration for shadow service.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| hosts | [string](#string) | repeated | Host is the server addresses for RabbitMQ server. |
+| uris | [string](#string) | repeated | Uris is the server addresses for RabbitMQ, such as 192.168.0.1:5672. |
 | userName | [string](#string) |  | Username for access RabbitMQ server. |
 | password | [string](#string) |  | Password for access RabbitMQ server. |
 
@@ -634,7 +634,7 @@ ShadowServiceRedis is the redis configuration for shadow service.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| hosts | [string](#string) | repeated | Host is the server addresses for Redis. |
+| uris | [string](#string) | repeated | Uris is the server addresses for Redis, such as 192.168.0.1:6379. |
 | userName | [string](#string) |  | Username for access Redis server. |
 | password | [string](#string) |  | Password for access Redis server. |
 

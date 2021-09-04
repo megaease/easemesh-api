@@ -1619,7 +1619,7 @@
             },
             {
               "name": "Namespace",
-              "description": "Namespace is kubernetes namespace where the service is deployed.",
+              "description": "Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -1702,8 +1702,8 @@
           "extensions": [],
           "fields": [
             {
-              "name": "hosts",
-              "description": "Host is the server addresses for ElasticSearch cluster.",
+              "name": "uris",
+              "description": "Uris is the server addresses for ElasticSearch cluster, such as 192.168.0.1:9200.",
               "label": "repeated",
               "type": "string",
               "longType": "string",
@@ -1750,8 +1750,8 @@
           "extensions": [],
           "fields": [
             {
-              "name": "hosts",
-              "description": "Hosts is the broker server for Kafka.",
+              "name": "uris",
+              "description": "Uris is the broker server for Kafka, such as 192.168.0.1:9092.",
               "label": "repeated",
               "type": "string",
               "longType": "string",
@@ -1774,8 +1774,8 @@
           "extensions": [],
           "fields": [
             {
-              "name": "hosts",
-              "description": "Hosts is the jdbc address for MySQL databases.",
+              "name": "uris",
+              "description": "Uris is the jdbc address for MySQL databases, such as jdbc:mysql://localhost:330611/db_demo.",
               "label": "repeated",
               "type": "string",
               "longType": "string",
@@ -1822,8 +1822,8 @@
           "extensions": [],
           "fields": [
             {
-              "name": "hosts",
-              "description": "Host is the server addresses for RabbitMQ server.",
+              "name": "uris",
+              "description": "Uris is the server addresses for RabbitMQ, such as 192.168.0.1:5672.",
               "label": "repeated",
               "type": "string",
               "longType": "string",
@@ -1870,8 +1870,8 @@
           "extensions": [],
           "fields": [
             {
-              "name": "hosts",
-              "description": "Host is the server addresses for Redis.",
+              "name": "uris",
+              "description": "Uris is the server addresses for Redis, such as 192.168.0.1:6379.",
               "label": "repeated",
               "type": "string",
               "longType": "string",
