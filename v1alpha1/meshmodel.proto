@@ -512,7 +512,7 @@ message ShadowService {
 	string Namespace = 2;
 
 	// MySQL configuration, optional.
-	ShadowServiceMySQL mysql  = 3;
+	ShadowServiceMySQL mySQL  = 3;
 
 	// Kafka configuration, optional.
 	ShadowServiceKafka kafka  = 4;
@@ -521,10 +521,10 @@ message ShadowService {
 	ShadowServiceRedis redis = 5;
 
 	// RabbitMQ configuration, optional.
-	ShadowServiceRabbitMQ rabbitmq  = 6;
+	ShadowServiceRabbitMQ rabbitMQ  = 6;
 
 	// ElasticSearch configuration, optional.
-	ShadowServiceElasticSearch elasticsearch  = 7;
+	ShadowServiceElasticSearch elasticSearch  = 7;
 }
 
 

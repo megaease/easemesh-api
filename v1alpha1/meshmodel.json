@@ -1630,7 +1630,7 @@
               "defaultValue": ""
             },
             {
-              "name": "mysql",
+              "name": "mySQL",
               "description": "MySQL configuration, optional.",
               "label": "",
               "type": "ShadowServiceMySQL",
@@ -1666,7 +1666,7 @@
               "defaultValue": ""
             },
             {
-              "name": "rabbitmq",
+              "name": "rabbitMQ",
               "description": "RabbitMQ configuration, optional.",
               "label": "",
               "type": "ShadowServiceRabbitMQ",
@@ -1678,7 +1678,7 @@
               "defaultValue": ""
             },
             {
-              "name": "elasticsearch",
+              "name": "elasticSearch",
               "description": "ElasticSearch configuration, optional.",
               "label": "",
               "type": "ShadowServiceElasticSearch",
