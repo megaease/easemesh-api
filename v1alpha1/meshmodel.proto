@@ -508,23 +508,26 @@ message ShadowService {
 	// Name is the mesh service's name.
 	string name = 1;
 
+	// ServiceName is the name of original service used to create the shadow service.
+	string serviceName = 2;
+
 	// Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default.
-	string Namespace = 2;
+	string namespace = 3;
 
 	// MySQL configuration, optional.
-	ShadowServiceMySQL mysql  = 3;
+	ShadowServiceMySQL mysql  = 4;
 
 	// Kafka configuration, optional.
-	ShadowServiceKafka kafka  = 4;
+	ShadowServiceKafka kafka  = 5;
 
 	// Redis configuration, optional.
-	ShadowServiceRedis redis = 5;
+	ShadowServiceRedis redis = 6;
 
 	// RabbitMQ configuration, optional.
-	ShadowServiceRabbitMQ rabbitmq  = 6;
+	ShadowServiceRabbitMQ rabbitMq  = 7;
 
 	// ElasticSearch configuration, optional.
-	ShadowServiceElasticSearch elasticsearch  = 7;
+	ShadowServiceElasticSearch elasticSearch  = 8;
 }
 
 

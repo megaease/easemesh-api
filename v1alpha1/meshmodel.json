@@ -1618,7 +1618,19 @@
               "defaultValue": ""
             },
             {
-              "name": "Namespace",
+              "name": "serviceName",
+              "description": "ServiceName is the name of original service used to create the shadow service.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "namespace",
               "description": "Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default.",
               "label": "",
               "type": "string",
@@ -1666,7 +1678,7 @@
               "defaultValue": ""
             },
             {
-              "name": "rabbitmq",
+              "name": "rabbitMq",
               "description": "RabbitMQ configuration, optional.",
               "label": "",
               "type": "ShadowServiceRabbitMQ",
@@ -1678,7 +1690,7 @@
               "defaultValue": ""
             },
             {
-              "name": "elasticsearch",
+              "name": "elasticSearch",
               "description": "ElasticSearch configuration, optional.",
               "label": "",
               "type": "ShadowServiceElasticSearch",
