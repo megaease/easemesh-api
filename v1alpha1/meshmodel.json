@@ -1630,7 +1630,7 @@
               "defaultValue": ""
             },
             {
-              "name": "Namespace",
+              "name": "namespace",
               "description": "Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default.",
               "label": "",
               "type": "string",

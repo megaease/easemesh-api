@@ -512,7 +512,7 @@ message ShadowService {
 	string serviceName = 2;
 
 	// Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default.
-	string Namespace = 3;
+	string namespace = 3;
 
 	// MySQL configuration, optional.
 	ShadowServiceMySQL mysql  = 4;
