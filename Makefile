@@ -53,12 +53,12 @@ pre-check:
 	@echo -e ${BLUE}"checking  dependent tool existing\n"${NC}
 ifeq ($(PROTOC),)
 # Run the right installation command for the Mac/Linux.
-	ifeq ($(UNAME), Darwin)
-		brew install protobuf
-	endif
-	ifeq ($(UNAME), Linux)
-		sudo apt-get install protobuf-compiler
-	endif
+ifeq ($(UNAME), Darwin)
+	brew install protobuf
+endif
+ifeq ($(UNAME), Linux)
+	sudo apt-get install protobuf-compiler
+endif
 else 
 	@echo -e ${BLUE}"protoc is already installed: $(PROTOC)\n"${NC}
 endif 

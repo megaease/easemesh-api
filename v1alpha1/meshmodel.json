@@ -516,6 +516,162 @@
           ]
         },
         {
+          "name": "Mock",
+          "longName": "Mock",
+          "fullName": "easemesh.v1alpha1.Mock",
+          "description": "Mock is the spec of mocking service's HTTP responses. Once enabled,\nthis service won't need to be deployed, and other services visit it will get\nthe configured response directly.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "enabled",
+              "description": "Enable configures this mesh service's mocking switch.",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "rules",
+              "description": "Rules are the array for this mocking service.",
+              "label": "repeated",
+              "type": "MockRule",
+              "longType": "MockRule",
+              "fullType": "easemesh.v1alpha1.MockRule",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "MockRule",
+          "longName": "MockRule",
+          "fullName": "easemesh.v1alpha1.MockRule",
+          "description": "MockRule is one rule for mocking service.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "path",
+              "description": "Path is the exactly path for matching request.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "pathPrefix",
+              "description": "PathPrefix is the prefix matching for request.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "code",
+              "description": "Code is the HTTP response code.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "headers",
+              "description": "Headers is the HTTP header fields for response.",
+              "label": "repeated",
+              "type": "HeadersEntry",
+              "longType": "MockRule.HeadersEntry",
+              "fullType": "easemesh.v1alpha1.MockRule.HeadersEntry",
+              "ismap": true,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "body",
+              "description": "Bosy is the HTTP response body.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "delay",
+              "description": "Delay is the waiting duration for HTTP reponse.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "HeadersEntry",
+          "longName": "MockRule.HeadersEntry",
+          "fullName": "easemesh.v1alpha1.MockRule.HeadersEntry",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "key",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "value",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
           "name": "Observability",
           "longName": "Observability",
           "fullName": "easemesh.v1alpha1.Observability",
@@ -1456,6 +1612,18 @@
               "type": "Observability",
               "longType": "Observability",
               "fullType": "easemesh.v1alpha1.Observability",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "mock",
+              "description": "Mock configuration, optional.",
+              "label": "",
+              "type": "Mock",
+              "longType": "Mock",
+              "fullType": "easemesh.v1alpha1.Mock",
               "ismap": false,
               "isoneof": false,
               "oneofdecl": "",

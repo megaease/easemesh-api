@@ -56,6 +56,9 @@ message Service {
 
 	// Observability configuration, optional.
 	Observability observability  = 7;
+
+	// Mock configuration, optional.
+	Mock mock = 8;
 }
 
 // Resilience configures four key types of features, RateLimiter, CircuitBreaker, 
@@ -104,6 +107,39 @@ message Sidecar {
 	// EgressProtocol is the protocol for egress traffic. Its value is "http"
 	string egressProtocol = 6;
 }
+
+// Mock is the spec of mocking service's HTTP responses. Once enabled,
+// this service won't need to be deployed, and other services visit it will get
+// the configured response directly.
+message Mock {
+	// Enable configures this mesh service's mocking switch.
+	bool enabled = 1;
+
+	// Rules are the array for this mocking service.
+	repeated MockRule rules = 2;
+}
+
+// MockRule is one rule for mocking service.
+message MockRule {
+	// Path is the exactly path for matching request.
+	string path  = 1;
+
+	// PathPrefix is the prefix matching for request.
+	string pathPrefix = 2;
+
+	// Code is the HTTP response code.
+	int32 code = 3;
+
+	// Headers is the HTTP header fields for response.
+	map<string, string> headers = 4;
+
+	// Bosy is the HTTP response body.
+	string body = 5;
+
+	// Delay is the waiting duration for HTTP reponse.
+	string delay = 6;
+}
+
 
 // LoadBalance configures how to distribute the traffic inside this mesh.
 message LoadBalance {
