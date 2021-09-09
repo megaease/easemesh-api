@@ -219,6 +219,18 @@
                 </li>
               
                 <li>
+                  <a href="#easemesh.v1alpha1.Mock"><span class="badge">M</span>Mock</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.MockRule"><span class="badge">M</span>MockRule</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.MockRule.HeadersEntry"><span class="badge">M</span>MockRule.HeadersEntry</a>
+                </li>
+              
+                <li>
                   <a href="#easemesh.v1alpha1.Observability"><span class="badge">M</span>Observability</a>
                 </li>
               
@@ -743,6 +755,127 @@ headerHash </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>HeaderHashKey configures the key in HTTP header when the policy is headerHash. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.Mock">Mock</h3>
+        <p>Mock is the spec of mocking service's HTTP responses. Once enabled,</p><p>this service won't need to be deployed, and other services visit it will get</p><p>the configured response directly.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Enable configures this mesh service&#39;s mocking switch. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rules</td>
+                  <td><a href="#easemesh.v1alpha1.MockRule">MockRule</a></td>
+                  <td>repeated</td>
+                  <td><p>Rules are the array for this mocking service. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.MockRule">MockRule</h3>
+        <p>MockRule is one rule for mocking service.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>path</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Path is the exactly path for matching request. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pathPrefix</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>PathPrefix is the prefix matching for request. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>code</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Code is the HTTP response code. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>headers</td>
+                  <td><a href="#easemesh.v1alpha1.MockRule.HeadersEntry">MockRule.HeadersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Headers is the HTTP header fields for response. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>body</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Bosy is the HTTP response body. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>delay</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Delay is the waiting duration for HTTP reponse. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.MockRule.HeadersEntry">MockRule.HeadersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -1428,6 +1561,13 @@ its permissions count back to the limitForPeriod value. </p></td>
                   <td><a href="#easemesh.v1alpha1.Observability">Observability</a></td>
                   <td></td>
                   <td><p>Observability configuration, optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>mock</td>
+                  <td><a href="#easemesh.v1alpha1.Mock">Mock</a></td>
+                  <td></td>
+                  <td><p>Mock configuration, optional. </p></td>
                 </tr>
               
             </tbody>

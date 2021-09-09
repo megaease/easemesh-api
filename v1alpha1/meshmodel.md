@@ -14,6 +14,9 @@
     - [IngressPath](#easemesh.v1alpha1.IngressPath)
     - [IngressRule](#easemesh.v1alpha1.IngressRule)
     - [LoadBalance](#easemesh.v1alpha1.LoadBalance)
+    - [Mock](#easemesh.v1alpha1.Mock)
+    - [MockRule](#easemesh.v1alpha1.MockRule)
+    - [MockRule.HeadersEntry](#easemesh.v1alpha1.MockRule.HeadersEntry)
     - [Observability](#easemesh.v1alpha1.Observability)
     - [ObservabilityMetrics](#easemesh.v1alpha1.ObservabilityMetrics)
     - [ObservabilityMetricsDetail](#easemesh.v1alpha1.ObservabilityMetricsDetail)
@@ -238,6 +241,60 @@ LoadBalance configures how to distribute the traffic inside this mesh.
 | ----- | ---- | ----- | ----------- |
 | policy | [string](#string) |  | Policy including four kinds of load balancing scheme, including random, weightedRandom,ipHash, headerHash |
 | headerHashKey | [string](#string) |  | HeaderHashKey configures the key in HTTP header when the policy is headerHash. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.Mock"></a>
+
+### Mock
+Mock is the spec of mocking service&#39;s HTTP responses. Once enabled,
+this service won&#39;t need to be deployed, and other services visit it will get
+the configured response directly.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Enable configures this mesh service&#39;s mocking switch. |
+| rules | [MockRule](#easemesh.v1alpha1.MockRule) | repeated | Rules are the array for this mocking service. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.MockRule"></a>
+
+### MockRule
+MockRule is one rule for mocking service.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| path | [string](#string) |  | Path is the exactly path for matching request. |
+| pathPrefix | [string](#string) |  | PathPrefix is the prefix matching for request. |
+| code | [int32](#int32) |  | Code is the HTTP response code. |
+| headers | [MockRule.HeadersEntry](#easemesh.v1alpha1.MockRule.HeadersEntry) | repeated | Headers is the HTTP header fields for response. |
+| body | [string](#string) |  | Bosy is the HTTP response body. |
+| delay | [string](#string) |  | Delay is the waiting duration for HTTP reponse. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.MockRule.HeadersEntry"></a>
+
+### MockRule.HeadersEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
 
 
 
@@ -496,6 +553,7 @@ tenant.
 | loadBalance | [LoadBalance](#easemesh.v1alpha1.LoadBalance) |  | LoadBalance configuration, optional. |
 | sidecar | [Sidecar](#easemesh.v1alpha1.Sidecar) |  | Sidecar configuration, optional. |
 | observability | [Observability](#easemesh.v1alpha1.Observability) |  | Observability configuration, optional. |
+| mock | [Mock](#easemesh.v1alpha1.Mock) |  | Mock configuration, optional. |
 
 
 
