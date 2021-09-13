@@ -2385,32 +2385,20 @@ func (x *URLRule) GetPolicyRef() string {
 	return ""
 }
 
-// Shadow Service is a copy of an existing easemesh service. The test traffic can be scheduled to the shadow service for the test.
-type ShadowService struct {
+// CustomObjectKind defines a custom object kind
+type CustomObjectKind struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name is the mesh service's name.
+	// Name is the name of the custom object kind
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ServiceName is the name of original service used to create the shadow service.
-	ServiceName string `protobuf:"bytes,2,opt,name=serviceName,proto3" json:"serviceName,omitempty"`
-	// Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default.
-	Namespace string `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`
-	// MySQL configuration, optional.
-	Mysql *ShadowServiceMySQL `protobuf:"bytes,4,opt,name=mysql,proto3" json:"mysql,omitempty"`
-	// Kafka configuration, optional.
-	Kafka *ShadowServiceKafka `protobuf:"bytes,5,opt,name=kafka,proto3" json:"kafka,omitempty"`
-	// Redis configuration, optional.
-	Redis *ShadowServiceRedis `protobuf:"bytes,6,opt,name=redis,proto3" json:"redis,omitempty"`
-	// RabbitMQ configuration, optional.
-	RabbitMq *ShadowServiceRabbitMQ `protobuf:"bytes,7,opt,name=rabbitMq,proto3" json:"rabbitMq,omitempty"`
-	// ElasticSearch configuration, optional.
-	ElasticSearch *ShadowServiceElasticSearch `protobuf:"bytes,8,opt,name=elasticSearch,proto3" json:"elasticSearch,omitempty"`
+	// JSONSchema is the json schema to validate a custom object of this kind
+	JsonSchema string `protobuf:"bytes,2,opt,name=jsonSchema,proto3" json:"jsonSchema,omitempty"`
 }
 
-func (x *ShadowService) Reset() {
-	*x = ShadowService{}
+func (x *CustomObjectKind) Reset() {
+	*x = CustomObjectKind{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_meshmodel_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2418,13 +2406,13 @@ func (x *ShadowService) Reset() {
 	}
 }
 
-func (x *ShadowService) String() string {
+func (x *CustomObjectKind) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ShadowService) ProtoMessage() {}
+func (*CustomObjectKind) ProtoMessage() {}
 
-func (x *ShadowService) ProtoReflect() protoreflect.Message {
+func (x *CustomObjectKind) ProtoReflect() protoreflect.Message {
 	mi := &file_meshmodel_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2436,380 +2424,21 @@ func (x *ShadowService) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ShadowService.ProtoReflect.Descriptor instead.
-func (*ShadowService) Descriptor() ([]byte, []int) {
+// Deprecated: Use CustomObjectKind.ProtoReflect.Descriptor instead.
+func (*CustomObjectKind) Descriptor() ([]byte, []int) {
 	return file_meshmodel_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *ShadowService) GetName() string {
+func (x *CustomObjectKind) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *ShadowService) GetServiceName() string {
+func (x *CustomObjectKind) GetJsonSchema() string {
 	if x != nil {
-		return x.ServiceName
-	}
-	return ""
-}
-
-func (x *ShadowService) GetNamespace() string {
-	if x != nil {
-		return x.Namespace
-	}
-	return ""
-}
-
-func (x *ShadowService) GetMysql() *ShadowServiceMySQL {
-	if x != nil {
-		return x.Mysql
-	}
-	return nil
-}
-
-func (x *ShadowService) GetKafka() *ShadowServiceKafka {
-	if x != nil {
-		return x.Kafka
-	}
-	return nil
-}
-
-func (x *ShadowService) GetRedis() *ShadowServiceRedis {
-	if x != nil {
-		return x.Redis
-	}
-	return nil
-}
-
-func (x *ShadowService) GetRabbitMq() *ShadowServiceRabbitMQ {
-	if x != nil {
-		return x.RabbitMq
-	}
-	return nil
-}
-
-func (x *ShadowService) GetElasticSearch() *ShadowServiceElasticSearch {
-	if x != nil {
-		return x.ElasticSearch
-	}
-	return nil
-}
-
-// ShadowServiceMySQL is the mysql configuration for shadow service.
-type ShadowServiceMySQL struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// Uris is the jdbc address for MySQL databases, such as jdbc:mysql://localhost:330611/db_demo.
-	Uris []string `protobuf:"bytes,1,rep,name=uris,proto3" json:"uris,omitempty"`
-	// Username for access MySQL databases.
-	UserName string `protobuf:"bytes,2,opt,name=userName,proto3" json:"userName,omitempty"`
-	// Password for access MySQL databases.
-	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-}
-
-func (x *ShadowServiceMySQL) Reset() {
-	*x = ShadowServiceMySQL{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meshmodel_proto_msgTypes[30]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ShadowServiceMySQL) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ShadowServiceMySQL) ProtoMessage() {}
-
-func (x *ShadowServiceMySQL) ProtoReflect() protoreflect.Message {
-	mi := &file_meshmodel_proto_msgTypes[30]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ShadowServiceMySQL.ProtoReflect.Descriptor instead.
-func (*ShadowServiceMySQL) Descriptor() ([]byte, []int) {
-	return file_meshmodel_proto_rawDescGZIP(), []int{30}
-}
-
-func (x *ShadowServiceMySQL) GetUris() []string {
-	if x != nil {
-		return x.Uris
-	}
-	return nil
-}
-
-func (x *ShadowServiceMySQL) GetUserName() string {
-	if x != nil {
-		return x.UserName
-	}
-	return ""
-}
-
-func (x *ShadowServiceMySQL) GetPassword() string {
-	if x != nil {
-		return x.Password
-	}
-	return ""
-}
-
-// ShadowServiceKafka is the kafka configuration for shadow service.
-type ShadowServiceKafka struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// Uris is the broker server for Kafka, such as 192.168.0.1:9092.
-	Uris []string `protobuf:"bytes,1,rep,name=uris,proto3" json:"uris,omitempty"`
-}
-
-func (x *ShadowServiceKafka) Reset() {
-	*x = ShadowServiceKafka{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meshmodel_proto_msgTypes[31]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ShadowServiceKafka) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ShadowServiceKafka) ProtoMessage() {}
-
-func (x *ShadowServiceKafka) ProtoReflect() protoreflect.Message {
-	mi := &file_meshmodel_proto_msgTypes[31]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ShadowServiceKafka.ProtoReflect.Descriptor instead.
-func (*ShadowServiceKafka) Descriptor() ([]byte, []int) {
-	return file_meshmodel_proto_rawDescGZIP(), []int{31}
-}
-
-func (x *ShadowServiceKafka) GetUris() []string {
-	if x != nil {
-		return x.Uris
-	}
-	return nil
-}
-
-// ShadowServiceRedis is the redis configuration for shadow service.
-type ShadowServiceRedis struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// Uris is the server addresses for Redis, such as 192.168.0.1:6379.
-	Uris []string `protobuf:"bytes,1,rep,name=uris,proto3" json:"uris,omitempty"`
-	// Username for access Redis server.
-	UserName string `protobuf:"bytes,2,opt,name=userName,proto3" json:"userName,omitempty"`
-	// Password for access Redis server.
-	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-}
-
-func (x *ShadowServiceRedis) Reset() {
-	*x = ShadowServiceRedis{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meshmodel_proto_msgTypes[32]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ShadowServiceRedis) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ShadowServiceRedis) ProtoMessage() {}
-
-func (x *ShadowServiceRedis) ProtoReflect() protoreflect.Message {
-	mi := &file_meshmodel_proto_msgTypes[32]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ShadowServiceRedis.ProtoReflect.Descriptor instead.
-func (*ShadowServiceRedis) Descriptor() ([]byte, []int) {
-	return file_meshmodel_proto_rawDescGZIP(), []int{32}
-}
-
-func (x *ShadowServiceRedis) GetUris() []string {
-	if x != nil {
-		return x.Uris
-	}
-	return nil
-}
-
-func (x *ShadowServiceRedis) GetUserName() string {
-	if x != nil {
-		return x.UserName
-	}
-	return ""
-}
-
-func (x *ShadowServiceRedis) GetPassword() string {
-	if x != nil {
-		return x.Password
-	}
-	return ""
-}
-
-// ShadowServiceRabbitMQ is the rabbitmq configuration for shadow service.
-type ShadowServiceRabbitMQ struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// Uris is the server addresses for RabbitMQ, such as 192.168.0.1:5672.
-	Uris []string `protobuf:"bytes,1,rep,name=uris,proto3" json:"uris,omitempty"`
-	// Username for access RabbitMQ server.
-	UserName string `protobuf:"bytes,2,opt,name=userName,proto3" json:"userName,omitempty"`
-	// Password for access RabbitMQ server.
-	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-}
-
-func (x *ShadowServiceRabbitMQ) Reset() {
-	*x = ShadowServiceRabbitMQ{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meshmodel_proto_msgTypes[33]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ShadowServiceRabbitMQ) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ShadowServiceRabbitMQ) ProtoMessage() {}
-
-func (x *ShadowServiceRabbitMQ) ProtoReflect() protoreflect.Message {
-	mi := &file_meshmodel_proto_msgTypes[33]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ShadowServiceRabbitMQ.ProtoReflect.Descriptor instead.
-func (*ShadowServiceRabbitMQ) Descriptor() ([]byte, []int) {
-	return file_meshmodel_proto_rawDescGZIP(), []int{33}
-}
-
-func (x *ShadowServiceRabbitMQ) GetUris() []string {
-	if x != nil {
-		return x.Uris
-	}
-	return nil
-}
-
-func (x *ShadowServiceRabbitMQ) GetUserName() string {
-	if x != nil {
-		return x.UserName
-	}
-	return ""
-}
-
-func (x *ShadowServiceRabbitMQ) GetPassword() string {
-	if x != nil {
-		return x.Password
-	}
-	return ""
-}
-
-// ShadowServiceElasticSearch is the elasticsearch configuration for shadow service.
-type ShadowServiceElasticSearch struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// Uris is the server addresses for ElasticSearch cluster, such as 192.168.0.1:9200.
-	Uris []string `protobuf:"bytes,1,rep,name=uris,proto3" json:"uris,omitempty"`
-	// Username for access ElasticSearch cluster.
-	UserName string `protobuf:"bytes,2,opt,name=userName,proto3" json:"userName,omitempty"`
-	// Password for access ElasticSearch cluster.
-	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-}
-
-func (x *ShadowServiceElasticSearch) Reset() {
-	*x = ShadowServiceElasticSearch{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meshmodel_proto_msgTypes[34]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ShadowServiceElasticSearch) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ShadowServiceElasticSearch) ProtoMessage() {}
-
-func (x *ShadowServiceElasticSearch) ProtoReflect() protoreflect.Message {
-	mi := &file_meshmodel_proto_msgTypes[34]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ShadowServiceElasticSearch.ProtoReflect.Descriptor instead.
-func (*ShadowServiceElasticSearch) Descriptor() ([]byte, []int) {
-	return file_meshmodel_proto_rawDescGZIP(), []int{34}
-}
-
-func (x *ShadowServiceElasticSearch) GetUris() []string {
-	if x != nil {
-		return x.Uris
-	}
-	return nil
-}
-
-func (x *ShadowServiceElasticSearch) GetUserName() string {
-	if x != nil {
-		return x.UserName
-	}
-	return ""
-}
-
-func (x *ShadowServiceElasticSearch) GetPassword() string {
-	if x != nil {
-		return x.Password
+		return x.JsonSchema
 	}
 	return ""
 }
@@ -3240,64 +2869,13 @@ var file_meshmodel_proto_rawDesc = []byte{
 	0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x4d, 0x61, 0x74, 0x63,
 	0x68, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x6f, 0x6c, 0x69, 0x63, 0x79,
 	0x52, 0x65, 0x66, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x70, 0x6f, 0x6c, 0x69, 0x63,
-	0x79, 0x52, 0x65, 0x66, 0x22, 0xb5, 0x03, 0x0a, 0x0d, 0x53, 0x68, 0x61, 0x64, 0x6f, 0x77, 0x53,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x73, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x0b, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1c, 0x0a, 0x09,
-	0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x09, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x12, 0x3b, 0x0a, 0x05, 0x6d, 0x79,
-	0x73, 0x71, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x65, 0x61, 0x73, 0x65,
-	0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x53, 0x68,
-	0x61, 0x64, 0x6f, 0x77, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x4d, 0x79, 0x53, 0x51, 0x4c,
-	0x52, 0x05, 0x6d, 0x79, 0x73, 0x71, 0x6c, 0x12, 0x3b, 0x0a, 0x05, 0x6b, 0x61, 0x66, 0x6b, 0x61,
-	0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73,
-	0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x53, 0x68, 0x61, 0x64, 0x6f,
-	0x77, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x4b, 0x61, 0x66, 0x6b, 0x61, 0x52, 0x05, 0x6b,
-	0x61, 0x66, 0x6b, 0x61, 0x12, 0x3b, 0x0a, 0x05, 0x72, 0x65, 0x64, 0x69, 0x73, 0x18, 0x06, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76,
-	0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x53, 0x68, 0x61, 0x64, 0x6f, 0x77, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x52, 0x65, 0x64, 0x69, 0x73, 0x52, 0x05, 0x72, 0x65, 0x64, 0x69,
-	0x73, 0x12, 0x44, 0x0a, 0x08, 0x72, 0x61, 0x62, 0x62, 0x69, 0x74, 0x4d, 0x71, 0x18, 0x07, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76,
-	0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x53, 0x68, 0x61, 0x64, 0x6f, 0x77, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x52, 0x61, 0x62, 0x62, 0x69, 0x74, 0x4d, 0x51, 0x52, 0x08, 0x72,
-	0x61, 0x62, 0x62, 0x69, 0x74, 0x4d, 0x71, 0x12, 0x53, 0x0a, 0x0d, 0x65, 0x6c, 0x61, 0x73, 0x74,
-	0x69, 0x63, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2d,
-	0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68,
-	0x61, 0x31, 0x2e, 0x53, 0x68, 0x61, 0x64, 0x6f, 0x77, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x45, 0x6c, 0x61, 0x73, 0x74, 0x69, 0x63, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x52, 0x0d, 0x65,
-	0x6c, 0x61, 0x73, 0x74, 0x69, 0x63, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x22, 0x60, 0x0a, 0x12,
-	0x53, 0x68, 0x61, 0x64, 0x6f, 0x77, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x4d, 0x79, 0x53,
-	0x51, 0x4c, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x72, 0x69, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09,
-	0x52, 0x04, 0x75, 0x72, 0x69, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4e, 0x61,
-	0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4e, 0x61,
-	0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x28,
-	0x0a, 0x12, 0x53, 0x68, 0x61, 0x64, 0x6f, 0x77, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x4b,
-	0x61, 0x66, 0x6b, 0x61, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x72, 0x69, 0x73, 0x18, 0x01, 0x20, 0x03,
-	0x28, 0x09, 0x52, 0x04, 0x75, 0x72, 0x69, 0x73, 0x22, 0x60, 0x0a, 0x12, 0x53, 0x68, 0x61, 0x64,
-	0x6f, 0x77, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x52, 0x65, 0x64, 0x69, 0x73, 0x12, 0x12,
-	0x0a, 0x04, 0x75, 0x72, 0x69, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x04, 0x75, 0x72,
-	0x69, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a,
-	0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x63, 0x0a, 0x15, 0x53, 0x68,
-	0x61, 0x64, 0x6f, 0x77, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x52, 0x61, 0x62, 0x62, 0x69,
-	0x74, 0x4d, 0x51, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x72, 0x69, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
-	0x09, 0x52, 0x04, 0x75, 0x72, 0x69, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4e,
-	0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4e,
-	0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22,
-	0x68, 0x0a, 0x1a, 0x53, 0x68, 0x61, 0x64, 0x6f, 0x77, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x45, 0x6c, 0x61, 0x73, 0x74, 0x69, 0x63, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x12, 0x12, 0x0a,
-	0x04, 0x75, 0x72, 0x69, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x04, 0x75, 0x72, 0x69,
-	0x73, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a,
-	0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x42, 0x17, 0x5a, 0x15, 0x65, 0x61, 0x73,
-	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68,
-	0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x79, 0x52, 0x65, 0x66, 0x22, 0x46, 0x0a, 0x10, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x4f, 0x62,
+	0x6a, 0x65, 0x63, 0x74, 0x4b, 0x69, 0x6e, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1e, 0x0a, 0x0a,
+	0x6a, 0x73, 0x6f, 0x6e, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0a, 0x6a, 0x73, 0x6f, 0x6e, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x61, 0x42, 0x17, 0x5a, 0x15,
+	0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x61,
+	0x6c, 0x70, 0x68, 0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3312,7 +2890,7 @@ func file_meshmodel_proto_rawDescGZIP() []byte {
 	return file_meshmodel_proto_rawDescData
 }
 
-var file_meshmodel_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
+var file_meshmodel_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
 var file_meshmodel_proto_goTypes = []interface{}{
 	(*Tenant)(nil),                            // 0: easemesh.v1alpha1.Tenant
 	(*Service)(nil),                           // 1: easemesh.v1alpha1.Service
@@ -3343,16 +2921,11 @@ var file_meshmodel_proto_goTypes = []interface{}{
 	(*IngressRule)(nil),                       // 26: easemesh.v1alpha1.IngressRule
 	(*StringMatch)(nil),                       // 27: easemesh.v1alpha1.StringMatch
 	(*URLRule)(nil),                           // 28: easemesh.v1alpha1.URLRule
-	(*ShadowService)(nil),                     // 29: easemesh.v1alpha1.ShadowService
-	(*ShadowServiceMySQL)(nil),                // 30: easemesh.v1alpha1.ShadowServiceMySQL
-	(*ShadowServiceKafka)(nil),                // 31: easemesh.v1alpha1.ShadowServiceKafka
-	(*ShadowServiceRedis)(nil),                // 32: easemesh.v1alpha1.ShadowServiceRedis
-	(*ShadowServiceRabbitMQ)(nil),             // 33: easemesh.v1alpha1.ShadowServiceRabbitMQ
-	(*ShadowServiceElasticSearch)(nil),        // 34: easemesh.v1alpha1.ShadowServiceElasticSearch
-	nil,                                       // 35: easemesh.v1alpha1.MockRule.HeadersEntry
-	nil,                                       // 36: easemesh.v1alpha1.ServiceInstance.LabelsEntry
-	nil,                                       // 37: easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
-	nil,                                       // 38: easemesh.v1alpha1.CanaryRule.HeadersEntry
+	(*CustomObjectKind)(nil),                  // 29: easemesh.v1alpha1.CustomObjectKind
+	nil,                                       // 30: easemesh.v1alpha1.MockRule.HeadersEntry
+	nil,                                       // 31: easemesh.v1alpha1.ServiceInstance.LabelsEntry
+	nil,                                       // 32: easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
+	nil,                                       // 33: easemesh.v1alpha1.CanaryRule.HeadersEntry
 }
 var file_meshmodel_proto_depIdxs = []int32{
 	2,  // 0: easemesh.v1alpha1.Service.resilience:type_name -> easemesh.v1alpha1.Resilience
@@ -3367,12 +2940,12 @@ var file_meshmodel_proto_depIdxs = []int32{
 	14, // 9: easemesh.v1alpha1.Resilience.timeLimiter:type_name -> easemesh.v1alpha1.TimeLimiter
 	18, // 10: easemesh.v1alpha1.Canary.canaryRules:type_name -> easemesh.v1alpha1.CanaryRule
 	6,  // 11: easemesh.v1alpha1.Mock.rules:type_name -> easemesh.v1alpha1.MockRule
-	35, // 12: easemesh.v1alpha1.MockRule.headers:type_name -> easemesh.v1alpha1.MockRule.HeadersEntry
+	30, // 12: easemesh.v1alpha1.MockRule.headers:type_name -> easemesh.v1alpha1.MockRule.HeadersEntry
 	19, // 13: easemesh.v1alpha1.Observability.outputServer:type_name -> easemesh.v1alpha1.ObservabilityOutputServer
 	22, // 14: easemesh.v1alpha1.Observability.tracings:type_name -> easemesh.v1alpha1.ObservabilityTracings
 	24, // 15: easemesh.v1alpha1.Observability.metrics:type_name -> easemesh.v1alpha1.ObservabilityMetrics
 	26, // 16: easemesh.v1alpha1.Ingress.rules:type_name -> easemesh.v1alpha1.IngressRule
-	36, // 17: easemesh.v1alpha1.ServiceInstance.labels:type_name -> easemesh.v1alpha1.ServiceInstance.LabelsEntry
+	31, // 17: easemesh.v1alpha1.ServiceInstance.labels:type_name -> easemesh.v1alpha1.ServiceInstance.LabelsEntry
 	17, // 18: easemesh.v1alpha1.RateLimiter.policies:type_name -> easemesh.v1alpha1.RateLimiterPolicy
 	28, // 19: easemesh.v1alpha1.RateLimiter.urls:type_name -> easemesh.v1alpha1.URLRule
 	15, // 20: easemesh.v1alpha1.CircuitBreaker.policies:type_name -> easemesh.v1alpha1.CircuitBreakerPolicy
@@ -3380,8 +2953,8 @@ var file_meshmodel_proto_depIdxs = []int32{
 	16, // 22: easemesh.v1alpha1.Retryer.policies:type_name -> easemesh.v1alpha1.RetryerPolicy
 	28, // 23: easemesh.v1alpha1.Retryer.urls:type_name -> easemesh.v1alpha1.URLRule
 	28, // 24: easemesh.v1alpha1.TimeLimiter.urls:type_name -> easemesh.v1alpha1.URLRule
-	37, // 25: easemesh.v1alpha1.CanaryRule.serviceInstanceLabels:type_name -> easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
-	38, // 26: easemesh.v1alpha1.CanaryRule.headers:type_name -> easemesh.v1alpha1.CanaryRule.HeadersEntry
+	32, // 25: easemesh.v1alpha1.CanaryRule.serviceInstanceLabels:type_name -> easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
+	33, // 26: easemesh.v1alpha1.CanaryRule.headers:type_name -> easemesh.v1alpha1.CanaryRule.HeadersEntry
 	28, // 27: easemesh.v1alpha1.CanaryRule.urls:type_name -> easemesh.v1alpha1.URLRule
 	21, // 28: easemesh.v1alpha1.ObservabilityTracings.output:type_name -> easemesh.v1alpha1.ObservabilityTracingsOutputConfig
 	20, // 29: easemesh.v1alpha1.ObservabilityTracings.request:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
@@ -3402,17 +2975,12 @@ var file_meshmodel_proto_depIdxs = []int32{
 	23, // 44: easemesh.v1alpha1.ObservabilityMetrics.md5Dictionary:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
 	25, // 45: easemesh.v1alpha1.IngressRule.paths:type_name -> easemesh.v1alpha1.IngressPath
 	27, // 46: easemesh.v1alpha1.URLRule.url:type_name -> easemesh.v1alpha1.StringMatch
-	30, // 47: easemesh.v1alpha1.ShadowService.mysql:type_name -> easemesh.v1alpha1.ShadowServiceMySQL
-	31, // 48: easemesh.v1alpha1.ShadowService.kafka:type_name -> easemesh.v1alpha1.ShadowServiceKafka
-	32, // 49: easemesh.v1alpha1.ShadowService.redis:type_name -> easemesh.v1alpha1.ShadowServiceRedis
-	33, // 50: easemesh.v1alpha1.ShadowService.rabbitMq:type_name -> easemesh.v1alpha1.ShadowServiceRabbitMQ
-	34, // 51: easemesh.v1alpha1.ShadowService.elasticSearch:type_name -> easemesh.v1alpha1.ShadowServiceElasticSearch
-	27, // 52: easemesh.v1alpha1.CanaryRule.HeadersEntry.value:type_name -> easemesh.v1alpha1.StringMatch
-	53, // [53:53] is the sub-list for method output_type
-	53, // [53:53] is the sub-list for method input_type
-	53, // [53:53] is the sub-list for extension type_name
-	53, // [53:53] is the sub-list for extension extendee
-	0,  // [0:53] is the sub-list for field type_name
+	27, // 47: easemesh.v1alpha1.CanaryRule.HeadersEntry.value:type_name -> easemesh.v1alpha1.StringMatch
+	48, // [48:48] is the sub-list for method output_type
+	48, // [48:48] is the sub-list for method input_type
+	48, // [48:48] is the sub-list for extension type_name
+	48, // [48:48] is the sub-list for extension extendee
+	0,  // [0:48] is the sub-list for field type_name
 }
 
 func init() { file_meshmodel_proto_init() }
@@ -3770,67 +3338,7 @@ func file_meshmodel_proto_init() {
 			}
 		}
 		file_meshmodel_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ShadowService); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meshmodel_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ShadowServiceMySQL); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meshmodel_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ShadowServiceKafka); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meshmodel_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ShadowServiceRedis); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meshmodel_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ShadowServiceRabbitMQ); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meshmodel_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ShadowServiceElasticSearch); i {
+			switch v := v.(*CustomObjectKind); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3848,7 +3356,7 @@ func file_meshmodel_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_meshmodel_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   39,
+			NumMessages:   34,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -10,6 +10,7 @@
     - [CanaryRule.ServiceInstanceLabelsEntry](#easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry)
     - [CircuitBreaker](#easemesh.v1alpha1.CircuitBreaker)
     - [CircuitBreakerPolicy](#easemesh.v1alpha1.CircuitBreakerPolicy)
+    - [CustomObjectKind](#easemesh.v1alpha1.CustomObjectKind)
     - [Ingress](#easemesh.v1alpha1.Ingress)
     - [IngressPath](#easemesh.v1alpha1.IngressPath)
     - [IngressRule](#easemesh.v1alpha1.IngressRule)
@@ -32,12 +33,6 @@
     - [Service](#easemesh.v1alpha1.Service)
     - [ServiceInstance](#easemesh.v1alpha1.ServiceInstance)
     - [ServiceInstance.LabelsEntry](#easemesh.v1alpha1.ServiceInstance.LabelsEntry)
-    - [ShadowService](#easemesh.v1alpha1.ShadowService)
-    - [ShadowServiceElasticSearch](#easemesh.v1alpha1.ShadowServiceElasticSearch)
-    - [ShadowServiceKafka](#easemesh.v1alpha1.ShadowServiceKafka)
-    - [ShadowServiceMySQL](#easemesh.v1alpha1.ShadowServiceMySQL)
-    - [ShadowServiceRabbitMQ](#easemesh.v1alpha1.ShadowServiceRabbitMQ)
-    - [ShadowServiceRedis](#easemesh.v1alpha1.ShadowServiceRedis)
     - [Sidecar](#easemesh.v1alpha1.Sidecar)
     - [StringMatch](#easemesh.v1alpha1.StringMatch)
     - [Tenant](#easemesh.v1alpha1.Tenant)
@@ -176,6 +171,22 @@ breaker will use. Whether including network error or not and so on.
 | maxWaitDurationInHalfOpenState | [string](#string) |  | MaxWaitDurationInHalfOpenState configures a maximum wait duration which controls the longest amount of time a CircuitBreaker could stay in Half Open state, before it switches to open. Value 0 means Circuit Breaker would wait infinitely in HalfOpen State until all permitted calls have been completed. |
 | waitDurationInOpenState | [string](#string) |  | WaitDurationInOpenState configures the duration that the CircuitBreaker should wait before transitioning from open to half-open,e.g.,60000ms. |
 | failureStatusCodes | [int32](#int32) | repeated | FailureStatusCodes is the array for HTTP failure status code for this CircuitBreakerPolicy. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.CustomObjectKind"></a>
+
+### CustomObjectKind
+CustomObjectKind defines a custom object kind
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Name is the name of the custom object kind |
+| jsonSchema | [string](#string) |  | JSONSchema is the json schema to validate a custom object of this kind |
 
 
 
@@ -591,111 +602,6 @@ ServiceInstance is the runnable entity of a Mesh Service.
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="easemesh.v1alpha1.ShadowService"></a>
-
-### ShadowService
-Shadow Service is a copy of an existing easemesh service. The test traffic can be scheduled to the shadow service for the test.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Name is the mesh service&#39;s name. |
-| serviceName | [string](#string) |  | ServiceName is the name of original service used to create the shadow service. |
-| namespace | [string](#string) |  | Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default. |
-| mysql | [ShadowServiceMySQL](#easemesh.v1alpha1.ShadowServiceMySQL) |  | MySQL configuration, optional. |
-| kafka | [ShadowServiceKafka](#easemesh.v1alpha1.ShadowServiceKafka) |  | Kafka configuration, optional. |
-| redis | [ShadowServiceRedis](#easemesh.v1alpha1.ShadowServiceRedis) |  | Redis configuration, optional. |
-| rabbitMq | [ShadowServiceRabbitMQ](#easemesh.v1alpha1.ShadowServiceRabbitMQ) |  | RabbitMQ configuration, optional. |
-| elasticSearch | [ShadowServiceElasticSearch](#easemesh.v1alpha1.ShadowServiceElasticSearch) |  | ElasticSearch configuration, optional. |
-
-
-
-
-
-
-<a name="easemesh.v1alpha1.ShadowServiceElasticSearch"></a>
-
-### ShadowServiceElasticSearch
-ShadowServiceElasticSearch is the elasticsearch configuration for shadow service.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| uris | [string](#string) | repeated | Uris is the server addresses for ElasticSearch cluster, such as 192.168.0.1:9200. |
-| userName | [string](#string) |  | Username for access ElasticSearch cluster. |
-| password | [string](#string) |  | Password for access ElasticSearch cluster. |
-
-
-
-
-
-
-<a name="easemesh.v1alpha1.ShadowServiceKafka"></a>
-
-### ShadowServiceKafka
-ShadowServiceKafka is the kafka configuration for shadow service.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| uris | [string](#string) | repeated | Uris is the broker server for Kafka, such as 192.168.0.1:9092. |
-
-
-
-
-
-
-<a name="easemesh.v1alpha1.ShadowServiceMySQL"></a>
-
-### ShadowServiceMySQL
-ShadowServiceMySQL is the mysql configuration for shadow service.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| uris | [string](#string) | repeated | Uris is the jdbc address for MySQL databases, such as jdbc:mysql://localhost:330611/db_demo. |
-| userName | [string](#string) |  | Username for access MySQL databases. |
-| password | [string](#string) |  | Password for access MySQL databases. |
-
-
-
-
-
-
-<a name="easemesh.v1alpha1.ShadowServiceRabbitMQ"></a>
-
-### ShadowServiceRabbitMQ
-ShadowServiceRabbitMQ is the rabbitmq configuration for shadow service.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| uris | [string](#string) | repeated | Uris is the server addresses for RabbitMQ, such as 192.168.0.1:5672. |
-| userName | [string](#string) |  | Username for access RabbitMQ server. |
-| password | [string](#string) |  | Password for access RabbitMQ server. |
-
-
-
-
-
-
-<a name="easemesh.v1alpha1.ShadowServiceRedis"></a>
-
-### ShadowServiceRedis
-ShadowServiceRedis is the redis configuration for shadow service.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| uris | [string](#string) | repeated | Uris is the server addresses for Redis, such as 192.168.0.1:6379. |
-| userName | [string](#string) |  | Username for access Redis server. |
-| password | [string](#string) |  | Password for access Redis server. |
 
 
 
