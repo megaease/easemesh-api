@@ -360,6 +360,42 @@
           ]
         },
         {
+          "name": "CustomObjectKind",
+          "longName": "CustomObjectKind",
+          "fullName": "easemesh.v1alpha1.CustomObjectKind",
+          "description": "CustomObjectKind defines a custom object kind",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the name of the custom object kind",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "jsonSchema",
+              "description": "JSONSchema is the json schema to validate a custom object of this kind",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
           "name": "Ingress",
           "longName": "Ingress",
           "fullName": "easemesh.v1alpha1.Ingress",
@@ -1752,330 +1788,6 @@
             {
               "name": "value",
               "description": "",
-              "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            }
-          ]
-        },
-        {
-          "name": "ShadowService",
-          "longName": "ShadowService",
-          "fullName": "easemesh.v1alpha1.ShadowService",
-          "description": "Shadow Service is a copy of an existing easemesh service. The test traffic can be scheduled to the shadow service for the test.",
-          "hasExtensions": false,
-          "hasFields": true,
-          "hasOneofs": false,
-          "extensions": [],
-          "fields": [
-            {
-              "name": "name",
-              "description": "Name is the mesh service's name.",
-              "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "serviceName",
-              "description": "ServiceName is the name of original service used to create the shadow service.",
-              "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "namespace",
-              "description": "Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default.",
-              "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "mysql",
-              "description": "MySQL configuration, optional.",
-              "label": "",
-              "type": "ShadowServiceMySQL",
-              "longType": "ShadowServiceMySQL",
-              "fullType": "easemesh.v1alpha1.ShadowServiceMySQL",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "kafka",
-              "description": "Kafka configuration, optional.",
-              "label": "",
-              "type": "ShadowServiceKafka",
-              "longType": "ShadowServiceKafka",
-              "fullType": "easemesh.v1alpha1.ShadowServiceKafka",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "redis",
-              "description": "Redis configuration, optional.",
-              "label": "",
-              "type": "ShadowServiceRedis",
-              "longType": "ShadowServiceRedis",
-              "fullType": "easemesh.v1alpha1.ShadowServiceRedis",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "rabbitMq",
-              "description": "RabbitMQ configuration, optional.",
-              "label": "",
-              "type": "ShadowServiceRabbitMQ",
-              "longType": "ShadowServiceRabbitMQ",
-              "fullType": "easemesh.v1alpha1.ShadowServiceRabbitMQ",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "elasticSearch",
-              "description": "ElasticSearch configuration, optional.",
-              "label": "",
-              "type": "ShadowServiceElasticSearch",
-              "longType": "ShadowServiceElasticSearch",
-              "fullType": "easemesh.v1alpha1.ShadowServiceElasticSearch",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            }
-          ]
-        },
-        {
-          "name": "ShadowServiceElasticSearch",
-          "longName": "ShadowServiceElasticSearch",
-          "fullName": "easemesh.v1alpha1.ShadowServiceElasticSearch",
-          "description": "ShadowServiceElasticSearch is the elasticsearch configuration for shadow service.",
-          "hasExtensions": false,
-          "hasFields": true,
-          "hasOneofs": false,
-          "extensions": [],
-          "fields": [
-            {
-              "name": "uris",
-              "description": "Uris is the server addresses for ElasticSearch cluster, such as 192.168.0.1:9200.",
-              "label": "repeated",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "userName",
-              "description": "Username for access ElasticSearch cluster.",
-              "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "password",
-              "description": "Password for access ElasticSearch cluster.",
-              "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            }
-          ]
-        },
-        {
-          "name": "ShadowServiceKafka",
-          "longName": "ShadowServiceKafka",
-          "fullName": "easemesh.v1alpha1.ShadowServiceKafka",
-          "description": "ShadowServiceKafka is the kafka configuration for shadow service.",
-          "hasExtensions": false,
-          "hasFields": true,
-          "hasOneofs": false,
-          "extensions": [],
-          "fields": [
-            {
-              "name": "uris",
-              "description": "Uris is the broker server for Kafka, such as 192.168.0.1:9092.",
-              "label": "repeated",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            }
-          ]
-        },
-        {
-          "name": "ShadowServiceMySQL",
-          "longName": "ShadowServiceMySQL",
-          "fullName": "easemesh.v1alpha1.ShadowServiceMySQL",
-          "description": "ShadowServiceMySQL is the mysql configuration for shadow service.",
-          "hasExtensions": false,
-          "hasFields": true,
-          "hasOneofs": false,
-          "extensions": [],
-          "fields": [
-            {
-              "name": "uris",
-              "description": "Uris is the jdbc address for MySQL databases, such as jdbc:mysql://localhost:330611/db_demo.",
-              "label": "repeated",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "userName",
-              "description": "Username for access MySQL databases.",
-              "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "password",
-              "description": "Password for access MySQL databases.",
-              "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            }
-          ]
-        },
-        {
-          "name": "ShadowServiceRabbitMQ",
-          "longName": "ShadowServiceRabbitMQ",
-          "fullName": "easemesh.v1alpha1.ShadowServiceRabbitMQ",
-          "description": "ShadowServiceRabbitMQ is the rabbitmq configuration for shadow service.",
-          "hasExtensions": false,
-          "hasFields": true,
-          "hasOneofs": false,
-          "extensions": [],
-          "fields": [
-            {
-              "name": "uris",
-              "description": "Uris is the server addresses for RabbitMQ, such as 192.168.0.1:5672.",
-              "label": "repeated",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "userName",
-              "description": "Username for access RabbitMQ server.",
-              "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "password",
-              "description": "Password for access RabbitMQ server.",
-              "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            }
-          ]
-        },
-        {
-          "name": "ShadowServiceRedis",
-          "longName": "ShadowServiceRedis",
-          "fullName": "easemesh.v1alpha1.ShadowServiceRedis",
-          "description": "ShadowServiceRedis is the redis configuration for shadow service.",
-          "hasExtensions": false,
-          "hasFields": true,
-          "hasOneofs": false,
-          "extensions": [],
-          "fields": [
-            {
-              "name": "uris",
-              "description": "Uris is the server addresses for Redis, such as 192.168.0.1:6379.",
-              "label": "repeated",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "userName",
-              "description": "Username for access Redis server.",
-              "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "password",
-              "description": "Password for access Redis server.",
               "label": "",
               "type": "string",
               "longType": "string",

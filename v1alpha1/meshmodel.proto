@@ -539,84 +539,11 @@ message URLRule {
 	string policyRef = 3;
 }
 
-// Shadow Service is a copy of an existing easemesh service. The test traffic can be scheduled to the shadow service for the test.
-message ShadowService {
-	// Name is the mesh service's name.
+// CustomObjectKind defines a custom object kind
+message CustomObjectKind {
+	// Name is the name of the custom object kind
 	string name = 1;
 
-	// ServiceName is the name of original service used to create the shadow service.
-	string serviceName = 2;
-
-	// Namespace is kubernetes namespace where the service is deployed. The shadow service is deployed at the same namespace as the original service by default.
-	string namespace = 3;
-
-	// MySQL configuration, optional.
-	ShadowServiceMySQL mysql  = 4;
-
-	// Kafka configuration, optional.
-	ShadowServiceKafka kafka  = 5;
-
-	// Redis configuration, optional.
-	ShadowServiceRedis redis = 6;
-
-	// RabbitMQ configuration, optional.
-	ShadowServiceRabbitMQ rabbitMq  = 7;
-
-	// ElasticSearch configuration, optional.
-	ShadowServiceElasticSearch elasticSearch  = 8;
-}
-
-
-// ShadowServiceMySQL is the mysql configuration for shadow service.
-message ShadowServiceMySQL {
-	// Uris is the jdbc address for MySQL databases, such as jdbc:mysql://localhost:330611/db_demo.
-	repeated string  uris = 1;
-
-	// Username for access MySQL databases.
-	string userName = 2;
-
-	// Password for access MySQL databases.
-	string password = 3;
-}
-
-// ShadowServiceKafka is the kafka configuration for shadow service.
-message ShadowServiceKafka {
-	// Uris is the broker server for Kafka, such as 192.168.0.1:9092.
-	repeated string  uris = 1;
-}
-
-// ShadowServiceRedis is the redis configuration for shadow service.
-message ShadowServiceRedis {
-	// Uris is the server addresses for Redis, such as 192.168.0.1:6379.
-	repeated string  uris = 1;
-
-	// Username for access Redis server.
-	string userName = 2;
-
-	// Password for access Redis server.
-	string password = 3;
-}
-
-// ShadowServiceRabbitMQ is the rabbitmq configuration for shadow service.
-message ShadowServiceRabbitMQ {
-	// Uris is the server addresses for RabbitMQ, such as 192.168.0.1:5672.
-	repeated string  uris = 1;
-
-	// Username for access RabbitMQ server.
-	string userName = 2;
-
-	// Password for access RabbitMQ server.
-	string password = 3;
-}
-
-// ShadowServiceElasticSearch is the elasticsearch configuration for shadow service.
-message ShadowServiceElasticSearch {
-	// Uris is the server addresses for ElasticSearch cluster, such as 192.168.0.1:9200.
-	repeated string  uris = 1;
-
-	// Username for access ElasticSearch cluster.
-	string userName = 2;
-
-	// Password for access ElasticSearch cluster.
-	string password = 3;
+	// JSONSchema is the json schema to validate a custom object of this kind
+	string jsonSchema = 2;
 }
