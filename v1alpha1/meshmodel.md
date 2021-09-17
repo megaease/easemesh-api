@@ -47,7 +47,7 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## meshmodel.proto
-Copyright 2021 MegaEase 
+Copyright 2021 MegaEase
   Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
@@ -81,7 +81,7 @@ rolling out to the whole instances.
 <a name="easemesh.v1alpha1.CanaryRule"></a>
 
 ### CanaryRule
-CanaryRule define the rule for canary deployment. Including service instances labels, 
+CanaryRule define the rule for canary deployment. Including service instances labels,
 how to match colored traffic, which traffic is considered as coloring.
 
 
@@ -131,10 +131,10 @@ how to match colored traffic, which traffic is considered as coloring.
 <a name="easemesh.v1alpha1.CircuitBreaker"></a>
 
 ### CircuitBreaker
-CircuitBreaker is used for blocking all in-coming requests when the the failure numbers 
-reach the configured limitation. You can declare an CircuitBreaker with COUNT_BASED or 
-TIME_BASED type.  It has three types of states, open, closed and half-close. One service 
-can declare its desired CircuitBreaker, and the upstream clients will active the same CircuitBreaker 
+CircuitBreaker is used for blocking all in-coming requests when the the failure numbers
+reach the configured limitation. You can declare an CircuitBreaker with COUNT_BASED or
+TIME_BASED type.  It has three types of states, open, closed and half-close. One service
+can declare its desired CircuitBreaker, and the upstream clients will active the same CircuitBreaker
 locally when calling this service.
 
 
@@ -152,8 +152,8 @@ locally when calling this service.
 <a name="easemesh.v1alpha1.CircuitBreakerPolicy"></a>
 
 ### CircuitBreakerPolicy
-CircuitBreakerPolicy is the policy for describing Resilience component CircuitBreaker. 
-It contains the basic configurations for the breaker, including the type of sliding window this 
+CircuitBreakerPolicy is the policy for describing Resilience component CircuitBreaker.
+It contains the basic configurations for the breaker, including the type of sliding window this
 breaker will use. Whether including network error or not and so on.
 
 
@@ -451,7 +451,7 @@ ObservabilityTracingsDetail
 <a name="easemesh.v1alpha1.RateLimiter"></a>
 
 ### RateLimiter
-RateLimiter configures a limiter which can establish your services&#39; high availability and reliability, 
+RateLimiter configures a limiter which can establish your services&#39; high availability and reliability,
 also it can be used for scaling APIs. RateLimiter can protect servers from overwhelm by the peak traffic.
 
 
@@ -489,7 +489,7 @@ the duration for request waiting and the permission count refreshing period.
 <a name="easemesh.v1alpha1.Resilience"></a>
 
 ### Resilience
-Resilience configures four key types of features, RateLimiter, CircuitBreaker, 
+Resilience configures four key types of features, RateLimiter, CircuitBreaker,
 Retryer and Timeout.
 
 
@@ -508,8 +508,8 @@ Retryer and Timeout.
 <a name="easemesh.v1alpha1.Retryer"></a>
 
 ### Retryer
-Retryer can perform an API calling retry when the service HTTP response code indicated its in 
-temporary unavailable states. The up-stream client should make sure this API is idempotent. 
+Retryer can perform an API calling retry when the service HTTP response code indicated its in
+temporary unavailable states. The up-stream client should make sure this API is idempotent.
 The service can declare an Retryer for its desired APIs and active in client side.
 
 
@@ -527,8 +527,8 @@ The service can declare an Retryer for its desired APIs and active in client sid
 <a name="easemesh.v1alpha1.RetryerPolicy"></a>
 
 ### RetryerPolicy
-RetryerPolicy configures the policy for describing Resilience component Retryer. 
-It contains the basic configurations for the retryer, including the type of sliding window this 
+RetryerPolicy configures the policy for describing Resilience component Retryer.
+It contains the basic configurations for the retryer, including the type of sliding window this
 breaker will use. Whether including network error or not and so on.
 
 
@@ -550,8 +550,8 @@ breaker will use. Whether including network error or not and so on.
 <a name="easemesh.v1alpha1.Service"></a>
 
 ### Service
-Service is the basic element in EaseMesh to describe a user&#39;s business microservices&#39; 
-name, belonging tenant, and governance specs. One service should belongs to a dedicated 
+Service is the basic element in EaseMesh to describe a user&#39;s business microservices&#39;
+name, belonging tenant, and governance specs. One service should belongs to a dedicated
 tenant.
 
 
@@ -579,6 +579,7 @@ ServiceInstance is the runnable entity of a Mesh Service.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| registryName | [string](#string) |  | registryName is the name of registry. |
 | serviceName | [string](#string) |  | ServiceName is the name of service this instance belongs to. |
 | instanceID | [string](#string) |  | InstanceID is the identity of this instance. |
 | ip | [string](#string) |  | IP is this instance&#39;s address in EaseMesh. |
@@ -653,9 +654,9 @@ string if it&#39;s provided
 
 ### Tenant
 Tenant is the logic group of mesh services. Inside the same tenant,
-services can visit each other directly. There are two kinds of tenant, one is the  common type 
-of tenants and the other is system reserved &#34;global&#34; tenant which&#39;s access scope is globally 
-inside the mesh . If one mesh service is created with &#34;global&#34; tenant filed, it can be visible 
+services can visit each other directly. There are two kinds of tenant, one is the  common type
+of tenants and the other is system reserved &#34;global&#34; tenant which&#39;s access scope is globally
+inside the mesh . If one mesh service is created with &#34;global&#34; tenant filed, it can be visible
 to all the service inside the mesh.
 
 
@@ -673,7 +674,7 @@ to all the service inside the mesh.
 <a name="easemesh.v1alpha1.TimeLimiter"></a>
 
 ### TimeLimiter
-Timeout configures the amount of time the client should wait for replies from a given service, 
+Timeout configures the amount of time the client should wait for replies from a given service,
 it will be running in upstream clients and declared in downstream relied services.
 
 

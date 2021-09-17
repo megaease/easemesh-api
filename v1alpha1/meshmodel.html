@@ -329,7 +329,7 @@
       <div class="file-heading">
         <h2 id="meshmodel.proto">meshmodel.proto</h2><a href="#title">Top</a>
       </div>
-      <p>Copyright 2021 MegaEase </p><p>Licensed under the Apache License, Version 2.0 (the "License");</p><p>you may not use this file except in compliance with the License.</p><p>You may obtain a copy of the License at</p><p>http://www.apache.org/licenses/LICENSE-2.0</p><p>Unless required by applicable law or agreed to in writing, software</p><p>distributed under the License is distributed on an "AS IS" BASIS,</p><p>WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</p><p>See the License for the specific language governing permissions and</p><p>limitations under the License.</p>
+      <p>Copyright 2021 MegaEase</p><p>Licensed under the Apache License, Version 2.0 (the "License");</p><p>you may not use this file except in compliance with the License.</p><p>You may obtain a copy of the License at</p><p>http://www.apache.org/licenses/LICENSE-2.0</p><p>Unless required by applicable law or agreed to in writing, software</p><p>distributed under the License is distributed on an "AS IS" BASIS,</p><p>WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</p><p>See the License for the specific language governing permissions and</p><p>limitations under the License.</p>
 
       
         <h3 id="easemesh.v1alpha1.Canary">Canary</h3>
@@ -357,7 +357,7 @@
         
       
         <h3 id="easemesh.v1alpha1.CanaryRule">CanaryRule</h3>
-        <p>CanaryRule define the rule for canary deployment. Including service instances labels, </p><p>how to match colored traffic, which traffic is considered as coloring.</p>
+        <p>CanaryRule define the rule for canary deployment. Including service instances labels,</p><p>how to match colored traffic, which traffic is considered as coloring.</p>
 
         
           <table class="field-table">
@@ -370,7 +370,7 @@
                   <td>serviceInstanceLabels</td>
                   <td><a href="#easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry">CanaryRule.ServiceInstanceLabelsEntry</a></td>
                   <td>repeated</td>
-                  <td><p>ServiceInstanceLabels configure the labels patched into the service instances. 
+                  <td><p>ServiceInstanceLabels configure the labels patched into the service instances.
 Registry center will label it to corresponding instances during deployment. It&#39;s optional.
 It indicates the canary target service instances. The relation between elements in this map is &#34;OR&#34;. </p></td>
                 </tr>
@@ -460,7 +460,7 @@ HTTP requests match one element in this array, it will be regarded as the colore
         
       
         <h3 id="easemesh.v1alpha1.CircuitBreaker">CircuitBreaker</h3>
-        <p>CircuitBreaker is used for blocking all in-coming requests when the the failure numbers </p><p>reach the configured limitation. You can declare an CircuitBreaker with COUNT_BASED or </p><p>TIME_BASED type.  It has three types of states, open, closed and half-close. One service </p><p>can declare its desired CircuitBreaker, and the upstream clients will active the same CircuitBreaker </p><p>locally when calling this service.</p>
+        <p>CircuitBreaker is used for blocking all in-coming requests when the the failure numbers</p><p>reach the configured limitation. You can declare an CircuitBreaker with COUNT_BASED or</p><p>TIME_BASED type.  It has three types of states, open, closed and half-close. One service</p><p>can declare its desired CircuitBreaker, and the upstream clients will active the same CircuitBreaker</p><p>locally when calling this service.</p>
 
         
           <table class="field-table">
@@ -498,7 +498,7 @@ HTTP requests match one element in this array, it will be regarded as the colore
         
       
         <h3 id="easemesh.v1alpha1.CircuitBreakerPolicy">CircuitBreakerPolicy</h3>
-        <p>CircuitBreakerPolicy is the policy for describing Resilience component CircuitBreaker. </p><p>It contains the basic configurations for the breaker, including the type of sliding window this </p><p>breaker will use. Whether including network error or not and so on.</p>
+        <p>CircuitBreakerPolicy is the policy for describing Resilience component CircuitBreaker.</p><p>It contains the basic configurations for the breaker, including the type of sliding window this</p><p>breaker will use. Whether including network error or not and so on.</p>
 
         
           <table class="field-table">
@@ -525,7 +525,7 @@ HTTP requests match one element in this array, it will be regarded as the colore
                   <td>failureRateThreshold</td>
                   <td><a href="#uint32">uint32</a></td>
                   <td></td>
-                  <td><p>FailureRateThreshold configures the failure rate threshold in percentage. When the failure rate is equal 
+                  <td><p>FailureRateThreshold configures the failure rate threshold in percentage. When the failure rate is equal
 or greater than the threshold the CircuitBreaker transitions to open and starts short-circuiting calls. </p></td>
                 </tr>
               
@@ -533,8 +533,8 @@ or greater than the threshold the CircuitBreaker transitions to open and starts 
                   <td>slowCallRateThreshold</td>
                   <td><a href="#uint32">uint32</a></td>
                   <td></td>
-                  <td><p>SlowCallRateThreshold Configures a threshold in percentage. The CircuitBreaker considers a call as slow 
-when the call duration is greater than slowCallDurationThreshold When the percentage of slow calls is 
+                  <td><p>SlowCallRateThreshold Configures a threshold in percentage. The CircuitBreaker considers a call as slow
+when the call duration is greater than slowCallDurationThreshold When the percentage of slow calls is
 equal or greater the threshold, the CircuitBreaker transitions to open and starts short-circuiting calls. </p></td>
                 </tr>
               
@@ -549,7 +549,7 @@ equal or greater the threshold, the CircuitBreaker transitions to open and start
                   <td>slidingWindowSize</td>
                   <td><a href="#uint32">uint32</a></td>
                   <td></td>
-                  <td><p>SlidingWindowSize configures the size of the sliding window which is used to record the outcome of 
+                  <td><p>SlidingWindowSize configures the size of the sliding window which is used to record the outcome of
 calls when the CircuitBreaker is closed. </p></td>
                 </tr>
               
@@ -557,7 +557,7 @@ calls when the CircuitBreaker is closed. </p></td>
                   <td>permittedNumberOfCallsInHalfOpenState</td>
                   <td><a href="#uint32">uint32</a></td>
                   <td></td>
-                  <td><p>PermittedNumberOfCallsInHalfOpenState configures the number of permitted calls when the CircuitBreaker 
+                  <td><p>PermittedNumberOfCallsInHalfOpenState configures the number of permitted calls when the CircuitBreaker
 is half open. </p></td>
                 </tr>
               
@@ -565,10 +565,10 @@ is half open. </p></td>
                   <td>minimumNumberOfCalls</td>
                   <td><a href="#uint32">uint32</a></td>
                   <td></td>
-                  <td><p>MinimumNumberOfCalls configures the minimum number of calls which are required (per sliding window period) 
-before the CircuitBreaker can calculate the error rate or slow call rate.  For example, 
-if minimumNumberOfCalls is 10, then at least 10 calls must be recorded, before the failure rate can be 
-calculated. If only 9 calls have been recorded the CircuitBreaker will not transition to open 
+                  <td><p>MinimumNumberOfCalls configures the minimum number of calls which are required (per sliding window period)
+before the CircuitBreaker can calculate the error rate or slow call rate.  For example,
+if minimumNumberOfCalls is 10, then at least 10 calls must be recorded, before the failure rate can be
+calculated. If only 9 calls have been recorded the CircuitBreaker will not transition to open
 even if all 9 calls have failed. </p></td>
                 </tr>
               
@@ -576,7 +576,7 @@ even if all 9 calls have failed. </p></td>
                   <td>slowCallDurationThreshold</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>SlowCallDurationThreshold configures the duration threshold above which calls are considered as slow 
+                  <td><p>SlowCallDurationThreshold configures the duration threshold above which calls are considered as slow
 and increase the rate of slow calls. </p></td>
                 </tr>
               
@@ -584,8 +584,8 @@ and increase the rate of slow calls. </p></td>
                   <td>maxWaitDurationInHalfOpenState</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>MaxWaitDurationInHalfOpenState configures a maximum wait duration which controls the longest amount 
-of time a CircuitBreaker could stay in Half Open state, before it switches to open. Value 0 means 
+                  <td><p>MaxWaitDurationInHalfOpenState configures a maximum wait duration which controls the longest amount
+of time a CircuitBreaker could stay in Half Open state, before it switches to open. Value 0 means
 Circuit Breaker would wait infinitely in HalfOpen State until all permitted calls have been completed. </p></td>
                 </tr>
               
@@ -593,7 +593,7 @@ Circuit Breaker would wait infinitely in HalfOpen State until all permitted call
                   <td>waitDurationInOpenState</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>WaitDurationInOpenState configures the duration that the CircuitBreaker should wait before transitioning 
+                  <td><p>WaitDurationInOpenState configures the duration that the CircuitBreaker should wait before transitioning
 from open to half-open,e.g.,60000ms. </p></td>
                 </tr>
               
@@ -694,7 +694,7 @@ from open to half-open,e.g.,60000ms. </p></td>
                   <td>rewriteTarget</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>RewriteTarget is a regular expression for rewriting original URL when 
+                  <td><p>RewriteTarget is a regular expression for rewriting original URL when
 the HTTP URL path match the Path field. </p></td>
                 </tr>
               
@@ -1283,7 +1283,7 @@ The exceeded request will be ignored. </p></td>
         
       
         <h3 id="easemesh.v1alpha1.RateLimiter">RateLimiter</h3>
-        <p>RateLimiter configures a limiter which can establish your services' high availability and reliability, </p><p>also it can be used for scaling APIs. RateLimiter can protect servers from overwhelm by the peak traffic.</p>
+        <p>RateLimiter configures a limiter which can establish your services' high availability and reliability,</p><p>also it can be used for scaling APIs. RateLimiter can protect servers from overwhelm by the peak traffic.</p>
 
         
           <table class="field-table">
@@ -1348,7 +1348,7 @@ The exceeded request will be ignored. </p></td>
                   <td>limitRefreshPeriod</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>LimitRefreshPeriod is the period of a limit refresh. After each period the rate limiter sets 
+                  <td><p>LimitRefreshPeriod is the period of a limit refresh. After each period the rate limiter sets
 its permissions count back to the limitForPeriod value. </p></td>
                 </tr>
               
@@ -1367,7 +1367,7 @@ its permissions count back to the limitForPeriod value. </p></td>
         
       
         <h3 id="easemesh.v1alpha1.Resilience">Resilience</h3>
-        <p>Resilience configures four key types of features, RateLimiter, CircuitBreaker, </p><p>Retryer and Timeout.</p>
+        <p>Resilience configures four key types of features, RateLimiter, CircuitBreaker,</p><p>Retryer and Timeout.</p>
 
         
           <table class="field-table">
@@ -1412,7 +1412,7 @@ its permissions count back to the limitForPeriod value. </p></td>
         
       
         <h3 id="easemesh.v1alpha1.Retryer">Retryer</h3>
-        <p>Retryer can perform an API calling retry when the service HTTP response code indicated its in </p><p>temporary unavailable states. The up-stream client should make sure this API is idempotent. </p><p>The service can declare an Retryer for its desired APIs and active in client side.</p>
+        <p>Retryer can perform an API calling retry when the service HTTP response code indicated its in</p><p>temporary unavailable states. The up-stream client should make sure this API is idempotent.</p><p>The service can declare an Retryer for its desired APIs and active in client side.</p>
 
         
           <table class="field-table">
@@ -1450,7 +1450,7 @@ its permissions count back to the limitForPeriod value. </p></td>
         
       
         <h3 id="easemesh.v1alpha1.RetryerPolicy">RetryerPolicy</h3>
-        <p>RetryerPolicy configures the policy for describing Resilience component Retryer. </p><p>It contains the basic configurations for the retryer, including the type of sliding window this </p><p>breaker will use. Whether including network error or not and so on.</p>
+        <p>RetryerPolicy configures the policy for describing Resilience component Retryer.</p><p>It contains the basic configurations for the retryer, including the type of sliding window this</p><p>breaker will use. Whether including network error or not and so on.</p>
 
         
           <table class="field-table">
@@ -1516,7 +1516,7 @@ its permissions count back to the limitForPeriod value. </p></td>
         
       
         <h3 id="easemesh.v1alpha1.Service">Service</h3>
-        <p>Service is the basic element in EaseMesh to describe a user's business microservices' </p><p>name, belonging tenant, and governance specs. One service should belongs to a dedicated </p><p>tenant.</p>
+        <p>Service is the basic element in EaseMesh to describe a user's business microservices'</p><p>name, belonging tenant, and governance specs. One service should belongs to a dedicated</p><p>tenant.</p>
 
         
           <table class="field-table">
@@ -1597,6 +1597,13 @@ its permissions count back to the limitForPeriod value. </p></td>
               <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
             </thead>
             <tbody>
+              
+                <tr>
+                  <td>registryName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>registryName is the name of registry. </p></td>
+                </tr>
               
                 <tr>
                   <td>serviceName</td>
@@ -1699,7 +1706,7 @@ its permissions count back to the limitForPeriod value. </p></td>
                   <td>discoveryType</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>DiscoveryType configures the type of service register/discovery type, its value are among 
+                  <td><p>DiscoveryType configures the type of service register/discovery type, its value are among
 &#34;eureka&#34;,&#34;consul&#34;, and &#34;nacos&#34;. </p></td>
                 </tr>
               
@@ -1784,7 +1791,7 @@ its permissions count back to the limitForPeriod value. </p></td>
         
       
         <h3 id="easemesh.v1alpha1.Tenant">Tenant</h3>
-        <p>Tenant is the logic group of mesh services. Inside the same tenant,</p><p>services can visit each other directly. There are two kinds of tenant, one is the  common type </p><p>of tenants and the other is system reserved "global" tenant which's access scope is globally </p><p>inside the mesh . If one mesh service is created with "global" tenant filed, it can be visible </p><p>to all the service inside the mesh.</p>
+        <p>Tenant is the logic group of mesh services. Inside the same tenant,</p><p>services can visit each other directly. There are two kinds of tenant, one is the  common type</p><p>of tenants and the other is system reserved "global" tenant which's access scope is globally</p><p>inside the mesh . If one mesh service is created with "global" tenant filed, it can be visible</p><p>to all the service inside the mesh.</p>
 
         
           <table class="field-table">
@@ -1822,7 +1829,7 @@ its permissions count back to the limitForPeriod value. </p></td>
         
       
         <h3 id="easemesh.v1alpha1.TimeLimiter">TimeLimiter</h3>
-        <p>Timeout configures the amount of time the client should wait for replies from a given service, </p><p>it will be running in upstream clients and declared in downstream relied services.</p>
+        <p>Timeout configures the amount of time the client should wait for replies from a given service,</p><p>it will be running in upstream clients and declared in downstream relied services.</p>
 
         
           <table class="field-table">
