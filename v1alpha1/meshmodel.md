@@ -10,7 +10,7 @@
     - [CanaryRule.ServiceInstanceLabelsEntry](#easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry)
     - [CircuitBreaker](#easemesh.v1alpha1.CircuitBreaker)
     - [CircuitBreakerPolicy](#easemesh.v1alpha1.CircuitBreakerPolicy)
-    - [CustomObjectKind](#easemesh.v1alpha1.CustomObjectKind)
+    - [CustomResourceKind](#easemesh.v1alpha1.CustomResourceKind)
     - [Ingress](#easemesh.v1alpha1.Ingress)
     - [IngressPath](#easemesh.v1alpha1.IngressPath)
     - [IngressRule](#easemesh.v1alpha1.IngressRule)
@@ -177,16 +177,16 @@ breaker will use. Whether including network error or not and so on.
 
 
 
-<a name="easemesh.v1alpha1.CustomObjectKind"></a>
+<a name="easemesh.v1alpha1.CustomResourceKind"></a>
 
-### CustomObjectKind
-CustomObjectKind defines a custom object kind
+### CustomResourceKind
+CustomResourceKind defines a custom resource kind
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Name is the name of the custom object kind |
-| jsonSchema | [string](#string) |  | JSONSchema is the json schema to validate a custom object of this kind |
+| name | [string](#string) |  | Name is the name of the custom resource kind |
+| jsonSchema | [string](#string) |  | JSONSchema is the json schema to validate a custom resource of this kind |
 
 
 

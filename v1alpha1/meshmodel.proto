@@ -542,11 +542,11 @@ message URLRule {
 	string policyRef = 3;
 }
 
-// CustomObjectKind defines a custom object kind
-message CustomObjectKind {
-	// Name is the name of the custom object kind
+// CustomResourceKind defines a custom resource kind
+message CustomResourceKind {
+	// Name is the name of the custom resource kind
 	string name = 1;
 
-	// JSONSchema is the json schema to validate a custom object of this kind
+	// JSONSchema is the json schema to validate a custom resource of this kind
 	string jsonSchema = 2;
 }
