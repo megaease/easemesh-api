@@ -360,10 +360,10 @@
           ]
         },
         {
-          "name": "CustomObjectKind",
-          "longName": "CustomObjectKind",
-          "fullName": "easemesh.v1alpha1.CustomObjectKind",
-          "description": "CustomObjectKind defines a custom object kind",
+          "name": "CustomResourceKind",
+          "longName": "CustomResourceKind",
+          "fullName": "easemesh.v1alpha1.CustomResourceKind",
+          "description": "CustomResourceKind defines a custom resource kind",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -371,7 +371,7 @@
           "fields": [
             {
               "name": "name",
-              "description": "Name is the name of the custom object kind",
+              "description": "Name is the name of the custom resource kind",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -383,7 +383,7 @@
             },
             {
               "name": "jsonSchema",
-              "description": "JSONSchema is the json schema to validate a custom object of this kind",
+              "description": "JSONSchema is the json schema to validate a custom resource of this kind",
               "label": "",
               "type": "string",
               "longType": "string",
