@@ -186,7 +186,7 @@ CustomResourceKind defines a custom resource kind
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Name is the name of the custom resource kind |
-| jsonSchema | [string](#string) |  | JSONSchema is the json schema to validate a custom resource of this kind |
+| jsonSchema | [google.protobuf.Struct](#google.protobuf.Struct) |  | JSONSchema is the json schema to validate a custom resource of this kind |
 
 
 
