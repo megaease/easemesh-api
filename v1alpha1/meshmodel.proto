@@ -14,6 +14,8 @@ syntax = "proto3";
 
 package easemesh.v1alpha1;
 
+import "google/protobuf/struct.proto";
+
 option go_package="easemesh/api/v1alpha1";
 
 // Tenant is the logic group of mesh services. Inside the same tenant,
@@ -548,5 +550,5 @@ message CustomResourceKind {
 	string name = 1;
 
 	// JSONSchema is the json schema to validate a custom resource of this kind
-	string jsonSchema = 2;
+	google.protobuf.Struct jsonSchema = 2;
 }
