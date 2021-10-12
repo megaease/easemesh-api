@@ -234,12 +234,12 @@ HTTPRouteGroup defines the spec of a HTTP route group
 <a name="easemesh.v1alpha1.IdentityBindingSubject"></a>
 
 ### IdentityBindingSubject
-IdentityBindingSubject is a service which should be allowed access to the TrafficTarget
+IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| kind | [string](#string) |  | Kind is the type of Subject to allow ingress (Service) |
+| kind | [string](#string) |  | Kind is the type of Subject to allow access, must be &#34;Service&#34; by now. |
 | name | [string](#string) |  | Name of the Subject, i.e. ServiceName |
 
 
@@ -763,14 +763,15 @@ TrafficTarget is the specification of a TrafficTarget
 <a name="easemesh.v1alpha1.TrafficTargetRule"></a>
 
 ### TrafficTargetRule
-TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget
+TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget,
+TrafficSpec can only be HTTPRouteGroup by now.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| kind | [string](#string) |  | Kind is the kind of TrafficSpec to allow |
+| kind | [string](#string) |  | Kind is the kind of TrafficSpec to allow, must be &#34;HTTPRouteGroup&#34; by now. |
 | name | [string](#string) |  | Name of the TrafficSpec to use |
-| matches | [string](#string) | repeated | Matches is a list of TrafficSpec routes to allow traffic for |
+| matches | [string](#string) | repeated | Matches is a list of TrafficSpec routes to allow traffic for, TrafficSpec routes can only be HTTPMatch by now. |
 
 
 

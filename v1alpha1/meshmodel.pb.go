@@ -2578,17 +2578,20 @@ func (x *HTTPRouteGroup) GetMatches() []*HTTPMatch {
 	return nil
 }
 
-// TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget
+// TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget,
+// TrafficSpec can only be HTTPRouteGroup by now.
 type TrafficTargetRule struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Kind is the kind of TrafficSpec to allow
+	// Kind is the kind of TrafficSpec to allow,
+	// must be "HTTPRouteGroup" by now.
 	Kind string `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
 	// Name of the TrafficSpec to use
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Matches is a list of TrafficSpec routes to allow traffic for
+	// Matches is a list of TrafficSpec routes to allow traffic for,
+	// TrafficSpec routes can only be HTTPMatch by now.
 	Matches []string `protobuf:"bytes,3,rep,name=matches,proto3" json:"matches,omitempty"`
 }
 
@@ -2645,13 +2648,13 @@ func (x *TrafficTargetRule) GetMatches() []string {
 	return nil
 }
 
-// IdentityBindingSubject is a service which should be allowed access to the TrafficTarget
+// IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget
 type IdentityBindingSubject struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Kind is the type of Subject to allow ingress (Service)
+	// Kind is the type of Subject to allow access, must be "Service" by now.
 	Kind string `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
 	// Name of the Subject, i.e. ServiceName
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`

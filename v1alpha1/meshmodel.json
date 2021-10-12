@@ -483,7 +483,7 @@
           "name": "IdentityBindingSubject",
           "longName": "IdentityBindingSubject",
           "fullName": "easemesh.v1alpha1.IdentityBindingSubject",
-          "description": "IdentityBindingSubject is a service which should be allowed access to the TrafficTarget",
+          "description": "IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -491,7 +491,7 @@
           "fields": [
             {
               "name": "kind",
-              "description": "Kind is the type of Subject to allow ingress (Service)",
+              "description": "Kind is the type of Subject to allow access, must be \"Service\" by now.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -2211,7 +2211,7 @@
           "name": "TrafficTargetRule",
           "longName": "TrafficTargetRule",
           "fullName": "easemesh.v1alpha1.TrafficTargetRule",
-          "description": "TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget",
+          "description": "TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget,\nTrafficSpec can only be HTTPRouteGroup by now.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -2219,7 +2219,7 @@
           "fields": [
             {
               "name": "kind",
-              "description": "Kind is the kind of TrafficSpec to allow",
+              "description": "Kind is the kind of TrafficSpec to allow,\nmust be \"HTTPRouteGroup\" by now.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -2243,7 +2243,7 @@
             },
             {
               "name": "matches",
-              "description": "Matches is a list of TrafficSpec routes to allow traffic for",
+              "description": "Matches is a list of TrafficSpec routes to allow traffic for,\nTrafficSpec routes can only be HTTPMatch by now.",
               "label": "repeated",
               "type": "string",
               "longType": "string",

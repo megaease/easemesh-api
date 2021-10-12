@@ -582,21 +582,24 @@ message HTTPRouteGroup {
 	repeated HTTPMatch matches = 2;
 }
 
-// TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget
+// TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget,
+// TrafficSpec can only be HTTPRouteGroup by now.
 message TrafficTargetRule {
-	// Kind is the kind of TrafficSpec to allow
+	// Kind is the kind of TrafficSpec to allow,
+	// must be "HTTPRouteGroup" by now.
 	string kind = 1;
 
 	// Name of the TrafficSpec to use
 	string name = 2;
 
-	// Matches is a list of TrafficSpec routes to allow traffic for
+	// Matches is a list of TrafficSpec routes to allow traffic for,
+	// TrafficSpec routes can only be HTTPMatch by now.
 	repeated string matches = 3;
 }
 
-// IdentityBindingSubject is a service which should be allowed access to the TrafficTarget
+// IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget
 message IdentityBindingSubject {
-	// Kind is the type of Subject to allow ingress (Service)
+	// Kind is the type of Subject to allow access, must be "Service" by now.
 	string kind  = 1;
 
 	// Name of the Subject, i.e. ServiceName

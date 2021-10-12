@@ -732,7 +732,7 @@ from open to half-open,e.g.,60000ms. </p></td>
         
       
         <h3 id="easemesh.v1alpha1.IdentityBindingSubject">IdentityBindingSubject</h3>
-        <p>IdentityBindingSubject is a service which should be allowed access to the TrafficTarget</p>
+        <p>IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget</p>
 
         
           <table class="field-table">
@@ -745,7 +745,7 @@ from open to half-open,e.g.,60000ms. </p></td>
                   <td>kind</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Kind is the type of Subject to allow ingress (Service) </p></td>
+                  <td><p>Kind is the type of Subject to allow access, must be &#34;Service&#34; by now. </p></td>
                 </tr>
               
                 <tr>
@@ -2025,7 +2025,7 @@ its permissions count back to the limitForPeriod value. </p></td>
         
       
         <h3 id="easemesh.v1alpha1.TrafficTargetRule">TrafficTargetRule</h3>
-        <p>TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget</p>
+        <p>TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget,</p><p>TrafficSpec can only be HTTPRouteGroup by now.</p>
 
         
           <table class="field-table">
@@ -2038,7 +2038,8 @@ its permissions count back to the limitForPeriod value. </p></td>
                   <td>kind</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Kind is the kind of TrafficSpec to allow </p></td>
+                  <td><p>Kind is the kind of TrafficSpec to allow,
+must be &#34;HTTPRouteGroup&#34; by now. </p></td>
                 </tr>
               
                 <tr>
@@ -2052,7 +2053,8 @@ its permissions count back to the limitForPeriod value. </p></td>
                   <td>matches</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Matches is a list of TrafficSpec routes to allow traffic for </p></td>
+                  <td><p>Matches is a list of TrafficSpec routes to allow traffic for,
+TrafficSpec routes can only be HTTPMatch by now. </p></td>
                 </tr>
               
             </tbody>
