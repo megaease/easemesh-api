@@ -396,6 +396,126 @@
           ]
         },
         {
+          "name": "HTTPMatch",
+          "longName": "HTTPMatch",
+          "fullName": "easemesh.v1alpha1.HTTPMatch",
+          "description": "HTTPMatch defines an individual route for HTTP traffic",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the name of the HTTP match",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "methods",
+              "description": "Methods configures allowed HTTP method string, e.g. \"GET\",\"DELETE\",\"POST\"",
+              "label": "repeated",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "pathRegex",
+              "description": "PathRegex is a regular expression defining the route",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "HTTPRouteGroup",
+          "longName": "HTTPRouteGroup",
+          "fullName": "easemesh.v1alpha1.HTTPRouteGroup",
+          "description": "HTTPRouteGroup defines the spec of a HTTP route group",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the name for referencing a HTTPRouteGroup",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "matches",
+              "description": "Matches is a list of HTTPMatch to match traffic",
+              "label": "repeated",
+              "type": "HTTPMatch",
+              "longType": "HTTPMatch",
+              "fullType": "easemesh.v1alpha1.HTTPMatch",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "IdentityBindingSubject",
+          "longName": "IdentityBindingSubject",
+          "fullName": "easemesh.v1alpha1.IdentityBindingSubject",
+          "description": "IdentityBindingSubject is a service which should be allowed access to the TrafficTarget",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "kind",
+              "description": "Kind is the type of Subject to allow ingress (Service)",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "name",
+              "description": "Name of the Subject, i.e. ServiceName",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
           "name": "Ingress",
           "longName": "Ingress",
           "fullName": "easemesh.v1alpha1.Ingress",
@@ -2020,6 +2140,114 @@
               "type": "URLRule",
               "longType": "URLRule",
               "fullType": "easemesh.v1alpha1.URLRule",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "TrafficTarget",
+          "longName": "TrafficTarget",
+          "fullName": "easemesh.v1alpha1.TrafficTarget",
+          "description": "TrafficTarget is the specification of a TrafficTarget",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the name for referencing a TrafficTarget",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "destination",
+              "description": "Destination is the service to allow ingress traffic",
+              "label": "",
+              "type": "IdentityBindingSubject",
+              "longType": "IdentityBindingSubject",
+              "fullType": "easemesh.v1alpha1.IdentityBindingSubject",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "sources",
+              "description": "Sources are the services to allow egress traffic",
+              "label": "repeated",
+              "type": "IdentityBindingSubject",
+              "longType": "IdentityBindingSubject",
+              "fullType": "easemesh.v1alpha1.IdentityBindingSubject",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "rules",
+              "description": "Rules are the traffic rules to allow (HTTPRoutes)",
+              "label": "repeated",
+              "type": "TrafficTargetRule",
+              "longType": "TrafficTargetRule",
+              "fullType": "easemesh.v1alpha1.TrafficTargetRule",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "TrafficTargetRule",
+          "longName": "TrafficTargetRule",
+          "fullName": "easemesh.v1alpha1.TrafficTargetRule",
+          "description": "TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "kind",
+              "description": "Kind is the kind of TrafficSpec to allow",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "name",
+              "description": "Name of the TrafficSpec to use",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "matches",
+              "description": "Matches is a list of TrafficSpec routes to allow traffic for",
+              "label": "repeated",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
               "ismap": false,
               "isoneof": false,
               "oneofdecl": "",

@@ -552,3 +552,68 @@ message CustomResourceKind {
 	// JSONSchema is the json schema to validate a custom resource of this kind
 	google.protobuf.Struct jsonSchema = 2;
 }
+
+// HTTPMatch defines an individual route for HTTP traffic
+message HTTPMatch {
+	// Name is the name of the HTTP match
+	string name = 1;
+
+	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST"
+	repeated string methods = 2;
+
+	// PathRegex is a regular expression defining the route
+	string pathRegex = 3;
+
+	// Headers is a list of headers used to match HTTP traffic
+	//
+	// But we are unable support headers in mesh, because all requests to mesh egress
+	// contains a special header 'X-Mesh-Rpc-Service', whose value is the name of the
+	// target service, and the relationship between multiple headers are 'OR'.
+	//
+	// map<string,string> headers = 4;
+}
+
+// HTTPRouteGroup defines the spec of a HTTP route group
+message HTTPRouteGroup {
+	// Name is the name for referencing a HTTPRouteGroup
+	string name = 1;
+
+	// Matches is a list of HTTPMatch to match traffic
+	repeated HTTPMatch matches = 2;
+}
+
+// TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget
+message TrafficTargetRule {
+	// Kind is the kind of TrafficSpec to allow
+	string kind = 1;
+
+	// Name of the TrafficSpec to use
+	string name = 2;
+
+	// Matches is a list of TrafficSpec routes to allow traffic for
+	repeated string matches = 3;
+}
+
+// IdentityBindingSubject is a service which should be allowed access to the TrafficTarget
+message IdentityBindingSubject {
+	// Kind is the type of Subject to allow ingress (Service)
+	string kind  = 1;
+
+	// Name of the Subject, i.e. ServiceName
+	string name = 2;
+}
+
+// TrafficTarget is the specification of a TrafficTarget
+message TrafficTarget {
+	// Name is the name for referencing a TrafficTarget
+	string name = 1;
+
+	// Destination is the service to allow ingress traffic
+	IdentityBindingSubject destination = 2;
+
+	// Sources are the services to allow egress traffic
+	repeated IdentityBindingSubject sources = 3;
+
+	// Rules are the traffic rules to allow (HTTPRoutes)
+	repeated TrafficTargetRule rules = 4;
+}

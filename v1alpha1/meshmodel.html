@@ -207,6 +207,18 @@
                 </li>
               
                 <li>
+                  <a href="#easemesh.v1alpha1.HTTPMatch"><span class="badge">M</span>HTTPMatch</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.HTTPRouteGroup"><span class="badge">M</span>HTTPRouteGroup</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.IdentityBindingSubject"><span class="badge">M</span>IdentityBindingSubject</a>
+                </li>
+              
+                <li>
                   <a href="#easemesh.v1alpha1.Ingress"><span class="badge">M</span>Ingress</a>
                 </li>
               
@@ -308,6 +320,14 @@
               
                 <li>
                   <a href="#easemesh.v1alpha1.TimeLimiter"><span class="badge">M</span>TimeLimiter</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.TrafficTarget"><span class="badge">M</span>TrafficTarget</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.TrafficTargetRule"><span class="badge">M</span>TrafficTargetRule</a>
                 </li>
               
                 <li>
@@ -633,6 +653,106 @@ from open to half-open,e.g.,60000ms. </p></td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>JSONSchema is the json schema to validate a custom resource of this kind </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.HTTPMatch">HTTPMatch</h3>
+        <p>HTTPMatch defines an individual route for HTTP traffic</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name is the name of the HTTP match </p></td>
+                </tr>
+              
+                <tr>
+                  <td>methods</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Methods configures allowed HTTP method string, e.g. &#34;GET&#34;,&#34;DELETE&#34;,&#34;POST&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pathRegex</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>PathRegex is a regular expression defining the route </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.HTTPRouteGroup">HTTPRouteGroup</h3>
+        <p>HTTPRouteGroup defines the spec of a HTTP route group</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name is the name for referencing a HTTPRouteGroup </p></td>
+                </tr>
+              
+                <tr>
+                  <td>matches</td>
+                  <td><a href="#easemesh.v1alpha1.HTTPMatch">HTTPMatch</a></td>
+                  <td>repeated</td>
+                  <td><p>Matches is a list of HTTPMatch to match traffic </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.IdentityBindingSubject">IdentityBindingSubject</h3>
+        <p>IdentityBindingSubject is a service which should be allowed access to the TrafficTarget</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>kind</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Kind is the type of Subject to allow ingress (Service) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name of the Subject, i.e. ServiceName </p></td>
                 </tr>
               
             </tbody>
@@ -1850,6 +1970,89 @@ its permissions count back to the limitForPeriod value. </p></td>
                   <td><a href="#easemesh.v1alpha1.URLRule">URLRule</a></td>
                   <td>repeated</td>
                   <td><p>Urls describe the HTTP request matching schemes for this limiter to filter. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.TrafficTarget">TrafficTarget</h3>
+        <p>TrafficTarget is the specification of a TrafficTarget</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name is the name for referencing a TrafficTarget </p></td>
+                </tr>
+              
+                <tr>
+                  <td>destination</td>
+                  <td><a href="#easemesh.v1alpha1.IdentityBindingSubject">IdentityBindingSubject</a></td>
+                  <td></td>
+                  <td><p>Destination is the service to allow ingress traffic </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sources</td>
+                  <td><a href="#easemesh.v1alpha1.IdentityBindingSubject">IdentityBindingSubject</a></td>
+                  <td>repeated</td>
+                  <td><p>Sources are the services to allow egress traffic </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rules</td>
+                  <td><a href="#easemesh.v1alpha1.TrafficTargetRule">TrafficTargetRule</a></td>
+                  <td>repeated</td>
+                  <td><p>Rules are the traffic rules to allow (HTTPRoutes) </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.TrafficTargetRule">TrafficTargetRule</h3>
+        <p>TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>kind</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Kind is the kind of TrafficSpec to allow </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name of the TrafficSpec to use </p></td>
+                </tr>
+              
+                <tr>
+                  <td>matches</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Matches is a list of TrafficSpec routes to allow traffic for </p></td>
                 </tr>
               
             </tbody>
