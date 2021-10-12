@@ -2334,7 +2334,7 @@ type URLRule struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST"
+	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST".
 	Methods []string `protobuf:"bytes,1,rep,name=methods,proto3" json:"methods,omitempty"`
 	// Url configures how to match the HTTP request URL.
 	Url *StringMatch `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
@@ -2395,15 +2395,15 @@ func (x *URLRule) GetPolicyRef() string {
 	return ""
 }
 
-// CustomResourceKind defines a custom resource kind
+// CustomResourceKind defines a custom resource kind.
 type CustomResourceKind struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name is the name of the custom resource kind
+	// Name is the name of the custom resource kind.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// JSONSchema is the json schema to validate a custom resource of this kind
+	// JSONSchema is the json schema to validate a custom resource of this kind.
 	JsonSchema *_struct.Struct `protobuf:"bytes,2,opt,name=jsonSchema,proto3" json:"jsonSchema,omitempty"`
 }
 
@@ -2449,6 +2449,334 @@ func (x *CustomResourceKind) GetName() string {
 func (x *CustomResourceKind) GetJsonSchema() *_struct.Struct {
 	if x != nil {
 		return x.JsonSchema
+	}
+	return nil
+}
+
+// HTTPMatch defines an individual route for HTTP traffic.
+type HTTPMatch struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Name is the name of the HTTP match.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST".
+	Methods []string `protobuf:"bytes,2,rep,name=methods,proto3" json:"methods,omitempty"`
+	// PathRegex is a regular expression defining the route.
+	PathRegex string `protobuf:"bytes,3,opt,name=pathRegex,proto3" json:"pathRegex,omitempty"`
+}
+
+func (x *HTTPMatch) Reset() {
+	*x = HTTPMatch{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[30]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *HTTPMatch) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HTTPMatch) ProtoMessage() {}
+
+func (x *HTTPMatch) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[30]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HTTPMatch.ProtoReflect.Descriptor instead.
+func (*HTTPMatch) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *HTTPMatch) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *HTTPMatch) GetMethods() []string {
+	if x != nil {
+		return x.Methods
+	}
+	return nil
+}
+
+func (x *HTTPMatch) GetPathRegex() string {
+	if x != nil {
+		return x.PathRegex
+	}
+	return ""
+}
+
+// HTTPRouteGroup defines the spec of a HTTP route group.
+type HTTPRouteGroup struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Name is the name for referencing a HTTPRouteGroup.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Matches is a list of HTTPMatch to match traffic.
+	Matches []*HTTPMatch `protobuf:"bytes,2,rep,name=matches,proto3" json:"matches,omitempty"`
+}
+
+func (x *HTTPRouteGroup) Reset() {
+	*x = HTTPRouteGroup{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[31]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *HTTPRouteGroup) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HTTPRouteGroup) ProtoMessage() {}
+
+func (x *HTTPRouteGroup) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[31]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HTTPRouteGroup.ProtoReflect.Descriptor instead.
+func (*HTTPRouteGroup) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *HTTPRouteGroup) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *HTTPRouteGroup) GetMatches() []*HTTPMatch {
+	if x != nil {
+		return x.Matches
+	}
+	return nil
+}
+
+// TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget,
+// TrafficSpec can only be HTTPRouteGroup by now.
+type TrafficTargetRule struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Kind is the kind of TrafficSpec to allow, must be "HTTPRouteGroup" by now.
+	Kind string `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
+	// Name of the TrafficSpec to use.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Matches is a list of TrafficSpec routes to allow traffic for,
+	// TrafficSpec routes can only be HTTPMatch by now.
+	Matches []string `protobuf:"bytes,3,rep,name=matches,proto3" json:"matches,omitempty"`
+}
+
+func (x *TrafficTargetRule) Reset() {
+	*x = TrafficTargetRule{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[32]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TrafficTargetRule) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TrafficTargetRule) ProtoMessage() {}
+
+func (x *TrafficTargetRule) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[32]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TrafficTargetRule.ProtoReflect.Descriptor instead.
+func (*TrafficTargetRule) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *TrafficTargetRule) GetKind() string {
+	if x != nil {
+		return x.Kind
+	}
+	return ""
+}
+
+func (x *TrafficTargetRule) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *TrafficTargetRule) GetMatches() []string {
+	if x != nil {
+		return x.Matches
+	}
+	return nil
+}
+
+// IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget.
+type IdentityBindingSubject struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Kind is the type of Subject to allow access, must be "Service" by now.
+	Kind string `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
+	// Name of the Subject, i.e. ServiceName.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+}
+
+func (x *IdentityBindingSubject) Reset() {
+	*x = IdentityBindingSubject{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[33]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IdentityBindingSubject) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdentityBindingSubject) ProtoMessage() {}
+
+func (x *IdentityBindingSubject) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[33]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdentityBindingSubject.ProtoReflect.Descriptor instead.
+func (*IdentityBindingSubject) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *IdentityBindingSubject) GetKind() string {
+	if x != nil {
+		return x.Kind
+	}
+	return ""
+}
+
+func (x *IdentityBindingSubject) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+// TrafficTarget is the specification of a TrafficTarget.
+type TrafficTarget struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Name is the name for referencing a TrafficTarget.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Destination is the service to allow ingress traffic.
+	Destination *IdentityBindingSubject `protobuf:"bytes,2,opt,name=destination,proto3" json:"destination,omitempty"`
+	// Sources are the services to allow egress traffic.
+	Sources []*IdentityBindingSubject `protobuf:"bytes,3,rep,name=sources,proto3" json:"sources,omitempty"`
+	// Rules are the traffic rules to allow (HTTPRoutes).
+	Rules []*TrafficTargetRule `protobuf:"bytes,4,rep,name=rules,proto3" json:"rules,omitempty"`
+}
+
+func (x *TrafficTarget) Reset() {
+	*x = TrafficTarget{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[34]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TrafficTarget) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TrafficTarget) ProtoMessage() {}
+
+func (x *TrafficTarget) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[34]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TrafficTarget.ProtoReflect.Descriptor instead.
+func (*TrafficTarget) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *TrafficTarget) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *TrafficTarget) GetDestination() *IdentityBindingSubject {
+	if x != nil {
+		return x.Destination
+	}
+	return nil
+}
+
+func (x *TrafficTarget) GetSources() []*IdentityBindingSubject {
+	if x != nil {
+		return x.Sources
+	}
+	return nil
+}
+
+func (x *TrafficTarget) GetRules() []*TrafficTargetRule {
+	if x != nil {
+		return x.Rules
 	}
 	return nil
 }
@@ -2889,9 +3217,45 @@ var file_meshmodel_proto_rawDesc = []byte{
 	0x12, 0x37, 0x0a, 0x0a, 0x6a, 0x73, 0x6f, 0x6e, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x61, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x75, 0x63, 0x74, 0x52, 0x0a, 0x6a,
-	0x73, 0x6f, 0x6e, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x61, 0x42, 0x17, 0x5a, 0x15, 0x65, 0x61, 0x73,
-	0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68,
-	0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x6f, 0x6e, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x61, 0x22, 0x57, 0x0a, 0x09, 0x48, 0x54, 0x54,
+	0x50, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65,
+	0x74, 0x68, 0x6f, 0x64, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x74,
+	0x68, 0x6f, 0x64, 0x73, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x61, 0x74, 0x68, 0x52, 0x65, 0x67, 0x65,
+	0x78, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x70, 0x61, 0x74, 0x68, 0x52, 0x65, 0x67,
+	0x65, 0x78, 0x22, 0x5c, 0x0a, 0x0e, 0x48, 0x54, 0x54, 0x50, 0x52, 0x6f, 0x75, 0x74, 0x65, 0x47,
+	0x72, 0x6f, 0x75, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x36, 0x0a, 0x07, 0x6d, 0x61, 0x74, 0x63,
+	0x68, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x65, 0x61, 0x73, 0x65,
+	0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x48, 0x54,
+	0x54, 0x50, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x52, 0x07, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x65, 0x73,
+	0x22, 0x55, 0x0a, 0x11, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x54, 0x61, 0x72, 0x67, 0x65,
+	0x74, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
+	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a,
+	0x07, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x09, 0x52, 0x07,
+	0x6d, 0x61, 0x74, 0x63, 0x68, 0x65, 0x73, 0x22, 0x40, 0x0a, 0x16, 0x49, 0x64, 0x65, 0x6e, 0x74,
+	0x69, 0x74, 0x79, 0x42, 0x69, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63,
+	0x74, 0x12, 0x12, 0x0a, 0x04, 0x6b, 0x69, 0x6e, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x04, 0x6b, 0x69, 0x6e, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0xf1, 0x01, 0x0a, 0x0d, 0x54, 0x72,
+	0x61, 0x66, 0x66, 0x69, 0x63, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
+	0x4b, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x29, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e,
+	0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74,
+	0x79, 0x42, 0x69, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52,
+	0x0b, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x43, 0x0a, 0x07,
+	0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x29, 0x2e,
+	0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61,
+	0x31, 0x2e, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x42, 0x69, 0x6e, 0x64, 0x69, 0x6e,
+	0x67, 0x53, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x07, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65,
+	0x73, 0x12, 0x3a, 0x0a, 0x05, 0x72, 0x75, 0x6c, 0x65, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x24, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c,
+	0x70, 0x68, 0x61, 0x31, 0x2e, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x54, 0x61, 0x72, 0x67,
+	0x65, 0x74, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x05, 0x72, 0x75, 0x6c, 0x65, 0x73, 0x42, 0x17, 0x5a,
+	0x15, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31,
+	0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2906,7 +3270,7 @@ func file_meshmodel_proto_rawDescGZIP() []byte {
 	return file_meshmodel_proto_rawDescData
 }
 
-var file_meshmodel_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
+var file_meshmodel_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
 var file_meshmodel_proto_goTypes = []interface{}{
 	(*Tenant)(nil),                            // 0: easemesh.v1alpha1.Tenant
 	(*Service)(nil),                           // 1: easemesh.v1alpha1.Service
@@ -2938,11 +3302,16 @@ var file_meshmodel_proto_goTypes = []interface{}{
 	(*StringMatch)(nil),                       // 27: easemesh.v1alpha1.StringMatch
 	(*URLRule)(nil),                           // 28: easemesh.v1alpha1.URLRule
 	(*CustomResourceKind)(nil),                // 29: easemesh.v1alpha1.CustomResourceKind
-	nil,                                       // 30: easemesh.v1alpha1.MockRule.HeadersEntry
-	nil,                                       // 31: easemesh.v1alpha1.ServiceInstance.LabelsEntry
-	nil,                                       // 32: easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
-	nil,                                       // 33: easemesh.v1alpha1.CanaryRule.HeadersEntry
-	(*_struct.Struct)(nil),                    // 34: google.protobuf.Struct
+	(*HTTPMatch)(nil),                         // 30: easemesh.v1alpha1.HTTPMatch
+	(*HTTPRouteGroup)(nil),                    // 31: easemesh.v1alpha1.HTTPRouteGroup
+	(*TrafficTargetRule)(nil),                 // 32: easemesh.v1alpha1.TrafficTargetRule
+	(*IdentityBindingSubject)(nil),            // 33: easemesh.v1alpha1.IdentityBindingSubject
+	(*TrafficTarget)(nil),                     // 34: easemesh.v1alpha1.TrafficTarget
+	nil,                                       // 35: easemesh.v1alpha1.MockRule.HeadersEntry
+	nil,                                       // 36: easemesh.v1alpha1.ServiceInstance.LabelsEntry
+	nil,                                       // 37: easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
+	nil,                                       // 38: easemesh.v1alpha1.CanaryRule.HeadersEntry
+	(*_struct.Struct)(nil),                    // 39: google.protobuf.Struct
 }
 var file_meshmodel_proto_depIdxs = []int32{
 	2,  // 0: easemesh.v1alpha1.Service.resilience:type_name -> easemesh.v1alpha1.Resilience
@@ -2957,12 +3326,12 @@ var file_meshmodel_proto_depIdxs = []int32{
 	14, // 9: easemesh.v1alpha1.Resilience.timeLimiter:type_name -> easemesh.v1alpha1.TimeLimiter
 	18, // 10: easemesh.v1alpha1.Canary.canaryRules:type_name -> easemesh.v1alpha1.CanaryRule
 	6,  // 11: easemesh.v1alpha1.Mock.rules:type_name -> easemesh.v1alpha1.MockRule
-	30, // 12: easemesh.v1alpha1.MockRule.headers:type_name -> easemesh.v1alpha1.MockRule.HeadersEntry
+	35, // 12: easemesh.v1alpha1.MockRule.headers:type_name -> easemesh.v1alpha1.MockRule.HeadersEntry
 	19, // 13: easemesh.v1alpha1.Observability.outputServer:type_name -> easemesh.v1alpha1.ObservabilityOutputServer
 	22, // 14: easemesh.v1alpha1.Observability.tracings:type_name -> easemesh.v1alpha1.ObservabilityTracings
 	24, // 15: easemesh.v1alpha1.Observability.metrics:type_name -> easemesh.v1alpha1.ObservabilityMetrics
 	26, // 16: easemesh.v1alpha1.Ingress.rules:type_name -> easemesh.v1alpha1.IngressRule
-	31, // 17: easemesh.v1alpha1.ServiceInstance.labels:type_name -> easemesh.v1alpha1.ServiceInstance.LabelsEntry
+	36, // 17: easemesh.v1alpha1.ServiceInstance.labels:type_name -> easemesh.v1alpha1.ServiceInstance.LabelsEntry
 	17, // 18: easemesh.v1alpha1.RateLimiter.policies:type_name -> easemesh.v1alpha1.RateLimiterPolicy
 	28, // 19: easemesh.v1alpha1.RateLimiter.urls:type_name -> easemesh.v1alpha1.URLRule
 	15, // 20: easemesh.v1alpha1.CircuitBreaker.policies:type_name -> easemesh.v1alpha1.CircuitBreakerPolicy
@@ -2970,8 +3339,8 @@ var file_meshmodel_proto_depIdxs = []int32{
 	16, // 22: easemesh.v1alpha1.Retryer.policies:type_name -> easemesh.v1alpha1.RetryerPolicy
 	28, // 23: easemesh.v1alpha1.Retryer.urls:type_name -> easemesh.v1alpha1.URLRule
 	28, // 24: easemesh.v1alpha1.TimeLimiter.urls:type_name -> easemesh.v1alpha1.URLRule
-	32, // 25: easemesh.v1alpha1.CanaryRule.serviceInstanceLabels:type_name -> easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
-	33, // 26: easemesh.v1alpha1.CanaryRule.headers:type_name -> easemesh.v1alpha1.CanaryRule.HeadersEntry
+	37, // 25: easemesh.v1alpha1.CanaryRule.serviceInstanceLabels:type_name -> easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
+	38, // 26: easemesh.v1alpha1.CanaryRule.headers:type_name -> easemesh.v1alpha1.CanaryRule.HeadersEntry
 	28, // 27: easemesh.v1alpha1.CanaryRule.urls:type_name -> easemesh.v1alpha1.URLRule
 	21, // 28: easemesh.v1alpha1.ObservabilityTracings.output:type_name -> easemesh.v1alpha1.ObservabilityTracingsOutputConfig
 	20, // 29: easemesh.v1alpha1.ObservabilityTracings.request:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
@@ -2992,13 +3361,17 @@ var file_meshmodel_proto_depIdxs = []int32{
 	23, // 44: easemesh.v1alpha1.ObservabilityMetrics.md5Dictionary:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
 	25, // 45: easemesh.v1alpha1.IngressRule.paths:type_name -> easemesh.v1alpha1.IngressPath
 	27, // 46: easemesh.v1alpha1.URLRule.url:type_name -> easemesh.v1alpha1.StringMatch
-	34, // 47: easemesh.v1alpha1.CustomResourceKind.jsonSchema:type_name -> google.protobuf.Struct
-	27, // 48: easemesh.v1alpha1.CanaryRule.HeadersEntry.value:type_name -> easemesh.v1alpha1.StringMatch
-	49, // [49:49] is the sub-list for method output_type
-	49, // [49:49] is the sub-list for method input_type
-	49, // [49:49] is the sub-list for extension type_name
-	49, // [49:49] is the sub-list for extension extendee
-	0,  // [0:49] is the sub-list for field type_name
+	39, // 47: easemesh.v1alpha1.CustomResourceKind.jsonSchema:type_name -> google.protobuf.Struct
+	30, // 48: easemesh.v1alpha1.HTTPRouteGroup.matches:type_name -> easemesh.v1alpha1.HTTPMatch
+	33, // 49: easemesh.v1alpha1.TrafficTarget.destination:type_name -> easemesh.v1alpha1.IdentityBindingSubject
+	33, // 50: easemesh.v1alpha1.TrafficTarget.sources:type_name -> easemesh.v1alpha1.IdentityBindingSubject
+	32, // 51: easemesh.v1alpha1.TrafficTarget.rules:type_name -> easemesh.v1alpha1.TrafficTargetRule
+	27, // 52: easemesh.v1alpha1.CanaryRule.HeadersEntry.value:type_name -> easemesh.v1alpha1.StringMatch
+	53, // [53:53] is the sub-list for method output_type
+	53, // [53:53] is the sub-list for method input_type
+	53, // [53:53] is the sub-list for extension type_name
+	53, // [53:53] is the sub-list for extension extendee
+	0,  // [0:53] is the sub-list for field type_name
 }
 
 func init() { file_meshmodel_proto_init() }
@@ -3367,6 +3740,66 @@ func file_meshmodel_proto_init() {
 				return nil
 			}
 		}
+		file_meshmodel_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*HTTPMatch); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meshmodel_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*HTTPRouteGroup); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meshmodel_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*TrafficTargetRule); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meshmodel_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IdentityBindingSubject); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meshmodel_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*TrafficTarget); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -3374,7 +3807,7 @@ func file_meshmodel_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_meshmodel_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   34,
+			NumMessages:   39,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
