@@ -2334,7 +2334,7 @@ type URLRule struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST"
+	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST".
 	Methods []string `protobuf:"bytes,1,rep,name=methods,proto3" json:"methods,omitempty"`
 	// Url configures how to match the HTTP request URL.
 	Url *StringMatch `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
@@ -2395,15 +2395,15 @@ func (x *URLRule) GetPolicyRef() string {
 	return ""
 }
 
-// CustomResourceKind defines a custom resource kind
+// CustomResourceKind defines a custom resource kind.
 type CustomResourceKind struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name is the name of the custom resource kind
+	// Name is the name of the custom resource kind.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// JSONSchema is the json schema to validate a custom resource of this kind
+	// JSONSchema is the json schema to validate a custom resource of this kind.
 	JsonSchema *_struct.Struct `protobuf:"bytes,2,opt,name=jsonSchema,proto3" json:"jsonSchema,omitempty"`
 }
 
@@ -2453,17 +2453,17 @@ func (x *CustomResourceKind) GetJsonSchema() *_struct.Struct {
 	return nil
 }
 
-// HTTPMatch defines an individual route for HTTP traffic
+// HTTPMatch defines an individual route for HTTP traffic.
 type HTTPMatch struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name is the name of the HTTP match
+	// Name is the name of the HTTP match.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST"
+	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST".
 	Methods []string `protobuf:"bytes,2,rep,name=methods,proto3" json:"methods,omitempty"`
-	// PathRegex is a regular expression defining the route
+	// PathRegex is a regular expression defining the route.
 	PathRegex string `protobuf:"bytes,3,opt,name=pathRegex,proto3" json:"pathRegex,omitempty"`
 }
 
@@ -2520,15 +2520,15 @@ func (x *HTTPMatch) GetPathRegex() string {
 	return ""
 }
 
-// HTTPRouteGroup defines the spec of a HTTP route group
+// HTTPRouteGroup defines the spec of a HTTP route group.
 type HTTPRouteGroup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name is the name for referencing a HTTPRouteGroup
+	// Name is the name for referencing a HTTPRouteGroup.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Matches is a list of HTTPMatch to match traffic
+	// Matches is a list of HTTPMatch to match traffic.
 	Matches []*HTTPMatch `protobuf:"bytes,2,rep,name=matches,proto3" json:"matches,omitempty"`
 }
 
@@ -2585,10 +2585,9 @@ type TrafficTargetRule struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Kind is the kind of TrafficSpec to allow,
-	// must be "HTTPRouteGroup" by now.
+	// Kind is the kind of TrafficSpec to allow, must be "HTTPRouteGroup" by now.
 	Kind string `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
-	// Name of the TrafficSpec to use
+	// Name of the TrafficSpec to use.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Matches is a list of TrafficSpec routes to allow traffic for,
 	// TrafficSpec routes can only be HTTPMatch by now.
@@ -2648,7 +2647,7 @@ func (x *TrafficTargetRule) GetMatches() []string {
 	return nil
 }
 
-// IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget
+// IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget.
 type IdentityBindingSubject struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2656,7 +2655,7 @@ type IdentityBindingSubject struct {
 
 	// Kind is the type of Subject to allow access, must be "Service" by now.
 	Kind string `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
-	// Name of the Subject, i.e. ServiceName
+	// Name of the Subject, i.e. ServiceName.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 }
 
@@ -2706,19 +2705,19 @@ func (x *IdentityBindingSubject) GetName() string {
 	return ""
 }
 
-// TrafficTarget is the specification of a TrafficTarget
+// TrafficTarget is the specification of a TrafficTarget.
 type TrafficTarget struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name is the name for referencing a TrafficTarget
+	// Name is the name for referencing a TrafficTarget.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Destination is the service to allow ingress traffic
+	// Destination is the service to allow ingress traffic.
 	Destination *IdentityBindingSubject `protobuf:"bytes,2,opt,name=destination,proto3" json:"destination,omitempty"`
-	// Sources are the services to allow egress traffic
+	// Sources are the services to allow egress traffic.
 	Sources []*IdentityBindingSubject `protobuf:"bytes,3,rep,name=sources,proto3" json:"sources,omitempty"`
-	// Rules are the traffic rules to allow (HTTPRoutes)
+	// Rules are the traffic rules to allow (HTTPRoutes).
 	Rules []*TrafficTargetRule `protobuf:"bytes,4,rep,name=rules,proto3" json:"rules,omitempty"`
 }
 

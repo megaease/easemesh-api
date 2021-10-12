@@ -363,7 +363,7 @@
           "name": "CustomResourceKind",
           "longName": "CustomResourceKind",
           "fullName": "easemesh.v1alpha1.CustomResourceKind",
-          "description": "CustomResourceKind defines a custom resource kind",
+          "description": "CustomResourceKind defines a custom resource kind.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -371,7 +371,7 @@
           "fields": [
             {
               "name": "name",
-              "description": "Name is the name of the custom resource kind",
+              "description": "Name is the name of the custom resource kind.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -383,7 +383,7 @@
             },
             {
               "name": "jsonSchema",
-              "description": "JSONSchema is the json schema to validate a custom resource of this kind",
+              "description": "JSONSchema is the json schema to validate a custom resource of this kind.",
               "label": "",
               "type": "Struct",
               "longType": "google.protobuf.Struct",
@@ -399,7 +399,7 @@
           "name": "HTTPMatch",
           "longName": "HTTPMatch",
           "fullName": "easemesh.v1alpha1.HTTPMatch",
-          "description": "HTTPMatch defines an individual route for HTTP traffic",
+          "description": "HTTPMatch defines an individual route for HTTP traffic.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -407,7 +407,7 @@
           "fields": [
             {
               "name": "name",
-              "description": "Name is the name of the HTTP match",
+              "description": "Name is the name of the HTTP match.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -419,7 +419,7 @@
             },
             {
               "name": "methods",
-              "description": "Methods configures allowed HTTP method string, e.g. \"GET\",\"DELETE\",\"POST\"",
+              "description": "Methods configures allowed HTTP method string, e.g. \"GET\",\"DELETE\",\"POST\".",
               "label": "repeated",
               "type": "string",
               "longType": "string",
@@ -431,7 +431,7 @@
             },
             {
               "name": "pathRegex",
-              "description": "PathRegex is a regular expression defining the route",
+              "description": "PathRegex is a regular expression defining the route.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -447,7 +447,7 @@
           "name": "HTTPRouteGroup",
           "longName": "HTTPRouteGroup",
           "fullName": "easemesh.v1alpha1.HTTPRouteGroup",
-          "description": "HTTPRouteGroup defines the spec of a HTTP route group",
+          "description": "HTTPRouteGroup defines the spec of a HTTP route group.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -455,7 +455,7 @@
           "fields": [
             {
               "name": "name",
-              "description": "Name is the name for referencing a HTTPRouteGroup",
+              "description": "Name is the name for referencing a HTTPRouteGroup.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -467,7 +467,7 @@
             },
             {
               "name": "matches",
-              "description": "Matches is a list of HTTPMatch to match traffic",
+              "description": "Matches is a list of HTTPMatch to match traffic.",
               "label": "repeated",
               "type": "HTTPMatch",
               "longType": "HTTPMatch",
@@ -483,7 +483,7 @@
           "name": "IdentityBindingSubject",
           "longName": "IdentityBindingSubject",
           "fullName": "easemesh.v1alpha1.IdentityBindingSubject",
-          "description": "IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget",
+          "description": "IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -503,7 +503,7 @@
             },
             {
               "name": "name",
-              "description": "Name of the Subject, i.e. ServiceName",
+              "description": "Name of the Subject, i.e. ServiceName.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -2151,7 +2151,7 @@
           "name": "TrafficTarget",
           "longName": "TrafficTarget",
           "fullName": "easemesh.v1alpha1.TrafficTarget",
-          "description": "TrafficTarget is the specification of a TrafficTarget",
+          "description": "TrafficTarget is the specification of a TrafficTarget.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -2159,7 +2159,7 @@
           "fields": [
             {
               "name": "name",
-              "description": "Name is the name for referencing a TrafficTarget",
+              "description": "Name is the name for referencing a TrafficTarget.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -2171,7 +2171,7 @@
             },
             {
               "name": "destination",
-              "description": "Destination is the service to allow ingress traffic",
+              "description": "Destination is the service to allow ingress traffic.",
               "label": "",
               "type": "IdentityBindingSubject",
               "longType": "IdentityBindingSubject",
@@ -2183,7 +2183,7 @@
             },
             {
               "name": "sources",
-              "description": "Sources are the services to allow egress traffic",
+              "description": "Sources are the services to allow egress traffic.",
               "label": "repeated",
               "type": "IdentityBindingSubject",
               "longType": "IdentityBindingSubject",
@@ -2195,7 +2195,7 @@
             },
             {
               "name": "rules",
-              "description": "Rules are the traffic rules to allow (HTTPRoutes)",
+              "description": "Rules are the traffic rules to allow (HTTPRoutes).",
               "label": "repeated",
               "type": "TrafficTargetRule",
               "longType": "TrafficTargetRule",
@@ -2219,7 +2219,7 @@
           "fields": [
             {
               "name": "kind",
-              "description": "Kind is the kind of TrafficSpec to allow,\nmust be \"HTTPRouteGroup\" by now.",
+              "description": "Kind is the kind of TrafficSpec to allow, must be \"HTTPRouteGroup\" by now.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -2231,7 +2231,7 @@
             },
             {
               "name": "name",
-              "description": "Name of the TrafficSpec to use",
+              "description": "Name of the TrafficSpec to use.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -2267,7 +2267,7 @@
           "fields": [
             {
               "name": "methods",
-              "description": "Methods configures allowed HTTP method string, e.g. \"GET\",\"DELETE\",\"POST\"",
+              "description": "Methods configures allowed HTTP method string, e.g. \"GET\",\"DELETE\",\"POST\".",
               "label": "repeated",
               "type": "string",
               "longType": "string",

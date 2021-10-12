@@ -534,7 +534,7 @@ message StringMatch {
 
 // URLRule can be used to filter HTTP request by using HTTP method and URL.
 message URLRule {
-	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST"
+	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST".
 	repeated string methods = 1;
 
 	// Url configures how to match the HTTP request URL.
@@ -544,27 +544,27 @@ message URLRule {
 	string policyRef = 3;
 }
 
-// CustomResourceKind defines a custom resource kind
+// CustomResourceKind defines a custom resource kind.
 message CustomResourceKind {
-	// Name is the name of the custom resource kind
+	// Name is the name of the custom resource kind.
 	string name = 1;
 
-	// JSONSchema is the json schema to validate a custom resource of this kind
+	// JSONSchema is the json schema to validate a custom resource of this kind.
 	google.protobuf.Struct jsonSchema = 2;
 }
 
-// HTTPMatch defines an individual route for HTTP traffic
+// HTTPMatch defines an individual route for HTTP traffic.
 message HTTPMatch {
-	// Name is the name of the HTTP match
+	// Name is the name of the HTTP match.
 	string name = 1;
 
-	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST"
+	// Methods configures allowed HTTP method string, e.g. "GET","DELETE","POST".
 	repeated string methods = 2;
 
-	// PathRegex is a regular expression defining the route
+	// PathRegex is a regular expression defining the route.
 	string pathRegex = 3;
 
-	// Headers is a list of headers used to match HTTP traffic
+	// Headers is a list of headers used to match HTTP traffic.
 	//
 	// But we are unable support headers in mesh, because all requests to mesh egress
 	// contains a special header 'X-Mesh-Rpc-Service', whose value is the name of the
@@ -573,23 +573,22 @@ message HTTPMatch {
 	// map<string,string> headers = 4;
 }
 
-// HTTPRouteGroup defines the spec of a HTTP route group
+// HTTPRouteGroup defines the spec of a HTTP route group.
 message HTTPRouteGroup {
-	// Name is the name for referencing a HTTPRouteGroup
+	// Name is the name for referencing a HTTPRouteGroup.
 	string name = 1;
 
-	// Matches is a list of HTTPMatch to match traffic
+	// Matches is a list of HTTPMatch to match traffic.
 	repeated HTTPMatch matches = 2;
 }
 
 // TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget,
 // TrafficSpec can only be HTTPRouteGroup by now.
 message TrafficTargetRule {
-	// Kind is the kind of TrafficSpec to allow,
-	// must be "HTTPRouteGroup" by now.
+	// Kind is the kind of TrafficSpec to allow, must be "HTTPRouteGroup" by now.
 	string kind = 1;
 
-	// Name of the TrafficSpec to use
+	// Name of the TrafficSpec to use.
 	string name = 2;
 
 	// Matches is a list of TrafficSpec routes to allow traffic for,
@@ -597,26 +596,26 @@ message TrafficTargetRule {
 	repeated string matches = 3;
 }
 
-// IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget
+// IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget.
 message IdentityBindingSubject {
 	// Kind is the type of Subject to allow access, must be "Service" by now.
 	string kind  = 1;
 
-	// Name of the Subject, i.e. ServiceName
+	// Name of the Subject, i.e. ServiceName.
 	string name = 2;
 }
 
-// TrafficTarget is the specification of a TrafficTarget
+// TrafficTarget is the specification of a TrafficTarget.
 message TrafficTarget {
-	// Name is the name for referencing a TrafficTarget
+	// Name is the name for referencing a TrafficTarget.
 	string name = 1;
 
-	// Destination is the service to allow ingress traffic
+	// Destination is the service to allow ingress traffic.
 	IdentityBindingSubject destination = 2;
 
-	// Sources are the services to allow egress traffic
+	// Sources are the services to allow egress traffic.
 	repeated IdentityBindingSubject sources = 3;
 
-	// Rules are the traffic rules to allow (HTTPRoutes)
+	// Rules are the traffic rules to allow (HTTPRoutes).
 	repeated TrafficTargetRule rules = 4;
 }

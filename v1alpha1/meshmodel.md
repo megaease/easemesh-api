@@ -185,13 +185,13 @@ breaker will use. Whether including network error or not and so on.
 <a name="easemesh.v1alpha1.CustomResourceKind"></a>
 
 ### CustomResourceKind
-CustomResourceKind defines a custom resource kind
+CustomResourceKind defines a custom resource kind.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Name is the name of the custom resource kind |
-| jsonSchema | [google.protobuf.Struct](#google.protobuf.Struct) |  | JSONSchema is the json schema to validate a custom resource of this kind |
+| name | [string](#string) |  | Name is the name of the custom resource kind. |
+| jsonSchema | [google.protobuf.Struct](#google.protobuf.Struct) |  | JSONSchema is the json schema to validate a custom resource of this kind. |
 
 
 
@@ -201,14 +201,14 @@ CustomResourceKind defines a custom resource kind
 <a name="easemesh.v1alpha1.HTTPMatch"></a>
 
 ### HTTPMatch
-HTTPMatch defines an individual route for HTTP traffic
+HTTPMatch defines an individual route for HTTP traffic.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Name is the name of the HTTP match |
-| methods | [string](#string) | repeated | Methods configures allowed HTTP method string, e.g. &#34;GET&#34;,&#34;DELETE&#34;,&#34;POST&#34; |
-| pathRegex | [string](#string) |  | PathRegex is a regular expression defining the route |
+| name | [string](#string) |  | Name is the name of the HTTP match. |
+| methods | [string](#string) | repeated | Methods configures allowed HTTP method string, e.g. &#34;GET&#34;,&#34;DELETE&#34;,&#34;POST&#34;. |
+| pathRegex | [string](#string) |  | PathRegex is a regular expression defining the route. |
 
 
 
@@ -218,13 +218,13 @@ HTTPMatch defines an individual route for HTTP traffic
 <a name="easemesh.v1alpha1.HTTPRouteGroup"></a>
 
 ### HTTPRouteGroup
-HTTPRouteGroup defines the spec of a HTTP route group
+HTTPRouteGroup defines the spec of a HTTP route group.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Name is the name for referencing a HTTPRouteGroup |
-| matches | [HTTPMatch](#easemesh.v1alpha1.HTTPMatch) | repeated | Matches is a list of HTTPMatch to match traffic |
+| name | [string](#string) |  | Name is the name for referencing a HTTPRouteGroup. |
+| matches | [HTTPMatch](#easemesh.v1alpha1.HTTPMatch) | repeated | Matches is a list of HTTPMatch to match traffic. |
 
 
 
@@ -234,13 +234,13 @@ HTTPRouteGroup defines the spec of a HTTP route group
 <a name="easemesh.v1alpha1.IdentityBindingSubject"></a>
 
 ### IdentityBindingSubject
-IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget
+IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | kind | [string](#string) |  | Kind is the type of Subject to allow access, must be &#34;Service&#34; by now. |
-| name | [string](#string) |  | Name of the Subject, i.e. ServiceName |
+| name | [string](#string) |  | Name of the Subject, i.e. ServiceName. |
 
 
 
@@ -745,15 +745,15 @@ it will be running in upstream clients and declared in downstream relied service
 <a name="easemesh.v1alpha1.TrafficTarget"></a>
 
 ### TrafficTarget
-TrafficTarget is the specification of a TrafficTarget
+TrafficTarget is the specification of a TrafficTarget.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Name is the name for referencing a TrafficTarget |
-| destination | [IdentityBindingSubject](#easemesh.v1alpha1.IdentityBindingSubject) |  | Destination is the service to allow ingress traffic |
-| sources | [IdentityBindingSubject](#easemesh.v1alpha1.IdentityBindingSubject) | repeated | Sources are the services to allow egress traffic |
-| rules | [TrafficTargetRule](#easemesh.v1alpha1.TrafficTargetRule) | repeated | Rules are the traffic rules to allow (HTTPRoutes) |
+| name | [string](#string) |  | Name is the name for referencing a TrafficTarget. |
+| destination | [IdentityBindingSubject](#easemesh.v1alpha1.IdentityBindingSubject) |  | Destination is the service to allow ingress traffic. |
+| sources | [IdentityBindingSubject](#easemesh.v1alpha1.IdentityBindingSubject) | repeated | Sources are the services to allow egress traffic. |
+| rules | [TrafficTargetRule](#easemesh.v1alpha1.TrafficTargetRule) | repeated | Rules are the traffic rules to allow (HTTPRoutes). |
 
 
 
@@ -770,7 +770,7 @@ TrafficSpec can only be HTTPRouteGroup by now.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | kind | [string](#string) |  | Kind is the kind of TrafficSpec to allow, must be &#34;HTTPRouteGroup&#34; by now. |
-| name | [string](#string) |  | Name of the TrafficSpec to use |
+| name | [string](#string) |  | Name of the TrafficSpec to use. |
 | matches | [string](#string) | repeated | Matches is a list of TrafficSpec routes to allow traffic for, TrafficSpec routes can only be HTTPMatch by now. |
 
 
@@ -786,7 +786,7 @@ URLRule can be used to filter HTTP request by using HTTP method and URL.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| methods | [string](#string) | repeated | Methods configures allowed HTTP method string, e.g. &#34;GET&#34;,&#34;DELETE&#34;,&#34;POST&#34; |
+| methods | [string](#string) | repeated | Methods configures allowed HTTP method string, e.g. &#34;GET&#34;,&#34;DELETE&#34;,&#34;POST&#34;. |
 | url | [StringMatch](#easemesh.v1alpha1.StringMatch) |  | Url configures how to match the HTTP request URL. |
 | policyRef | [string](#string) |  | PolicyRef configures which policy this URLRule references to. |
 
