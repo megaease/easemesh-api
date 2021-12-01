@@ -1788,6 +1788,66 @@
           ]
         },
         {
+          "name": "ServiceCanary",
+          "longName": "ServiceCanary",
+          "fullName": "easemesh.v1alpha1.ServiceCanary",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the name of service canary.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "priority",
+              "description": "Priority must be [1, 9], the default is 5 if user does not set it.\nThe smaller number get higher priority.\nThe order is sorted by name alphabetically in the same priority.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "selector",
+              "description": "Selector is the service selector to choose\nservice instances.",
+              "label": "",
+              "type": "ServiceSelector",
+              "longType": "ServiceSelector",
+              "fullType": "easemesh.v1alpha1.ServiceSelector",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "trafficRules",
+              "description": "TrafficRules is the traffic rules to be colored\nas the current canary.",
+              "label": "",
+              "type": "TrafficRules",
+              "longType": "TrafficRules",
+              "fullType": "easemesh.v1alpha1.TrafficRules",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
           "name": "ServiceInstance",
           "longName": "ServiceInstance",
           "fullName": "easemesh.v1alpha1.ServiceInstance",
@@ -1899,6 +1959,78 @@
           "name": "LabelsEntry",
           "longName": "ServiceInstance.LabelsEntry",
           "fullName": "easemesh.v1alpha1.ServiceInstance.LabelsEntry",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "key",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "value",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "ServiceSelector",
+          "longName": "ServiceSelector",
+          "fullName": "easemesh.v1alpha1.ServiceSelector",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "matchServices",
+              "description": "MatchServices is the service list.",
+              "label": "repeated",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "matchInstanceLabels",
+              "description": "MatchInstanceLabels is the instance labels.",
+              "label": "repeated",
+              "type": "MatchInstanceLabelsEntry",
+              "longType": "ServiceSelector.MatchInstanceLabelsEntry",
+              "fullType": "easemesh.v1alpha1.ServiceSelector.MatchInstanceLabelsEntry",
+              "ismap": true,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "MatchInstanceLabelsEntry",
+          "longName": "ServiceSelector.MatchInstanceLabelsEntry",
+          "fullName": "easemesh.v1alpha1.ServiceSelector.MatchInstanceLabelsEntry",
           "description": "",
           "hasExtensions": false,
           "hasFields": true,
@@ -2140,6 +2272,66 @@
               "type": "URLRule",
               "longType": "URLRule",
               "fullType": "easemesh.v1alpha1.URLRule",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "TrafficRules",
+          "longName": "TrafficRules",
+          "fullName": "easemesh.v1alpha1.TrafficRules",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "headers",
+              "description": "Headers configure HTTP requests matching configurations with \"OR\" relation. Once\nHTTP requests match one element in this array, it will be regarded as the colored traffic.",
+              "label": "repeated",
+              "type": "HeadersEntry",
+              "longType": "TrafficRules.HeadersEntry",
+              "fullType": "easemesh.v1alpha1.TrafficRules.HeadersEntry",
+              "ismap": true,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "HeadersEntry",
+          "longName": "TrafficRules.HeadersEntry",
+          "fullName": "easemesh.v1alpha1.TrafficRules.HeadersEntry",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "key",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "value",
+              "description": "",
+              "label": "",
+              "type": "StringMatch",
+              "longType": "StringMatch",
+              "fullType": "easemesh.v1alpha1.StringMatch",
               "ismap": false,
               "isoneof": false,
               "oneofdecl": "",

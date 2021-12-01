@@ -299,11 +299,23 @@
                 </li>
               
                 <li>
+                  <a href="#easemesh.v1alpha1.ServiceCanary"><span class="badge">M</span>ServiceCanary</a>
+                </li>
+              
+                <li>
                   <a href="#easemesh.v1alpha1.ServiceInstance"><span class="badge">M</span>ServiceInstance</a>
                 </li>
               
                 <li>
                   <a href="#easemesh.v1alpha1.ServiceInstance.LabelsEntry"><span class="badge">M</span>ServiceInstance.LabelsEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ServiceSelector"><span class="badge">M</span>ServiceSelector</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.ServiceSelector.MatchInstanceLabelsEntry"><span class="badge">M</span>ServiceSelector.MatchInstanceLabelsEntry</a>
                 </li>
               
                 <li>
@@ -320,6 +332,14 @@
               
                 <li>
                   <a href="#easemesh.v1alpha1.TimeLimiter"><span class="badge">M</span>TimeLimiter</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.TrafficRules"><span class="badge">M</span>TrafficRules</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.TrafficRules.HeadersEntry"><span class="badge">M</span>TrafficRules.HeadersEntry</a>
                 </li>
               
                 <li>
@@ -1708,6 +1728,55 @@ its permissions count back to the limitForPeriod value. </p></td>
 
         
       
+        <h3 id="easemesh.v1alpha1.ServiceCanary">ServiceCanary</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name is the name of service canary. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>priority</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Priority must be [1, 9], the default is 5 if user does not set it.
+The smaller number get higher priority.
+The order is sorted by name alphabetically in the same priority. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>selector</td>
+                  <td><a href="#easemesh.v1alpha1.ServiceSelector">ServiceSelector</a></td>
+                  <td></td>
+                  <td><p>Selector is the service selector to choose
+service instances. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>trafficRules</td>
+                  <td><a href="#easemesh.v1alpha1.TrafficRules">TrafficRules</a></td>
+                  <td></td>
+                  <td><p>TrafficRules is the traffic rules to be colored
+as the current canary. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="easemesh.v1alpha1.ServiceInstance">ServiceInstance</h3>
         <p>ServiceInstance is the runnable entity of a Mesh Service.</p>
 
@@ -1782,6 +1851,68 @@ its permissions count back to the limitForPeriod value. </p></td>
         
       
         <h3 id="easemesh.v1alpha1.ServiceInstance.LabelsEntry">ServiceInstance.LabelsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ServiceSelector">ServiceSelector</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>matchServices</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>MatchServices is the service list. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>matchInstanceLabels</td>
+                  <td><a href="#easemesh.v1alpha1.ServiceSelector.MatchInstanceLabelsEntry">ServiceSelector.MatchInstanceLabelsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>MatchInstanceLabels is the instance labels. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.ServiceSelector.MatchInstanceLabelsEntry">ServiceSelector.MatchInstanceLabelsEntry</h3>
         <p></p>
 
         
@@ -1970,6 +2101,62 @@ its permissions count back to the limitForPeriod value. </p></td>
                   <td><a href="#easemesh.v1alpha1.URLRule">URLRule</a></td>
                   <td>repeated</td>
                   <td><p>Urls describe the HTTP request matching schemes for this limiter to filter. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.TrafficRules">TrafficRules</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>headers</td>
+                  <td><a href="#easemesh.v1alpha1.TrafficRules.HeadersEntry">TrafficRules.HeadersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Headers configure HTTP requests matching configurations with &#34;OR&#34; relation. Once
+HTTP requests match one element in this array, it will be regarded as the colored traffic. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.TrafficRules.HeadersEntry">TrafficRules.HeadersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#easemesh.v1alpha1.StringMatch">StringMatch</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>

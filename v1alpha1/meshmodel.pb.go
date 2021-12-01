@@ -20,9 +20,9 @@
 package v1alpha1
 
 import (
-	_struct "github.com/golang/protobuf/ptypes/struct"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 )
@@ -2404,7 +2404,7 @@ type CustomResourceKind struct {
 	// Name is the name of the custom resource kind.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// JSONSchema is the json schema to validate a custom resource of this kind.
-	JsonSchema *_struct.Struct `protobuf:"bytes,2,opt,name=jsonSchema,proto3" json:"jsonSchema,omitempty"`
+	JsonSchema *structpb.Struct `protobuf:"bytes,2,opt,name=jsonSchema,proto3" json:"jsonSchema,omitempty"`
 }
 
 func (x *CustomResourceKind) Reset() {
@@ -2446,7 +2446,7 @@ func (x *CustomResourceKind) GetName() string {
 	return ""
 }
 
-func (x *CustomResourceKind) GetJsonSchema() *_struct.Struct {
+func (x *CustomResourceKind) GetJsonSchema() *structpb.Struct {
 	if x != nil {
 		return x.JsonSchema
 	}
@@ -2777,6 +2777,191 @@ func (x *TrafficTarget) GetSources() []*IdentityBindingSubject {
 func (x *TrafficTarget) GetRules() []*TrafficTargetRule {
 	if x != nil {
 		return x.Rules
+	}
+	return nil
+}
+
+type ServiceCanary struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Name is the name of service canary.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Priority must be [1, 9], the default is 5 if user does not set it.
+	// The smaller number get higher priority.
+	// The order is sorted by name alphabetically in the same priority.
+	Priority int32 `protobuf:"varint,2,opt,name=priority,proto3" json:"priority,omitempty"`
+	// Selector is the service selector to choose
+	// service instances.
+	Selector *ServiceSelector `protobuf:"bytes,3,opt,name=selector,proto3" json:"selector,omitempty"`
+	// TrafficRules is the traffic rules to be colored
+	// as the current canary.
+	TrafficRules *TrafficRules `protobuf:"bytes,4,opt,name=trafficRules,proto3" json:"trafficRules,omitempty"`
+}
+
+func (x *ServiceCanary) Reset() {
+	*x = ServiceCanary{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[35]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ServiceCanary) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ServiceCanary) ProtoMessage() {}
+
+func (x *ServiceCanary) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[35]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ServiceCanary.ProtoReflect.Descriptor instead.
+func (*ServiceCanary) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *ServiceCanary) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ServiceCanary) GetPriority() int32 {
+	if x != nil {
+		return x.Priority
+	}
+	return 0
+}
+
+func (x *ServiceCanary) GetSelector() *ServiceSelector {
+	if x != nil {
+		return x.Selector
+	}
+	return nil
+}
+
+func (x *ServiceCanary) GetTrafficRules() *TrafficRules {
+	if x != nil {
+		return x.TrafficRules
+	}
+	return nil
+}
+
+type ServiceSelector struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// MatchServices is the service list.
+	MatchServices []string `protobuf:"bytes,1,rep,name=matchServices,proto3" json:"matchServices,omitempty"`
+	// MatchInstanceLabels is the instance labels.
+	MatchInstanceLabels map[string]string `protobuf:"bytes,2,rep,name=matchInstanceLabels,proto3" json:"matchInstanceLabels,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+}
+
+func (x *ServiceSelector) Reset() {
+	*x = ServiceSelector{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[36]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ServiceSelector) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ServiceSelector) ProtoMessage() {}
+
+func (x *ServiceSelector) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[36]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ServiceSelector.ProtoReflect.Descriptor instead.
+func (*ServiceSelector) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *ServiceSelector) GetMatchServices() []string {
+	if x != nil {
+		return x.MatchServices
+	}
+	return nil
+}
+
+func (x *ServiceSelector) GetMatchInstanceLabels() map[string]string {
+	if x != nil {
+		return x.MatchInstanceLabels
+	}
+	return nil
+}
+
+type TrafficRules struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Headers configure HTTP requests matching configurations with "OR" relation. Once
+	// HTTP requests match one element in this array, it will be regarded as the colored traffic.
+	Headers map[string]*StringMatch `protobuf:"bytes,2,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+}
+
+func (x *TrafficRules) Reset() {
+	*x = TrafficRules{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meshmodel_proto_msgTypes[37]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TrafficRules) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TrafficRules) ProtoMessage() {}
+
+func (x *TrafficRules) ProtoReflect() protoreflect.Message {
+	mi := &file_meshmodel_proto_msgTypes[37]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TrafficRules.ProtoReflect.Descriptor instead.
+func (*TrafficRules) Descriptor() ([]byte, []int) {
+	return file_meshmodel_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *TrafficRules) GetHeaders() map[string]*StringMatch {
+	if x != nil {
+		return x.Headers
 	}
 	return nil
 }
@@ -3253,9 +3438,48 @@ var file_meshmodel_proto_rawDesc = []byte{
 	0x73, 0x12, 0x3a, 0x0a, 0x05, 0x72, 0x75, 0x6c, 0x65, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b,
 	0x32, 0x24, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c,
 	0x70, 0x68, 0x61, 0x31, 0x2e, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x54, 0x61, 0x72, 0x67,
-	0x65, 0x74, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x05, 0x72, 0x75, 0x6c, 0x65, 0x73, 0x42, 0x17, 0x5a,
-	0x15, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31,
-	0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x74, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x05, 0x72, 0x75, 0x6c, 0x65, 0x73, 0x22, 0xc4, 0x01,
+	0x0a, 0x0d, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x43, 0x61, 0x6e, 0x61, 0x72, 0x79, 0x12,
+	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x72, 0x69, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x70, 0x72, 0x69, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x12,
+	0x3e, 0x0a, 0x08, 0x73, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x22, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61,
+	0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x53, 0x65, 0x6c,
+	0x65, 0x63, 0x74, 0x6f, 0x72, 0x52, 0x08, 0x73, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x12,
+	0x43, 0x0a, 0x0c, 0x74, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x52, 0x75, 0x6c, 0x65, 0x73, 0x18,
+	0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68,
+	0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69,
+	0x63, 0x52, 0x75, 0x6c, 0x65, 0x73, 0x52, 0x0c, 0x74, 0x72, 0x61, 0x66, 0x66, 0x69, 0x63, 0x52,
+	0x75, 0x6c, 0x65, 0x73, 0x22, 0xee, 0x01, 0x0a, 0x0f, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x53, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x12, 0x24, 0x0a, 0x0d, 0x6d, 0x61, 0x74, 0x63,
+	0x68, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52,
+	0x0d, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x12, 0x6d,
+	0x0a, 0x13, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x49, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x4c,
+	0x61, 0x62, 0x65, 0x6c, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x3b, 0x2e, 0x65, 0x61,
+	0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e,
+	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x53, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x2e,
+	0x4d, 0x61, 0x74, 0x63, 0x68, 0x49, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x4c, 0x61, 0x62,
+	0x65, 0x6c, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x13, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x49,
+	0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x4c, 0x61, 0x62, 0x65, 0x6c, 0x73, 0x1a, 0x46, 0x0a,
+	0x18, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x49, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x4c, 0x61,
+	0x62, 0x65, 0x6c, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76,
+	0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75,
+	0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0xb2, 0x01, 0x0a, 0x0c, 0x54, 0x72, 0x61, 0x66, 0x66, 0x69,
+	0x63, 0x52, 0x75, 0x6c, 0x65, 0x73, 0x12, 0x46, 0x0a, 0x07, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
+	0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2c, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65,
+	0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x54, 0x72, 0x61, 0x66,
+	0x66, 0x69, 0x63, 0x52, 0x75, 0x6c, 0x65, 0x73, 0x2e, 0x48, 0x65, 0x61, 0x64, 0x65, 0x72, 0x73,
+	0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x07, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x73, 0x1a, 0x5a,
+	0x0a, 0x0c, 0x48, 0x65, 0x61, 0x64, 0x65, 0x72, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10,
+	0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79,
+	0x12, 0x34, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x1e, 0x2e, 0x65, 0x61, 0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70,
+	0x68, 0x61, 0x31, 0x2e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x52,
+	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x42, 0x17, 0x5a, 0x15, 0x65, 0x61,
+	0x73, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x61, 0x6c, 0x70,
+	0x68, 0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3270,7 +3494,7 @@ func file_meshmodel_proto_rawDescGZIP() []byte {
 	return file_meshmodel_proto_rawDescData
 }
 
-var file_meshmodel_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
+var file_meshmodel_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
 var file_meshmodel_proto_goTypes = []interface{}{
 	(*Tenant)(nil),                            // 0: easemesh.v1alpha1.Tenant
 	(*Service)(nil),                           // 1: easemesh.v1alpha1.Service
@@ -3307,11 +3531,16 @@ var file_meshmodel_proto_goTypes = []interface{}{
 	(*TrafficTargetRule)(nil),                 // 32: easemesh.v1alpha1.TrafficTargetRule
 	(*IdentityBindingSubject)(nil),            // 33: easemesh.v1alpha1.IdentityBindingSubject
 	(*TrafficTarget)(nil),                     // 34: easemesh.v1alpha1.TrafficTarget
-	nil,                                       // 35: easemesh.v1alpha1.MockRule.HeadersEntry
-	nil,                                       // 36: easemesh.v1alpha1.ServiceInstance.LabelsEntry
-	nil,                                       // 37: easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
-	nil,                                       // 38: easemesh.v1alpha1.CanaryRule.HeadersEntry
-	(*_struct.Struct)(nil),                    // 39: google.protobuf.Struct
+	(*ServiceCanary)(nil),                     // 35: easemesh.v1alpha1.ServiceCanary
+	(*ServiceSelector)(nil),                   // 36: easemesh.v1alpha1.ServiceSelector
+	(*TrafficRules)(nil),                      // 37: easemesh.v1alpha1.TrafficRules
+	nil,                                       // 38: easemesh.v1alpha1.MockRule.HeadersEntry
+	nil,                                       // 39: easemesh.v1alpha1.ServiceInstance.LabelsEntry
+	nil,                                       // 40: easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
+	nil,                                       // 41: easemesh.v1alpha1.CanaryRule.HeadersEntry
+	nil,                                       // 42: easemesh.v1alpha1.ServiceSelector.MatchInstanceLabelsEntry
+	nil,                                       // 43: easemesh.v1alpha1.TrafficRules.HeadersEntry
+	(*structpb.Struct)(nil),                   // 44: google.protobuf.Struct
 }
 var file_meshmodel_proto_depIdxs = []int32{
 	2,  // 0: easemesh.v1alpha1.Service.resilience:type_name -> easemesh.v1alpha1.Resilience
@@ -3326,12 +3555,12 @@ var file_meshmodel_proto_depIdxs = []int32{
 	14, // 9: easemesh.v1alpha1.Resilience.timeLimiter:type_name -> easemesh.v1alpha1.TimeLimiter
 	18, // 10: easemesh.v1alpha1.Canary.canaryRules:type_name -> easemesh.v1alpha1.CanaryRule
 	6,  // 11: easemesh.v1alpha1.Mock.rules:type_name -> easemesh.v1alpha1.MockRule
-	35, // 12: easemesh.v1alpha1.MockRule.headers:type_name -> easemesh.v1alpha1.MockRule.HeadersEntry
+	38, // 12: easemesh.v1alpha1.MockRule.headers:type_name -> easemesh.v1alpha1.MockRule.HeadersEntry
 	19, // 13: easemesh.v1alpha1.Observability.outputServer:type_name -> easemesh.v1alpha1.ObservabilityOutputServer
 	22, // 14: easemesh.v1alpha1.Observability.tracings:type_name -> easemesh.v1alpha1.ObservabilityTracings
 	24, // 15: easemesh.v1alpha1.Observability.metrics:type_name -> easemesh.v1alpha1.ObservabilityMetrics
 	26, // 16: easemesh.v1alpha1.Ingress.rules:type_name -> easemesh.v1alpha1.IngressRule
-	36, // 17: easemesh.v1alpha1.ServiceInstance.labels:type_name -> easemesh.v1alpha1.ServiceInstance.LabelsEntry
+	39, // 17: easemesh.v1alpha1.ServiceInstance.labels:type_name -> easemesh.v1alpha1.ServiceInstance.LabelsEntry
 	17, // 18: easemesh.v1alpha1.RateLimiter.policies:type_name -> easemesh.v1alpha1.RateLimiterPolicy
 	28, // 19: easemesh.v1alpha1.RateLimiter.urls:type_name -> easemesh.v1alpha1.URLRule
 	15, // 20: easemesh.v1alpha1.CircuitBreaker.policies:type_name -> easemesh.v1alpha1.CircuitBreakerPolicy
@@ -3339,8 +3568,8 @@ var file_meshmodel_proto_depIdxs = []int32{
 	16, // 22: easemesh.v1alpha1.Retryer.policies:type_name -> easemesh.v1alpha1.RetryerPolicy
 	28, // 23: easemesh.v1alpha1.Retryer.urls:type_name -> easemesh.v1alpha1.URLRule
 	28, // 24: easemesh.v1alpha1.TimeLimiter.urls:type_name -> easemesh.v1alpha1.URLRule
-	37, // 25: easemesh.v1alpha1.CanaryRule.serviceInstanceLabels:type_name -> easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
-	38, // 26: easemesh.v1alpha1.CanaryRule.headers:type_name -> easemesh.v1alpha1.CanaryRule.HeadersEntry
+	40, // 25: easemesh.v1alpha1.CanaryRule.serviceInstanceLabels:type_name -> easemesh.v1alpha1.CanaryRule.ServiceInstanceLabelsEntry
+	41, // 26: easemesh.v1alpha1.CanaryRule.headers:type_name -> easemesh.v1alpha1.CanaryRule.HeadersEntry
 	28, // 27: easemesh.v1alpha1.CanaryRule.urls:type_name -> easemesh.v1alpha1.URLRule
 	21, // 28: easemesh.v1alpha1.ObservabilityTracings.output:type_name -> easemesh.v1alpha1.ObservabilityTracingsOutputConfig
 	20, // 29: easemesh.v1alpha1.ObservabilityTracings.request:type_name -> easemesh.v1alpha1.ObservabilityTracingsDetail
@@ -3361,17 +3590,22 @@ var file_meshmodel_proto_depIdxs = []int32{
 	23, // 44: easemesh.v1alpha1.ObservabilityMetrics.md5Dictionary:type_name -> easemesh.v1alpha1.ObservabilityMetricsDetail
 	25, // 45: easemesh.v1alpha1.IngressRule.paths:type_name -> easemesh.v1alpha1.IngressPath
 	27, // 46: easemesh.v1alpha1.URLRule.url:type_name -> easemesh.v1alpha1.StringMatch
-	39, // 47: easemesh.v1alpha1.CustomResourceKind.jsonSchema:type_name -> google.protobuf.Struct
+	44, // 47: easemesh.v1alpha1.CustomResourceKind.jsonSchema:type_name -> google.protobuf.Struct
 	30, // 48: easemesh.v1alpha1.HTTPRouteGroup.matches:type_name -> easemesh.v1alpha1.HTTPMatch
 	33, // 49: easemesh.v1alpha1.TrafficTarget.destination:type_name -> easemesh.v1alpha1.IdentityBindingSubject
 	33, // 50: easemesh.v1alpha1.TrafficTarget.sources:type_name -> easemesh.v1alpha1.IdentityBindingSubject
 	32, // 51: easemesh.v1alpha1.TrafficTarget.rules:type_name -> easemesh.v1alpha1.TrafficTargetRule
-	27, // 52: easemesh.v1alpha1.CanaryRule.HeadersEntry.value:type_name -> easemesh.v1alpha1.StringMatch
-	53, // [53:53] is the sub-list for method output_type
-	53, // [53:53] is the sub-list for method input_type
-	53, // [53:53] is the sub-list for extension type_name
-	53, // [53:53] is the sub-list for extension extendee
-	0,  // [0:53] is the sub-list for field type_name
+	36, // 52: easemesh.v1alpha1.ServiceCanary.selector:type_name -> easemesh.v1alpha1.ServiceSelector
+	37, // 53: easemesh.v1alpha1.ServiceCanary.trafficRules:type_name -> easemesh.v1alpha1.TrafficRules
+	42, // 54: easemesh.v1alpha1.ServiceSelector.matchInstanceLabels:type_name -> easemesh.v1alpha1.ServiceSelector.MatchInstanceLabelsEntry
+	43, // 55: easemesh.v1alpha1.TrafficRules.headers:type_name -> easemesh.v1alpha1.TrafficRules.HeadersEntry
+	27, // 56: easemesh.v1alpha1.CanaryRule.HeadersEntry.value:type_name -> easemesh.v1alpha1.StringMatch
+	27, // 57: easemesh.v1alpha1.TrafficRules.HeadersEntry.value:type_name -> easemesh.v1alpha1.StringMatch
+	58, // [58:58] is the sub-list for method output_type
+	58, // [58:58] is the sub-list for method input_type
+	58, // [58:58] is the sub-list for extension type_name
+	58, // [58:58] is the sub-list for extension extendee
+	0,  // [0:58] is the sub-list for field type_name
 }
 
 func init() { file_meshmodel_proto_init() }
@@ -3800,6 +4034,42 @@ func file_meshmodel_proto_init() {
 				return nil
 			}
 		}
+		file_meshmodel_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ServiceCanary); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meshmodel_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ServiceSelector); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meshmodel_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*TrafficRules); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -3807,7 +4077,7 @@ func file_meshmodel_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_meshmodel_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   39,
+			NumMessages:   44,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
