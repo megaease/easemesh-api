@@ -624,7 +624,6 @@ message ServiceCanary {
 	// Name is the name of service canary.
 	string name = 1;
 
-
 	// Priority must be [1, 9], the default is 5 if user does not set it.
 	// The smaller number get higher priority.
 	// The order is sorted by name alphabetically in the same priority.
