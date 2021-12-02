@@ -34,12 +34,17 @@
     - [Retryer](#easemesh.v1alpha1.Retryer)
     - [RetryerPolicy](#easemesh.v1alpha1.RetryerPolicy)
     - [Service](#easemesh.v1alpha1.Service)
+    - [ServiceCanary](#easemesh.v1alpha1.ServiceCanary)
     - [ServiceInstance](#easemesh.v1alpha1.ServiceInstance)
     - [ServiceInstance.LabelsEntry](#easemesh.v1alpha1.ServiceInstance.LabelsEntry)
+    - [ServiceSelector](#easemesh.v1alpha1.ServiceSelector)
+    - [ServiceSelector.MatchInstanceLabelsEntry](#easemesh.v1alpha1.ServiceSelector.MatchInstanceLabelsEntry)
     - [Sidecar](#easemesh.v1alpha1.Sidecar)
     - [StringMatch](#easemesh.v1alpha1.StringMatch)
     - [Tenant](#easemesh.v1alpha1.Tenant)
     - [TimeLimiter](#easemesh.v1alpha1.TimeLimiter)
+    - [TrafficRules](#easemesh.v1alpha1.TrafficRules)
+    - [TrafficRules.HeadersEntry](#easemesh.v1alpha1.TrafficRules.HeadersEntry)
     - [TrafficTarget](#easemesh.v1alpha1.TrafficTarget)
     - [TrafficTargetRule](#easemesh.v1alpha1.TrafficTargetRule)
     - [URLRule](#easemesh.v1alpha1.URLRule)
@@ -625,6 +630,24 @@ tenant.
 
 
 
+<a name="easemesh.v1alpha1.ServiceCanary"></a>
+
+### ServiceCanary
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Name is the name of service canary. |
+| priority | [int32](#int32) |  | Priority must be [1, 9], the default is 5 if user does not set it. The smaller number get higher priority. The order is sorted by name alphabetically in the same priority. |
+| selector | [ServiceSelector](#easemesh.v1alpha1.ServiceSelector) |  | Selector is the service selector to choose service instances. |
+| trafficRules | [TrafficRules](#easemesh.v1alpha1.TrafficRules) |  | TrafficRules is the traffic rules to be colored as the current canary. |
+
+
+
+
+
+
 <a name="easemesh.v1alpha1.ServiceInstance"></a>
 
 ### ServiceInstance
@@ -650,6 +673,38 @@ ServiceInstance is the runnable entity of a Mesh Service.
 <a name="easemesh.v1alpha1.ServiceInstance.LabelsEntry"></a>
 
 ### ServiceInstance.LabelsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.ServiceSelector"></a>
+
+### ServiceSelector
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| matchServices | [string](#string) | repeated | MatchServices is the service list. |
+| matchInstanceLabels | [ServiceSelector.MatchInstanceLabelsEntry](#easemesh.v1alpha1.ServiceSelector.MatchInstanceLabelsEntry) | repeated | MatchInstanceLabels is the instance labels. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.ServiceSelector.MatchInstanceLabelsEntry"></a>
+
+### ServiceSelector.MatchInstanceLabelsEntry
 
 
 
@@ -736,6 +791,37 @@ it will be running in upstream clients and declared in downstream relied service
 | ----- | ---- | ----- | ----------- |
 | defaultTimeoutDuration | [string](#string) |  | DefaultTimeoutDuration configures the default duration for timeout, e.g.,500ms. |
 | urls | [URLRule](#easemesh.v1alpha1.URLRule) | repeated | Urls describe the HTTP request matching schemes for this limiter to filter. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.TrafficRules"></a>
+
+### TrafficRules
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| headers | [TrafficRules.HeadersEntry](#easemesh.v1alpha1.TrafficRules.HeadersEntry) | repeated | Headers configure HTTP requests matching configurations with &#34;OR&#34; relation. Once HTTP requests match one element in this array, it will be regarded as the colored traffic. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.TrafficRules.HeadersEntry"></a>
+
+### TrafficRules.HeadersEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [StringMatch](#easemesh.v1alpha1.StringMatch) |  |  |
 
 
 

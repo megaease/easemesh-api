@@ -619,3 +619,35 @@ message TrafficTarget {
 	// Rules are the traffic rules to allow (HTTPRoutes).
 	repeated TrafficTargetRule rules = 4;
 }
+
+message ServiceCanary {
+	// Name is the name of service canary.
+	string name = 1;
+
+	// Priority must be [1, 9], the default is 5 if user does not set it.
+	// The smaller number get higher priority.
+	// The order is sorted by name alphabetically in the same priority.
+	int32 priority = 2;
+
+	// Selector is the service selector to choose
+	// service instances.
+	ServiceSelector selector = 3;
+
+	// TrafficRules is the traffic rules to be colored
+	// as the current canary.
+	TrafficRules trafficRules = 4;
+}
+
+message ServiceSelector {
+	// MatchServices is the service list.
+	repeated string matchServices = 1;
+
+	// MatchInstanceLabels is the instance labels.
+	map<string, string> matchInstanceLabels = 2;
+}
+
+message TrafficRules {
+	// Headers configure HTTP requests matching configurations with "OR" relation. Once
+	// HTTP requests match one element in this array, it will be regarded as the colored traffic.
+	map<string, StringMatch> headers = 2;
+}
