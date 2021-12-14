@@ -19,6 +19,8 @@
     - [IngressRule](#easemesh.v1alpha1.IngressRule)
     - [LoadBalance](#easemesh.v1alpha1.LoadBalance)
     - [Mock](#easemesh.v1alpha1.Mock)
+    - [MockMatchRule](#easemesh.v1alpha1.MockMatchRule)
+    - [MockMatchRule.HeadersEntry](#easemesh.v1alpha1.MockMatchRule.HeadersEntry)
     - [MockRule](#easemesh.v1alpha1.MockRule)
     - [MockRule.HeadersEntry](#easemesh.v1alpha1.MockRule.HeadersEntry)
     - [Observability](#easemesh.v1alpha1.Observability)
@@ -335,6 +337,40 @@ the configured response directly.
 
 
 
+<a name="easemesh.v1alpha1.MockMatchRule"></a>
+
+### MockMatchRule
+MockMatchRule is the rule to match a request for mocking
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| path | [string](#string) |  | Path is the exactly path for matching request. |
+| pathPrefix | [string](#string) |  | PathPrefix is the prefix matching for request. |
+| matchAllHeaders | [bool](#bool) |  | MatchAllHeaders specifies whether to match all headers. |
+| headers | [MockMatchRule.HeadersEntry](#easemesh.v1alpha1.MockMatchRule.HeadersEntry) | repeated | Headers are the headers to match, key is header name, value is the match rule of the header value. |
+
+
+
+
+
+
+<a name="easemesh.v1alpha1.MockMatchRule.HeadersEntry"></a>
+
+### MockMatchRule.HeadersEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [StringMatch](#easemesh.v1alpha1.StringMatch) |  |  |
+
+
+
+
+
+
 <a name="easemesh.v1alpha1.MockRule"></a>
 
 ### MockRule
@@ -343,8 +379,7 @@ MockRule is one rule for mocking service.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| path | [string](#string) |  | Path is the exactly path for matching request. |
-| pathPrefix | [string](#string) |  | PathPrefix is the prefix matching for request. |
+| match | [MockMatchRule](#easemesh.v1alpha1.MockMatchRule) |  | match is the rule to match a request. |
 | code | [int32](#int32) |  | Code is the HTTP response code. |
 | headers | [MockRule.HeadersEntry](#easemesh.v1alpha1.MockRule.HeadersEntry) | repeated | Headers is the HTTP header fields for response. |
 | body | [string](#string) |  | Bosy is the HTTP response body. |

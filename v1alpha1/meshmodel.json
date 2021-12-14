@@ -708,10 +708,10 @@
           ]
         },
         {
-          "name": "MockRule",
-          "longName": "MockRule",
-          "fullName": "easemesh.v1alpha1.MockRule",
-          "description": "MockRule is one rule for mocking service.",
+          "name": "MockMatchRule",
+          "longName": "MockMatchRule",
+          "fullName": "easemesh.v1alpha1.MockMatchRule",
+          "description": "MockMatchRule is the rule to match a request for mocking",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -736,6 +736,90 @@
               "type": "string",
               "longType": "string",
               "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "matchAllHeaders",
+              "description": "MatchAllHeaders specifies whether to match all headers.",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "headers",
+              "description": "Headers are the headers to match, key is header name, value is the\nmatch rule of the header value.",
+              "label": "repeated",
+              "type": "HeadersEntry",
+              "longType": "MockMatchRule.HeadersEntry",
+              "fullType": "easemesh.v1alpha1.MockMatchRule.HeadersEntry",
+              "ismap": true,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "HeadersEntry",
+          "longName": "MockMatchRule.HeadersEntry",
+          "fullName": "easemesh.v1alpha1.MockMatchRule.HeadersEntry",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "key",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "value",
+              "description": "",
+              "label": "",
+              "type": "StringMatch",
+              "longType": "StringMatch",
+              "fullType": "easemesh.v1alpha1.StringMatch",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "MockRule",
+          "longName": "MockRule",
+          "fullName": "easemesh.v1alpha1.MockRule",
+          "description": "MockRule is one rule for mocking service.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "match",
+              "description": "match is the rule to match a request.",
+              "label": "",
+              "type": "MockMatchRule",
+              "longType": "MockMatchRule",
+              "fullType": "easemesh.v1alpha1.MockMatchRule",
               "ismap": false,
               "isoneof": false,
               "oneofdecl": "",

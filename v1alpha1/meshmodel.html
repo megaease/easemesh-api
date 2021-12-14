@@ -239,6 +239,14 @@
                 </li>
               
                 <li>
+                  <a href="#easemesh.v1alpha1.MockMatchRule"><span class="badge">M</span>MockMatchRule</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v1alpha1.MockMatchRule.HeadersEntry"><span class="badge">M</span>MockMatchRule.HeadersEntry</a>
+                </li>
+              
+                <li>
                   <a href="#easemesh.v1alpha1.MockRule"><span class="badge">M</span>MockRule</a>
                 </li>
               
@@ -946,8 +954,8 @@ headerHash </p></td>
 
         
       
-        <h3 id="easemesh.v1alpha1.MockRule">MockRule</h3>
-        <p>MockRule is one rule for mocking service.</p>
+        <h3 id="easemesh.v1alpha1.MockMatchRule">MockMatchRule</h3>
+        <p>MockMatchRule is the rule to match a request for mocking</p>
 
         
           <table class="field-table">
@@ -968,6 +976,76 @@ headerHash </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>PathPrefix is the prefix matching for request. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>matchAllHeaders</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>MatchAllHeaders specifies whether to match all headers. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>headers</td>
+                  <td><a href="#easemesh.v1alpha1.MockMatchRule.HeadersEntry">MockMatchRule.HeadersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Headers are the headers to match, key is header name, value is the
+match rule of the header value. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.MockMatchRule.HeadersEntry">MockMatchRule.HeadersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#easemesh.v1alpha1.StringMatch">StringMatch</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v1alpha1.MockRule">MockRule</h3>
+        <p>MockRule is one rule for mocking service.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>match</td>
+                  <td><a href="#easemesh.v1alpha1.MockMatchRule">MockMatchRule</a></td>
+                  <td></td>
+                  <td><p>match is the rule to match a request. </p></td>
                 </tr>
               
                 <tr>
