@@ -1,0 +1,2357 @@
+{
+  "files": [
+    {
+      "name": "meshmodel.proto",
+      "description": "Copyright 2021 MegaEase\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.",
+      "package": "easemesh.v2alpha1",
+      "hasEnums": false,
+      "hasExtensions": false,
+      "hasMessages": true,
+      "hasServices": false,
+      "enums": [],
+      "extensions": [],
+      "messages": [
+        {
+          "name": "CircuitBreaker",
+          "longName": "CircuitBreaker",
+          "fullName": "easemesh.v2alpha1.CircuitBreaker",
+          "description": "CircuitBreaker is used for blocking all in-coming requests when the the failure numbers\nreach the configured limitation. You can declare an CircuitBreaker with COUNT_BASED or\nTIME_BASED type.  It has three types of states, open, closed and half-close. One service\ncan declare its desired CircuitBreaker, and the upstream clients will active the same CircuitBreaker",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "slidingWindowType",
+              "description": "SlidingWindowType is the sliding window type of this break, only \"COUNT_BASED\" or \"TIME_BASED\" allowed.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "failureRateThreshold",
+              "description": "FailureRateThreshold configures the failure rate threshold in percentage. When the failure rate is equal\nor greater than the threshold the CircuitBreaker transitions to open and starts short-circuiting calls.",
+              "label": "",
+              "type": "uint32",
+              "longType": "uint32",
+              "fullType": "uint32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "slowCallRateThreshold",
+              "description": "SlowCallRateThreshold Configures a threshold in percentage. The CircuitBreaker considers a call as slow\nwhen the call duration is greater than slowCallDurationThreshold When the percentage of slow calls is\nequal or greater the threshold, the CircuitBreaker transitions to open and starts short-circuiting calls.",
+              "label": "",
+              "type": "uint32",
+              "longType": "uint32",
+              "fullType": "uint32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "slidingWindowSize",
+              "description": "SlidingWindowSize configures the size of the sliding window which is used to record the outcome of\ncalls when the CircuitBreaker is closed.",
+              "label": "",
+              "type": "uint32",
+              "longType": "uint32",
+              "fullType": "uint32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "permittedNumberOfCallsInHalfOpenState",
+              "description": "PermittedNumberOfCallsInHalfOpenState configures the number of permitted calls when the CircuitBreaker\nis half open.",
+              "label": "",
+              "type": "uint32",
+              "longType": "uint32",
+              "fullType": "uint32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "minimumNumberOfCalls",
+              "description": "MinimumNumberOfCalls configures the minimum number of calls which are required (per sliding window period)\nbefore the CircuitBreaker can calculate the error rate or slow call rate.  For example,\nif minimumNumberOfCalls is 10, then at least 10 calls must be recorded, before the failure rate can be\ncalculated. If only 9 calls have been recorded the CircuitBreaker will not transition to open\neven if all 9 calls have failed.",
+              "label": "",
+              "type": "uint32",
+              "longType": "uint32",
+              "fullType": "uint32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "slowCallDurationThreshold",
+              "description": "SlowCallDurationThreshold configures the duration threshold above which calls are considered as slow\nand increase the rate of slow calls.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "maxWaitDurationInHalfOpenState",
+              "description": "MaxWaitDurationInHalfOpenState configures a maximum wait duration which controls the longest amount\nof time a CircuitBreaker could stay in Half Open state, before it switches to open. Value 0 means\nCircuit Breaker would wait infinitely in HalfOpen State until all permitted calls have been completed.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "waitDurationInOpenState",
+              "description": "WaitDurationInOpenState configures the duration that the CircuitBreaker should wait before transitioning\nfrom open to half-open,e.g.,60000ms.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "failureCodes",
+              "description": "FailureCodes is the codes indicating the circuit breaker to count the response as a failure.",
+              "label": "repeated",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "CustomResourceKind",
+          "longName": "CustomResourceKind",
+          "fullName": "easemesh.v2alpha1.CustomResourceKind",
+          "description": "CustomResourceKind defines a custom resource kind.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the name of the custom resource kind.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "jsonSchema",
+              "description": "JSONSchema is the json schema to validate a custom resource of this kind.",
+              "label": "",
+              "type": "Struct",
+              "longType": "google.protobuf.Struct",
+              "fullType": "google.protobuf.Struct",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "HTTPMatch",
+          "longName": "HTTPMatch",
+          "fullName": "easemesh.v2alpha1.HTTPMatch",
+          "description": "HTTPMatch defines an individual route for HTTP traffic.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the name of the HTTP match.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "methods",
+              "description": "Methods configures allowed HTTP method string, e.g. \"GET\",\"DELETE\",\"POST\".",
+              "label": "repeated",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "pathRegex",
+              "description": "PathRegex is a regular expression defining the route.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "HTTPRouteGroup",
+          "longName": "HTTPRouteGroup",
+          "fullName": "easemesh.v2alpha1.HTTPRouteGroup",
+          "description": "HTTPRouteGroup defines the spec of a HTTP route group.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the name for referencing a HTTPRouteGroup.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "matches",
+              "description": "Matches is a list of HTTPMatch to match traffic.",
+              "label": "repeated",
+              "type": "HTTPMatch",
+              "longType": "HTTPMatch",
+              "fullType": "easemesh.v2alpha1.HTTPMatch",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "IdentityBindingSubject",
+          "longName": "IdentityBindingSubject",
+          "fullName": "easemesh.v2alpha1.IdentityBindingSubject",
+          "description": "IdentityBindingSubject is a subject which should be allowed access to the TrafficTarget.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "kind",
+              "description": "Kind is the type of Subject to allow access, must be \"Service\" by now.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "name",
+              "description": "Name of the Subject, i.e. ServiceName.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "Ingress",
+          "longName": "Ingress",
+          "fullName": "easemesh.v2alpha1.Ingress",
+          "description": "Ingress is the spec of mesh ingress.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the identify of this ingress.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "rules",
+              "description": "Rules is an array of ingress routing rules.",
+              "label": "repeated",
+              "type": "IngressRule",
+              "longType": "IngressRule",
+              "fullType": "easemesh.v2alpha1.IngressRule",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "IngressPath",
+          "longName": "IngressPath",
+          "fullName": "easemesh.v2alpha1.IngressPath",
+          "description": "IngressPath is the path for a mesh ingress rule",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "path",
+              "description": "Path is a regular expression for matching the target HTTP URL.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "rewriteTarget",
+              "description": "RewriteTarget is a regular expression for rewriting original URL when\nthe HTTP URL path match the Path field.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "backend",
+              "description": "Backend is the mesh service's name.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "IngressRule",
+          "longName": "IngressRule",
+          "fullName": "easemesh.v2alpha1.IngressRule",
+          "description": "IngressRule is the rule for mesh ingress.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "host",
+              "description": "Host is the RFC3986 defined host name.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "paths",
+              "description": "Paths is an array for mapping HTTP paths to mesh services.",
+              "label": "repeated",
+              "type": "IngressPath",
+              "longType": "IngressPath",
+              "fullType": "easemesh.v2alpha1.IngressPath",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "LoadBalance",
+          "longName": "LoadBalance",
+          "fullName": "easemesh.v2alpha1.LoadBalance",
+          "description": "LoadBalance configures how to distribute the traffic inside this mesh.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "policy",
+              "description": "Policy including four kinds of load balancing scheme, including random, weightedRandom,ipHash,\nheaderHash",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "headerHashKey",
+              "description": "HeaderHashKey configures the key in HTTP header when the policy is headerHash.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "Mock",
+          "longName": "Mock",
+          "fullName": "easemesh.v2alpha1.Mock",
+          "description": "Mock is the spec of mocking service's HTTP responses. Once enabled,\nthis service won't need to be deployed, and other services visit it will get\nthe configured response directly.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "enabled",
+              "description": "Enable configures this mesh service's mocking switch.",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "rules",
+              "description": "Rules are the array for this mocking service.",
+              "label": "repeated",
+              "type": "MockRule",
+              "longType": "MockRule",
+              "fullType": "easemesh.v2alpha1.MockRule",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "MockRule",
+          "longName": "MockRule",
+          "fullName": "easemesh.v2alpha1.MockRule",
+          "description": "MockRule is one rule for mocking service.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "path",
+              "description": "Path is the exactly path for matching request.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "pathPrefix",
+              "description": "PathPrefix is the prefix matching for request.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "code",
+              "description": "Code is the HTTP response code.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "headers",
+              "description": "Headers is the HTTP header fields for response.",
+              "label": "repeated",
+              "type": "HeadersEntry",
+              "longType": "MockRule.HeadersEntry",
+              "fullType": "easemesh.v2alpha1.MockRule.HeadersEntry",
+              "ismap": true,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "body",
+              "description": "Bosy is the HTTP response body.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "delay",
+              "description": "Delay is the waiting duration for HTTP reponse.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "HeadersEntry",
+          "longName": "MockRule.HeadersEntry",
+          "fullName": "easemesh.v2alpha1.MockRule.HeadersEntry",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "key",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "value",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "Observability",
+          "longName": "Observability",
+          "fullName": "easemesh.v2alpha1.Observability",
+          "description": "Observability consists of three components, outputServer, tracing, and metrics.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "outputServer",
+              "description": "OutputServer configures JavaAgent's tracing output target.",
+              "label": "",
+              "type": "ObservabilityOutputServer",
+              "longType": "ObservabilityOutputServer",
+              "fullType": "easemesh.v2alpha1.ObservabilityOutputServer",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "tracings",
+              "description": "Tracings configures whether JavaAgent should deal with tracing HTTP header or not.",
+              "label": "",
+              "type": "ObservabilityTracings",
+              "longType": "ObservabilityTracings",
+              "fullType": "easemesh.v2alpha1.ObservabilityTracings",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "metrics",
+              "description": "Metrics configures the metrics JavaAgent should collect.",
+              "label": "",
+              "type": "ObservabilityMetrics",
+              "longType": "ObservabilityMetrics",
+              "fullType": "easemesh.v2alpha1.ObservabilityMetrics",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "ObservabilityMetrics",
+          "longName": "ObservabilityMetrics",
+          "fullName": "easemesh.v2alpha1.ObservabilityMetrics",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "enabled",
+              "description": "Enabled configures the global switch for this mesh service.",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "access",
+              "description": "Access configures the access log about metrics.",
+              "label": "",
+              "type": "ObservabilityMetricsDetail",
+              "longType": "ObservabilityMetricsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityMetricsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "request",
+              "description": "Request configures this mesh service's HTTP APIs metrics.",
+              "label": "",
+              "type": "ObservabilityMetricsDetail",
+              "longType": "ObservabilityMetricsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityMetricsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "jdbcStatement",
+              "description": "JdbcStatement configures this mesh service's JDBC statement metrics.",
+              "label": "",
+              "type": "ObservabilityMetricsDetail",
+              "longType": "ObservabilityMetricsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityMetricsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "jdbcConnection",
+              "description": "JdbcConnection configures this mesh service's JDBC connection related metrics.",
+              "label": "",
+              "type": "ObservabilityMetricsDetail",
+              "longType": "ObservabilityMetricsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityMetricsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "rabbit",
+              "description": "Rabbit configures this mesh service's RabbitMQ requesting metrics.",
+              "label": "",
+              "type": "ObservabilityMetricsDetail",
+              "longType": "ObservabilityMetricsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityMetricsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "kafka",
+              "description": "Kafka configures this mesh service's Kafka requesting metrics.",
+              "label": "",
+              "type": "ObservabilityMetricsDetail",
+              "longType": "ObservabilityMetricsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityMetricsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "redis",
+              "description": "Redis configures this mesh service's redis requesting metrics.",
+              "label": "",
+              "type": "ObservabilityMetricsDetail",
+              "longType": "ObservabilityMetricsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityMetricsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "jvmGc",
+              "description": "JvmGc configures this mesh service's JVM GC related metrics.",
+              "label": "",
+              "type": "ObservabilityMetricsDetail",
+              "longType": "ObservabilityMetricsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityMetricsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "jvmMemory",
+              "description": "JvmMemory configures this mesh service's JVM memory usage related metrics.",
+              "label": "",
+              "type": "ObservabilityMetricsDetail",
+              "longType": "ObservabilityMetricsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityMetricsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "md5Dictionary",
+              "description": "Md5Dictionary configures this service's md5Dictionary for reporting complete SQL Sentence and signature.",
+              "label": "",
+              "type": "ObservabilityMetricsDetail",
+              "longType": "ObservabilityMetricsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityMetricsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "ObservabilityMetricsDetail",
+          "longName": "ObservabilityMetricsDetail",
+          "fullName": "easemesh.v2alpha1.ObservabilityMetricsDetail",
+          "description": "ObservabilityMetricsDetail is the metrics detail of observability.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "enabled",
+              "description": "Enabled configures the switch for one kind metric.",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "interval",
+              "description": "Interval configures the million seconds for metric reporting.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "topic",
+              "description": "Topic configures the metrics' reporting Kafka topic.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "ObservabilityOutputServer",
+          "longName": "ObservabilityOutputServer",
+          "fullName": "easemesh.v2alpha1.ObservabilityOutputServer",
+          "description": "ObservabilityOutputServer configures how to report observability data to Kafka.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "enabled",
+              "description": "Enabled configures whether reporting observability data to Kafka or not.",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "bootstrapServer",
+              "description": "BootstrapServer configures the Kafka bootstrap servers.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "timeout",
+              "description": "Timeout configures the timeout million second for requesting Kafka.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "ObservabilityTracings",
+          "longName": "ObservabilityTracings",
+          "fullName": "easemesh.v2alpha1.ObservabilityTracings",
+          "description": "ObservabilityTracings configure the tracings of observability.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "enabled",
+              "description": "Enable configures this mesh service's global tracing switch.",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "sampleByQPS",
+              "description": "SampleByQPS configures the QPS value for tracing sampling.\nThe exceeded request will be ignored.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "output",
+              "description": "Output configures the tracing output topic, queue and thread.",
+              "label": "",
+              "type": "ObservabilityTracingsOutputConfig",
+              "longType": "ObservabilityTracingsOutputConfig",
+              "fullType": "easemesh.v2alpha1.ObservabilityTracingsOutputConfig",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "request",
+              "description": "Request configures the tracing switch for this mesh service's HTTP APIs.",
+              "label": "",
+              "type": "ObservabilityTracingsDetail",
+              "longType": "ObservabilityTracingsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityTracingsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "remoteInvoke",
+              "description": "RemoteInvoke configures the tracing switch for this mesh service's HTTP RPC tracing.",
+              "label": "",
+              "type": "ObservabilityTracingsDetail",
+              "longType": "ObservabilityTracingsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityTracingsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "kafka",
+              "description": "Kafka configures the tracing switch for this mesh service's Kafka requesting.",
+              "label": "",
+              "type": "ObservabilityTracingsDetail",
+              "longType": "ObservabilityTracingsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityTracingsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "jdbc",
+              "description": "Jdbc configures the tracing switch for this mesh service's JDBC requesting.",
+              "label": "",
+              "type": "ObservabilityTracingsDetail",
+              "longType": "ObservabilityTracingsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityTracingsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "redis",
+              "description": "Redis configures the tracing switch for this mesh service's redis requesting.",
+              "label": "",
+              "type": "ObservabilityTracingsDetail",
+              "longType": "ObservabilityTracingsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityTracingsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "rabbit",
+              "description": "Rabbit configures the tracing switch for this mesh service's rabbitMQ requesting.",
+              "label": "",
+              "type": "ObservabilityTracingsDetail",
+              "longType": "ObservabilityTracingsDetail",
+              "fullType": "easemesh.v2alpha1.ObservabilityTracingsDetail",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "ObservabilityTracingsDetail",
+          "longName": "ObservabilityTracingsDetail",
+          "fullName": "easemesh.v2alpha1.ObservabilityTracingsDetail",
+          "description": "ObservabilityTracingsDetail",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "enabled",
+              "description": "Enabled configures whether reporting this tracing component or not.",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "servicePrefix",
+              "description": "ServicePrefix is used to be combined with the tracing component's.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "ObservabilityTracingsOutputConfig",
+          "longName": "ObservabilityTracingsOutputConfig",
+          "fullName": "easemesh.v2alpha1.ObservabilityTracingsOutputConfig",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "enabled",
+              "description": "Enabled configures whether reporting to tracing output or not.",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "reportThread",
+              "description": "ReportThread configures the thread number for JavaAgent's reporting process.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "topic",
+              "description": "Topic configures the Kafka topic for tracing output target.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "messageMaxBytes",
+              "description": "MessageMaxBytes configures the max bytes for one tracing report message.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "queuedMaxSpans",
+              "description": "QueuedMaxSpans configures the max spans number for reporting queued.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "queuedMaxSize",
+              "description": "QueuedMaxSize configures the max size of reporting queue.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "messageTimeout",
+              "description": "MessageTimeout configures the timeout for the message queue.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "RateLimiter",
+          "longName": "RateLimiter",
+          "fullName": "easemesh.v2alpha1.RateLimiter",
+          "description": "RateLimiter configures a limiter which can establish your services' high availability and reliability,\nalso it can be used for scaling APIs. RateLimiter can protect servers from overwhelm by the peak traffic.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "policies",
+              "description": "Policies contains different limiting configurations for this RateLimiter to use.",
+              "label": "repeated",
+              "type": "RateLimiterPolicy",
+              "longType": "RateLimiterPolicy",
+              "fullType": "easemesh.v2alpha1.RateLimiterPolicy",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "defaultPolicyRef",
+              "description": "DefaultPolicyRef is the default reference policy name.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "urls",
+              "description": "Urls describe the HTTP request matching schemes for this limiter to filter.",
+              "label": "repeated",
+              "type": "URLRule",
+              "longType": "URLRule",
+              "fullType": "easemesh.v2alpha1.URLRule",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "RateLimiterPolicy",
+          "longName": "RateLimiterPolicy",
+          "fullName": "easemesh.v2alpha1.RateLimiterPolicy",
+          "description": "RateLimiterPolicy configures the limiting policy used for Resilience component RateLimiter.\nIt contains the basic configurations for the limiter, including the permission number,\nthe duration for request waiting and the permission count refreshing period.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the identify of this policy.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "timeoutDuration",
+              "description": "TimeoutDuration is the duration for one request should wait for a permission,e.g.,500ms.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "limitRefreshPeriod",
+              "description": "LimitRefreshPeriod is the period of a limit refresh. After each period the rate limiter sets\nits permissions count back to the limitForPeriod value.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "limitForPeriod",
+              "description": "LimitForPeriod is the number of permissions available during one limit refresh period.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "Resilience",
+          "longName": "Resilience",
+          "fullName": "easemesh.v2alpha1.Resilience",
+          "description": "Resilience configures four key types of features, RateLimiter, CircuitBreaker,\nRetry and Timeout.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "rateLimiter",
+              "description": "RateLimiter configuration.",
+              "label": "",
+              "type": "RateLimiter",
+              "longType": "RateLimiter",
+              "fullType": "easemesh.v2alpha1.RateLimiter",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "circuitBreaker",
+              "description": "CircuitBreaker configuration.",
+              "label": "",
+              "type": "CircuitBreaker",
+              "longType": "CircuitBreaker",
+              "fullType": "easemesh.v2alpha1.CircuitBreaker",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "retry",
+              "description": "Retry configuration.",
+              "label": "",
+              "type": "Retry",
+              "longType": "Retry",
+              "fullType": "easemesh.v2alpha1.Retry",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "timeLimiter",
+              "description": "TimeLimiter configuration",
+              "label": "",
+              "type": "TimeLimiter",
+              "longType": "TimeLimiter",
+              "fullType": "easemesh.v2alpha1.TimeLimiter",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "Retry",
+          "longName": "Retry",
+          "fullName": "easemesh.v2alpha1.Retry",
+          "description": "Retry can perform an API calling retry when the service HTTP response code indicated its in\ntemporary unavailable states. The up-stream client should make sure this API is idempotent.\nThe service can declare an Retry for its desired APIs and active in client side.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "maxAttempts",
+              "description": "MaxAttempts configures the maximum number of attempts. (including the initial call as the first attempt)",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "waitDuration",
+              "description": "WaitDuration configures the based and fixed wait duration between retry attempts.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "backOffPolicy",
+              "description": "BackOffPolicy configures the two kinds of policy, random and exponential.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "randomizationFactor",
+              "description": "RandomizationFactor configures the factor used for backoff, value between 0 and 1.",
+              "label": "",
+              "type": "double",
+              "longType": "double",
+              "fullType": "double",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "Service",
+          "longName": "Service",
+          "fullName": "easemesh.v2alpha1.Service",
+          "description": "Service is the basic element in EaseMesh to describe a user's business microservices'\nname, belonging tenant, and governance specs. One service should belongs to a dedicated\ntenant.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "registryName",
+              "description": "Registry name is the registry name, it means mesh registry if empty.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "name",
+              "description": "Name is the mesh service's name.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "registerTenant",
+              "description": "RegisterTenant is the tenant's name this service belongs to.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "resilience",
+              "description": "Resilience configuration, optional.",
+              "label": "",
+              "type": "Resilience",
+              "longType": "Resilience",
+              "fullType": "easemesh.v2alpha1.Resilience",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "loadBalance",
+              "description": "LoadBalance configuration, optional.",
+              "label": "",
+              "type": "LoadBalance",
+              "longType": "LoadBalance",
+              "fullType": "easemesh.v2alpha1.LoadBalance",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "sidecar",
+              "description": "Sidecar configuration, optional.",
+              "label": "",
+              "type": "Sidecar",
+              "longType": "Sidecar",
+              "fullType": "easemesh.v2alpha1.Sidecar",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "observability",
+              "description": "Observability configuration, optional.",
+              "label": "",
+              "type": "Observability",
+              "longType": "Observability",
+              "fullType": "easemesh.v2alpha1.Observability",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "mock",
+              "description": "Mock configuration, optional.",
+              "label": "",
+              "type": "Mock",
+              "longType": "Mock",
+              "fullType": "easemesh.v2alpha1.Mock",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "ServiceCanary",
+          "longName": "ServiceCanary",
+          "fullName": "easemesh.v2alpha1.ServiceCanary",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the name of service canary.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "priority",
+              "description": "Priority must be [1, 9], the default is 5 if user does not set it.\nThe smaller number get higher priority.\nThe order is sorted by name alphabetically in the same priority.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "selector",
+              "description": "Selector is the service selector to choose\nservice instances.",
+              "label": "",
+              "type": "ServiceSelector",
+              "longType": "ServiceSelector",
+              "fullType": "easemesh.v2alpha1.ServiceSelector",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "trafficRules",
+              "description": "TrafficRules is the traffic rules to be colored\nas the current canary.",
+              "label": "",
+              "type": "TrafficRules",
+              "longType": "TrafficRules",
+              "fullType": "easemesh.v2alpha1.TrafficRules",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "ServiceInstance",
+          "longName": "ServiceInstance",
+          "fullName": "easemesh.v2alpha1.ServiceInstance",
+          "description": "ServiceInstance is the runnable entity of a Mesh Service.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "registryName",
+              "description": "registryName is the name of registry.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "serviceName",
+              "description": "ServiceName is the name of service this instance belongs to.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "instanceID",
+              "description": "InstanceID is the identity of this instance.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "ip",
+              "description": "IP is this instance's address in EaseMesh.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "port",
+              "description": "Port is the port this instance listening to.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "registryTime",
+              "description": "RegistryTime is the time this instance registered.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "labels",
+              "description": "Labels is a map for storing service labels. This field is used for Canary Deployment.",
+              "label": "repeated",
+              "type": "LabelsEntry",
+              "longType": "ServiceInstance.LabelsEntry",
+              "fullType": "easemesh.v2alpha1.ServiceInstance.LabelsEntry",
+              "ismap": true,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "status",
+              "description": "Status is the status of this mesh service instance.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "LabelsEntry",
+          "longName": "ServiceInstance.LabelsEntry",
+          "fullName": "easemesh.v2alpha1.ServiceInstance.LabelsEntry",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "key",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "value",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "ServiceSelector",
+          "longName": "ServiceSelector",
+          "fullName": "easemesh.v2alpha1.ServiceSelector",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "matchServices",
+              "description": "MatchServices is the service list.",
+              "label": "repeated",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "matchInstanceLabels",
+              "description": "MatchInstanceLabels is the instance labels.",
+              "label": "repeated",
+              "type": "MatchInstanceLabelsEntry",
+              "longType": "ServiceSelector.MatchInstanceLabelsEntry",
+              "fullType": "easemesh.v2alpha1.ServiceSelector.MatchInstanceLabelsEntry",
+              "ismap": true,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "MatchInstanceLabelsEntry",
+          "longName": "ServiceSelector.MatchInstanceLabelsEntry",
+          "fullName": "easemesh.v2alpha1.ServiceSelector.MatchInstanceLabelsEntry",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "key",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "value",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "Sidecar",
+          "longName": "Sidecar",
+          "fullName": "easemesh.v2alpha1.Sidecar",
+          "description": "Sidecar configures the sidecar for every mesh service instances. It works inside the same\npod with the workload instance.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "discoveryType",
+              "description": "DiscoveryType configures the type of service register/discovery type, its value are among\n\"eureka\",\"consul\", and \"nacos\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "address",
+              "description": "Address is the registry center address for workload to visit.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "ingressPort",
+              "description": "IngressPort is the port for ingress traffic.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "ingressProtocol",
+              "description": "IngressProtocol is the protocol for ingress traffic. Its value is \"http\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "egressPort",
+              "description": "EgressPort is the port for egress traffic.",
+              "label": "",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "egressProtocol",
+              "description": "EgressProtocol is the protocol for egress traffic. Its value is \"http\"",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "StringMatch",
+          "longName": "StringMatch",
+          "fullName": "easemesh.v2alpha1.StringMatch",
+          "description": "StringMatch configures how to match string in different ways.\nIts priority is according to the field order. StringMatch will try exactly matching firstly,\nthen try to check has the same prefix, at last, it will use the regular expression to match the\nstring if it's provided",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "exact",
+              "description": "Exact configures the exactly URL value to match.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "prefix",
+              "description": "Prefix configures the prefix for URL to match.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "regex",
+              "description": "Regex configures the regular expression for URL to match.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "Tenant",
+          "longName": "Tenant",
+          "fullName": "easemesh.v2alpha1.Tenant",
+          "description": "Tenant is the logic group of mesh services. Inside the same tenant,\nservices can visit each other directly. There are two kinds of tenant, one is the  common type\nof tenants and the other is system reserved \"global\" tenant which's access scope is globally\ninside the mesh . If one mesh service is created with \"global\" tenant filed, it can be visible\nto all the service inside the mesh.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the identify of this tenant.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "services",
+              "description": "Services are the array of mesh service name in this tenant.",
+              "label": "repeated",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "description",
+              "description": "Descriptions for this tenant.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "TimeLimiter",
+          "longName": "TimeLimiter",
+          "fullName": "easemesh.v2alpha1.TimeLimiter",
+          "description": "Timeout configures the amount of time the client should wait for replies from a given service,\nit will be running in upstream clients and declared in downstream relied services.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "timeout",
+              "description": "timeout configures the duration for timeout, e.g.,500ms.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "TrafficRules",
+          "longName": "TrafficRules",
+          "fullName": "easemesh.v2alpha1.TrafficRules",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "headers",
+              "description": "Headers configure HTTP requests matching configurations with \"OR\" relation. Once\nHTTP requests match one element in this array, it will be regarded as the colored traffic.",
+              "label": "repeated",
+              "type": "HeadersEntry",
+              "longType": "TrafficRules.HeadersEntry",
+              "fullType": "easemesh.v2alpha1.TrafficRules.HeadersEntry",
+              "ismap": true,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "HeadersEntry",
+          "longName": "TrafficRules.HeadersEntry",
+          "fullName": "easemesh.v2alpha1.TrafficRules.HeadersEntry",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "key",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "value",
+              "description": "",
+              "label": "",
+              "type": "StringMatch",
+              "longType": "StringMatch",
+              "fullType": "easemesh.v2alpha1.StringMatch",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "TrafficTarget",
+          "longName": "TrafficTarget",
+          "fullName": "easemesh.v2alpha1.TrafficTarget",
+          "description": "TrafficTarget is the specification of a TrafficTarget.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "Name is the name for referencing a TrafficTarget.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "destination",
+              "description": "Destination is the service to allow ingress traffic.",
+              "label": "",
+              "type": "IdentityBindingSubject",
+              "longType": "IdentityBindingSubject",
+              "fullType": "easemesh.v2alpha1.IdentityBindingSubject",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "sources",
+              "description": "Sources are the services to allow egress traffic.",
+              "label": "repeated",
+              "type": "IdentityBindingSubject",
+              "longType": "IdentityBindingSubject",
+              "fullType": "easemesh.v2alpha1.IdentityBindingSubject",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "rules",
+              "description": "Rules are the traffic rules to allow (HTTPRoutes).",
+              "label": "repeated",
+              "type": "TrafficTargetRule",
+              "longType": "TrafficTargetRule",
+              "fullType": "easemesh.v2alpha1.TrafficTargetRule",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "TrafficTargetRule",
+          "longName": "TrafficTargetRule",
+          "fullName": "easemesh.v2alpha1.TrafficTargetRule",
+          "description": "TrafficTargetRule is the TrafficSpec to allow for a TrafficTarget,\nTrafficSpec can only be HTTPRouteGroup by now.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "kind",
+              "description": "Kind is the kind of TrafficSpec to allow, must be \"HTTPRouteGroup\" by now.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "name",
+              "description": "Name of the TrafficSpec to use.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "matches",
+              "description": "Matches is a list of TrafficSpec routes to allow traffic for,\nTrafficSpec routes can only be HTTPMatch by now.",
+              "label": "repeated",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "URLRule",
+          "longName": "URLRule",
+          "fullName": "easemesh.v2alpha1.URLRule",
+          "description": "URLRule can be used to filter HTTP request by using HTTP method and URL.",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "methods",
+              "description": "Methods configures allowed HTTP method string, e.g. \"GET\",\"DELETE\",\"POST\".",
+              "label": "repeated",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "url",
+              "description": "Url configures how to match the HTTP request URL.",
+              "label": "",
+              "type": "StringMatch",
+              "longType": "StringMatch",
+              "fullType": "easemesh.v2alpha1.StringMatch",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "policyRef",
+              "description": "PolicyRef configures which policy this URLRule references to.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        }
+      ],
+      "services": []
+    }
+  ],
+  "scalarValueTypes": [
+    {
+      "protoType": "double",
+      "notes": "",
+      "cppType": "double",
+      "csType": "double",
+      "goType": "float64",
+      "javaType": "double",
+      "phpType": "float",
+      "pythonType": "float",
+      "rubyType": "Float"
+    },
+    {
+      "protoType": "float",
+      "notes": "",
+      "cppType": "float",
+      "csType": "float",
+      "goType": "float32",
+      "javaType": "float",
+      "phpType": "float",
+      "pythonType": "float",
+      "rubyType": "Float"
+    },
+    {
+      "protoType": "int32",
+      "notes": "Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.",
+      "cppType": "int32",
+      "csType": "int",
+      "goType": "int32",
+      "javaType": "int",
+      "phpType": "integer",
+      "pythonType": "int",
+      "rubyType": "Bignum or Fixnum (as required)"
+    },
+    {
+      "protoType": "int64",
+      "notes": "Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead.",
+      "cppType": "int64",
+      "csType": "long",
+      "goType": "int64",
+      "javaType": "long",
+      "phpType": "integer/string",
+      "pythonType": "int/long",
+      "rubyType": "Bignum"
+    },
+    {
+      "protoType": "uint32",
+      "notes": "Uses variable-length encoding.",
+      "cppType": "uint32",
+      "csType": "uint",
+      "goType": "uint32",
+      "javaType": "int",
+      "phpType": "integer",
+      "pythonType": "int/long",
+      "rubyType": "Bignum or Fixnum (as required)"
+    },
+    {
+      "protoType": "uint64",
+      "notes": "Uses variable-length encoding.",
+      "cppType": "uint64",
+      "csType": "ulong",
+      "goType": "uint64",
+      "javaType": "long",
+      "phpType": "integer/string",
+      "pythonType": "int/long",
+      "rubyType": "Bignum or Fixnum (as required)"
+    },
+    {
+      "protoType": "sint32",
+      "notes": "Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s.",
+      "cppType": "int32",
+      "csType": "int",
+      "goType": "int32",
+      "javaType": "int",
+      "phpType": "integer",
+      "pythonType": "int",
+      "rubyType": "Bignum or Fixnum (as required)"
+    },
+    {
+      "protoType": "sint64",
+      "notes": "Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s.",
+      "cppType": "int64",
+      "csType": "long",
+      "goType": "int64",
+      "javaType": "long",
+      "phpType": "integer/string",
+      "pythonType": "int/long",
+      "rubyType": "Bignum"
+    },
+    {
+      "protoType": "fixed32",
+      "notes": "Always four bytes. More efficient than uint32 if values are often greater than 2^28.",
+      "cppType": "uint32",
+      "csType": "uint",
+      "goType": "uint32",
+      "javaType": "int",
+      "phpType": "integer",
+      "pythonType": "int",
+      "rubyType": "Bignum or Fixnum (as required)"
+    },
+    {
+      "protoType": "fixed64",
+      "notes": "Always eight bytes. More efficient than uint64 if values are often greater than 2^56.",
+      "cppType": "uint64",
+      "csType": "ulong",
+      "goType": "uint64",
+      "javaType": "long",
+      "phpType": "integer/string",
+      "pythonType": "int/long",
+      "rubyType": "Bignum"
+    },
+    {
+      "protoType": "sfixed32",
+      "notes": "Always four bytes.",
+      "cppType": "int32",
+      "csType": "int",
+      "goType": "int32",
+      "javaType": "int",
+      "phpType": "integer",
+      "pythonType": "int",
+      "rubyType": "Bignum or Fixnum (as required)"
+    },
+    {
+      "protoType": "sfixed64",
+      "notes": "Always eight bytes.",
+      "cppType": "int64",
+      "csType": "long",
+      "goType": "int64",
+      "javaType": "long",
+      "phpType": "integer/string",
+      "pythonType": "int/long",
+      "rubyType": "Bignum"
+    },
+    {
+      "protoType": "bool",
+      "notes": "",
+      "cppType": "bool",
+      "csType": "bool",
+      "goType": "bool",
+      "javaType": "boolean",
+      "phpType": "boolean",
+      "pythonType": "boolean",
+      "rubyType": "TrueClass/FalseClass"
+    },
+    {
+      "protoType": "string",
+      "notes": "A string must always contain UTF-8 encoded or 7-bit ASCII text.",
+      "cppType": "string",
+      "csType": "string",
+      "goType": "string",
+      "javaType": "String",
+      "phpType": "string",
+      "pythonType": "str/unicode",
+      "rubyType": "String (UTF-8)"
+    },
+    {
+      "protoType": "bytes",
+      "notes": "May contain any arbitrary sequence of bytes.",
+      "cppType": "string",
+      "csType": "ByteString",
+      "goType": "[]byte",
+      "javaType": "ByteString",
+      "phpType": "string",
+      "pythonType": "str",
+      "rubyType": "String (ASCII-8BIT)"
+    }
+  ]
+}

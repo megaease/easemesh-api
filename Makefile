@@ -27,7 +27,7 @@ NC='\033[0m'
 MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 MKFILE_DIR := $(dir $(MKFILE_PATH))
 
-RELEASE?=v1alpha1
+RELEASE?=v2alpha1
 
 # Protoc releated tools
 PROTOC_GEN_DOC := $(GOPATH)/bin/protoc-gen-doc
