@@ -434,13 +434,6 @@ Circuit Breaker would wait infinitely in HalfOpen State until all permitted call
 from open to half-open,e.g.,60000ms. </p></td>
                 </tr>
               
-                <tr>
-                  <td>failureCodes</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td>repeated</td>
-                  <td><p>FailureCodes is the codes indicating the circuit breaker to count the response as a failure. </p></td>
-                </tr>
-              
             </tbody>
           </table>
 
@@ -1339,6 +1332,13 @@ its permissions count back to the limitForPeriod value. </p></td>
                   <td><a href="#easemesh.v2alpha1.TimeLimiter">TimeLimiter</a></td>
                   <td></td>
                   <td><p>TimeLimiter configuration </p></td>
+                </tr>
+              
+                <tr>
+                  <td>failureCodes</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>repeated</td>
+                  <td><p>FailureCodes is the codes indicating the circuit breaker and retry to count the response as a failure. </p></td>
                 </tr>
               
             </tbody>

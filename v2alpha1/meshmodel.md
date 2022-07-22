@@ -85,7 +85,6 @@ can declare its desired CircuitBreaker, and the upstream clients will active the
 | slowCallDurationThreshold | [string](#string) |  | SlowCallDurationThreshold configures the duration threshold above which calls are considered as slow and increase the rate of slow calls. |
 | maxWaitDurationInHalfOpenState | [string](#string) |  | MaxWaitDurationInHalfOpenState configures a maximum wait duration which controls the longest amount of time a CircuitBreaker could stay in Half Open state, before it switches to open. Value 0 means Circuit Breaker would wait infinitely in HalfOpen State until all permitted calls have been completed. |
 | waitDurationInOpenState | [string](#string) |  | WaitDurationInOpenState configures the duration that the CircuitBreaker should wait before transitioning from open to half-open,e.g.,60000ms. |
-| failureCodes | [int32](#int32) | repeated | FailureCodes is the codes indicating the circuit breaker to count the response as a failure. |
 
 
 
@@ -463,6 +462,7 @@ Retry and Timeout.
 | circuitBreaker | [CircuitBreaker](#easemesh.v2alpha1.CircuitBreaker) |  | CircuitBreaker configuration. |
 | retry | [Retry](#easemesh.v2alpha1.Retry) |  | Retry configuration. |
 | timeLimiter | [TimeLimiter](#easemesh.v2alpha1.TimeLimiter) |  | TimeLimiter configuration |
+| failureCodes | [int32](#int32) | repeated | FailureCodes is the codes indicating the circuit breaker and retry to count the response as a failure. |
 
 
 

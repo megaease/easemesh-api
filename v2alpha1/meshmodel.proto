@@ -77,6 +77,9 @@ message Resilience {
 
 	// TimeLimiter configuration
 	TimeLimiter timeLimiter = 4;
+
+	// FailureCodes is the codes indicating the circuit breaker and retry to count the response as a failure.
+	repeated int32 failureCodes = 5;
 }
 
 
@@ -278,9 +281,6 @@ message CircuitBreaker {
 	// WaitDurationInOpenState configures the duration that the CircuitBreaker should wait before transitioning
 	// from open to half-open,e.g.,60000ms.
 	string waitDurationInOpenState = 9;
-
-	// FailureCodes is the codes indicating the circuit breaker to count the response as a failure.
-	repeated int32 failureCodes = 10;
 }
 
 

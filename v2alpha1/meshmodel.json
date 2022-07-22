@@ -128,18 +128,6 @@
               "isoneof": false,
               "oneofdecl": "",
               "defaultValue": ""
-            },
-            {
-              "name": "failureCodes",
-              "description": "FailureCodes is the codes indicating the circuit breaker to count the response as a failure.",
-              "label": "repeated",
-              "type": "int32",
-              "longType": "int32",
-              "fullType": "int32",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
             }
           ]
         },
@@ -1312,6 +1300,18 @@
               "type": "TimeLimiter",
               "longType": "TimeLimiter",
               "fullType": "easemesh.v2alpha1.TimeLimiter",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "failureCodes",
+              "description": "FailureCodes is the codes indicating the circuit breaker and retry to count the response as a failure.",
+              "label": "repeated",
+              "type": "int32",
+              "longType": "int32",
+              "fullType": "int32",
               "ismap": false,
               "isoneof": false,
               "oneofdecl": "",
