@@ -233,8 +233,8 @@ LoadBalance configures how to distribute the traffic inside this mesh.
 | ----- | ---- | ----- | ----------- |
 | path | [string](#string) |  | Path is the exact path for matching request. |
 | pathPrefix | [string](#string) |  | PathPrefix is the prefix matching for request. |
-| headers | [MatchRule.HeadersEntry](#easemesh.v2alpha1.MatchRule.HeadersEntry) | repeated | Headers is the |
-| matchAllHeaders | [bool](#bool) |  |  |
+| headers | [MatchRule.HeadersEntry](#easemesh.v2alpha1.MatchRule.HeadersEntry) | repeated | Headers is the HTTP header fields for matching. |
+| matchAllHeaders | [bool](#bool) |  | matchAllHeaders configures whether all the headers rule need to be matched. |
 
 
 
@@ -286,7 +286,7 @@ MockRule is one rule for mocking service.
 | match | [MatchRule](#easemesh.v2alpha1.MatchRule) |  |  |
 | code | [int32](#int32) |  | Code is the HTTP response code. |
 | headers | [MockRule.HeadersEntry](#easemesh.v2alpha1.MockRule.HeadersEntry) | repeated | Headers is the HTTP header fields for response. |
-| body | [string](#string) |  | Bosy is the HTTP response body. |
+| body | [string](#string) |  | Body is the HTTP response body. |
 | delay | [string](#string) |  | Delay is the waiting duration for HTTP reponse. |
 
 

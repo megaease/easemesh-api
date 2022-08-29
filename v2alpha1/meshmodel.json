@@ -479,7 +479,7 @@
             },
             {
               "name": "headers",
-              "description": "Headers is the",
+              "description": "Headers is the HTTP header fields for matching.",
               "label": "repeated",
               "type": "HeadersEntry",
               "longType": "MatchRule.HeadersEntry",
@@ -491,7 +491,7 @@
             },
             {
               "name": "matchAllHeaders",
-              "description": "",
+              "description": "matchAllHeaders configures whether all the headers rule need to be matched.",
               "label": "",
               "type": "bool",
               "longType": "bool",
@@ -623,7 +623,7 @@
             },
             {
               "name": "body",
-              "description": "Bosy is the HTTP response body.",
+              "description": "Body is the HTTP response body.",
               "label": "",
               "type": "string",
               "longType": "string",

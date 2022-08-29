@@ -127,7 +127,7 @@ message MockRule {
 	// Headers is the HTTP header fields for response.
 	map<string, string> headers = 3;
 
-	// Bosy is the HTTP response body.
+	// Body is the HTTP response body.
 	string body = 4;
 
 	// Delay is the waiting duration for HTTP reponse.

@@ -382,7 +382,7 @@ MockRule is one rule for mocking service.
 | match | [MockMatchRule](#easemesh.v1alpha1.MockMatchRule) |  | match is the rule to match a request. |
 | code | [int32](#int32) |  | Code is the HTTP response code. |
 | headers | [MockRule.HeadersEntry](#easemesh.v1alpha1.MockRule.HeadersEntry) | repeated | Headers is the HTTP header fields for response. |
-| body | [string](#string) |  | Bosy is the HTTP response body. |
+| body | [string](#string) |  | Body is the HTTP response body. |
 | delay | [string](#string) |  | Delay is the waiting duration for HTTP reponse. |
 
 

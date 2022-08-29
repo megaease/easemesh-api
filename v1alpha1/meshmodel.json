@@ -851,7 +851,7 @@
             },
             {
               "name": "body",
-              "description": "Bosy is the HTTP response body.",
+              "description": "Body is the HTTP response body.",
               "label": "",
               "type": "string",
               "longType": "string",

@@ -20,9 +20,9 @@
 package v1alpha1
 
 import (
-	_struct "github.com/golang/protobuf/ptypes/struct"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 )
@@ -515,7 +515,7 @@ type MockRule struct {
 	Code int32 `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`
 	// Headers is the HTTP header fields for response.
 	Headers map[string]string `protobuf:"bytes,3,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Bosy is the HTTP response body.
+	// Body is the HTTP response body.
 	Body string `protobuf:"bytes,4,opt,name=body,proto3" json:"body,omitempty"`
 	// Delay is the waiting duration for HTTP reponse.
 	Delay string `protobuf:"bytes,5,opt,name=delay,proto3" json:"delay,omitempty"`
@@ -2472,7 +2472,7 @@ type CustomResourceKind struct {
 	// Name is the name of the custom resource kind.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// JSONSchema is the json schema to validate a custom resource of this kind.
-	JsonSchema *_struct.Struct `protobuf:"bytes,2,opt,name=jsonSchema,proto3" json:"jsonSchema,omitempty"`
+	JsonSchema *structpb.Struct `protobuf:"bytes,2,opt,name=jsonSchema,proto3" json:"jsonSchema,omitempty"`
 }
 
 func (x *CustomResourceKind) Reset() {
@@ -2514,7 +2514,7 @@ func (x *CustomResourceKind) GetName() string {
 	return ""
 }
 
-func (x *CustomResourceKind) GetJsonSchema() *_struct.Struct {
+func (x *CustomResourceKind) GetJsonSchema() *structpb.Struct {
 	if x != nil {
 		return x.JsonSchema
 	}
@@ -3628,7 +3628,7 @@ var file_meshmodel_proto_goTypes = []interface{}{
 	nil,                                       // 43: easemesh.v1alpha1.CanaryRule.HeadersEntry
 	nil,                                       // 44: easemesh.v1alpha1.ServiceSelector.MatchInstanceLabelsEntry
 	nil,                                       // 45: easemesh.v1alpha1.TrafficRules.HeadersEntry
-	(*_struct.Struct)(nil),                    // 46: google.protobuf.Struct
+	(*structpb.Struct)(nil),                   // 46: google.protobuf.Struct
 }
 var file_meshmodel_proto_depIdxs = []int32{
 	2,  // 0: easemesh.v1alpha1.Service.resilience:type_name -> easemesh.v1alpha1.Resilience

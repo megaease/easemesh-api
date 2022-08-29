@@ -472,7 +472,7 @@ type MockRule struct {
 	Code int32 `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`
 	// Headers is the HTTP header fields for response.
 	Headers map[string]string `protobuf:"bytes,3,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Bosy is the HTTP response body.
+	// Body is the HTTP response body.
 	Body string `protobuf:"bytes,4,opt,name=body,proto3" json:"body,omitempty"`
 	// Delay is the waiting duration for HTTP reponse.
 	Delay string `protobuf:"bytes,5,opt,name=delay,proto3" json:"delay,omitempty"`
@@ -554,9 +554,10 @@ type MatchRule struct {
 	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
 	// PathPrefix is the prefix matching for request.
 	PathPrefix string `protobuf:"bytes,2,opt,name=pathPrefix,proto3" json:"pathPrefix,omitempty"`
-	// Headers is the
-	Headers         map[string]*StringMatch `protobuf:"bytes,3,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	MatchAllHeaders bool                    `protobuf:"varint,4,opt,name=matchAllHeaders,proto3" json:"matchAllHeaders,omitempty"`
+	// Headers is the HTTP header fields for matching.
+	Headers map[string]*StringMatch `protobuf:"bytes,3,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// matchAllHeaders configures whether all the headers rule need to be matched.
+	MatchAllHeaders bool `protobuf:"varint,4,opt,name=matchAllHeaders,proto3" json:"matchAllHeaders,omitempty"`
 }
 
 func (x *MatchRule) Reset() {
