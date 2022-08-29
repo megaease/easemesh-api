@@ -13,6 +13,8 @@
     - [IngressPath](#easemesh.v2alpha1.IngressPath)
     - [IngressRule](#easemesh.v2alpha1.IngressRule)
     - [LoadBalance](#easemesh.v2alpha1.LoadBalance)
+    - [MatchRule](#easemesh.v2alpha1.MatchRule)
+    - [MatchRule.HeadersEntry](#easemesh.v2alpha1.MatchRule.HeadersEntry)
     - [Mock](#easemesh.v2alpha1.Mock)
     - [MockRule](#easemesh.v2alpha1.MockRule)
     - [MockRule.HeadersEntry](#easemesh.v2alpha1.MockRule.HeadersEntry)
@@ -221,6 +223,40 @@ LoadBalance configures how to distribute the traffic inside this mesh.
 
 
 
+<a name="easemesh.v2alpha1.MatchRule"></a>
+
+### MatchRule
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| path | [string](#string) |  | Path is the exact path for matching request. |
+| pathPrefix | [string](#string) |  | PathPrefix is the prefix matching for request. |
+| headers | [MatchRule.HeadersEntry](#easemesh.v2alpha1.MatchRule.HeadersEntry) | repeated | Headers is the |
+| matchAllHeaders | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="easemesh.v2alpha1.MatchRule.HeadersEntry"></a>
+
+### MatchRule.HeadersEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [StringMatch](#easemesh.v2alpha1.StringMatch) |  |  |
+
+
+
+
+
+
 <a name="easemesh.v2alpha1.Mock"></a>
 
 ### Mock
@@ -247,8 +283,7 @@ MockRule is one rule for mocking service.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| path | [string](#string) |  | Path is the exactly path for matching request. |
-| pathPrefix | [string](#string) |  | PathPrefix is the prefix matching for request. |
+| match | [MatchRule](#easemesh.v2alpha1.MatchRule) |  |  |
 | code | [int32](#int32) |  | Code is the HTTP response code. |
 | headers | [MockRule.HeadersEntry](#easemesh.v2alpha1.MockRule.HeadersEntry) | repeated | Headers is the HTTP header fields for response. |
 | body | [string](#string) |  | Bosy is the HTTP response body. |

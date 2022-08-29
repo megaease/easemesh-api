@@ -215,6 +215,14 @@
                 </li>
               
                 <li>
+                  <a href="#easemesh.v2alpha1.MatchRule"><span class="badge">M</span>MatchRule</a>
+                </li>
+              
+                <li>
+                  <a href="#easemesh.v2alpha1.MatchRule.HeadersEntry"><span class="badge">M</span>MatchRule.HeadersEntry</a>
+                </li>
+              
+                <li>
                   <a href="#easemesh.v2alpha1.Mock"><span class="badge">M</span>Mock</a>
                 </li>
               
@@ -705,6 +713,82 @@ headerHash </p></td>
 
         
       
+        <h3 id="easemesh.v2alpha1.MatchRule">MatchRule</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>path</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Path is the exact path for matching request. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pathPrefix</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>PathPrefix is the prefix matching for request. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>headers</td>
+                  <td><a href="#easemesh.v2alpha1.MatchRule.HeadersEntry">MatchRule.HeadersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Headers is the </p></td>
+                </tr>
+              
+                <tr>
+                  <td>matchAllHeaders</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="easemesh.v2alpha1.MatchRule.HeadersEntry">MatchRule.HeadersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#easemesh.v2alpha1.StringMatch">StringMatch</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="easemesh.v2alpha1.Mock">Mock</h3>
         <p>Mock is the spec of mocking service's HTTP responses. Once enabled,</p><p>this service won't need to be deployed, and other services visit it will get</p><p>the configured response directly.</p>
 
@@ -747,17 +831,10 @@ headerHash </p></td>
             <tbody>
               
                 <tr>
-                  <td>path</td>
-                  <td><a href="#string">string</a></td>
+                  <td>match</td>
+                  <td><a href="#easemesh.v2alpha1.MatchRule">MatchRule</a></td>
                   <td></td>
-                  <td><p>Path is the exactly path for matching request. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>pathPrefix</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>PathPrefix is the prefix matching for request. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>

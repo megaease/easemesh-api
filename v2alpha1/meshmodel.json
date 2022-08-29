@@ -444,6 +444,102 @@
           ]
         },
         {
+          "name": "MatchRule",
+          "longName": "MatchRule",
+          "fullName": "easemesh.v2alpha1.MatchRule",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "path",
+              "description": "Path is the exact path for matching request.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "pathPrefix",
+              "description": "PathPrefix is the prefix matching for request.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "headers",
+              "description": "Headers is the",
+              "label": "repeated",
+              "type": "HeadersEntry",
+              "longType": "MatchRule.HeadersEntry",
+              "fullType": "easemesh.v2alpha1.MatchRule.HeadersEntry",
+              "ismap": true,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "matchAllHeaders",
+              "description": "",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "HeadersEntry",
+          "longName": "MatchRule.HeadersEntry",
+          "fullName": "easemesh.v2alpha1.MatchRule.HeadersEntry",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "key",
+              "description": "",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "value",
+              "description": "",
+              "label": "",
+              "type": "StringMatch",
+              "longType": "StringMatch",
+              "fullType": "easemesh.v2alpha1.StringMatch",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
           "name": "Mock",
           "longName": "Mock",
           "fullName": "easemesh.v2alpha1.Mock",
@@ -490,24 +586,12 @@
           "extensions": [],
           "fields": [
             {
-              "name": "path",
-              "description": "Path is the exactly path for matching request.",
+              "name": "match",
+              "description": "",
               "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
-              "ismap": false,
-              "isoneof": false,
-              "oneofdecl": "",
-              "defaultValue": ""
-            },
-            {
-              "name": "pathPrefix",
-              "description": "PathPrefix is the prefix matching for request.",
-              "label": "",
-              "type": "string",
-              "longType": "string",
-              "fullType": "string",
+              "type": "MatchRule",
+              "longType": "MatchRule",
+              "fullType": "easemesh.v2alpha1.MatchRule",
               "ismap": false,
               "isoneof": false,
               "oneofdecl": "",

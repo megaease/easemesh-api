@@ -119,23 +119,33 @@ message Mock {
 
 // MockRule is one rule for mocking service.
 message MockRule {
-	// Path is the exactly path for matching request.
-	string path  = 1;
+	MatchRule match = 1;
+
+	// Code is the HTTP response code.
+	int32 code = 2;
+
+	// Headers is the HTTP header fields for response.
+	map<string, string> headers = 3;
+
+	// Bosy is the HTTP response body.
+	string body = 4;
+
+	// Delay is the waiting duration for HTTP reponse.
+	string delay = 5;
+}
+
+message MatchRule {
+	// Path is the exact path for matching request.
+	string path = 1;
 
 	// PathPrefix is the prefix matching for request.
 	string pathPrefix = 2;
 
-	// Code is the HTTP response code.
-	int32 code = 3;
+	// Headers is the HTTP header fields for matching.
+	map<string, StringMatch> headers = 3;
 
-	// Headers is the HTTP header fields for response.
-	map<string, string> headers = 4;
-
-	// Bosy is the HTTP response body.
-	string body = 5;
-
-	// Delay is the waiting duration for HTTP reponse.
-	string delay = 6;
+	// matchAllHeaders configures whether all the headers rule need to be matched.
+	bool matchAllHeaders = 4;
 }
 
 
