@@ -582,6 +582,7 @@ ServiceInstance is the runnable entity of a Mesh Service.
 | registryTime | [string](#string) |  | RegistryTime is the time this instance registered. |
 | labels | [ServiceInstance.LabelsEntry](#easemesh.v2alpha1.ServiceInstance.LabelsEntry) | repeated | Labels is a map for storing service labels. This field is used for Canary Deployment. |
 | status | [string](#string) |  | Status is the status of this mesh service instance. |
+| agentType | [string](#string) |  | AgentType is the type of agent, which supports EaseAgent, GoSDK, None(same as empty value). |
 
 
 

@@ -205,6 +205,9 @@ message ServiceInstance {
 
 	// Status is the status of this mesh service instance.
 	string status = 8;
+
+	// AgentType is the type of agent, which supports EaseAgent, GoSDK, None(same as empty value).
+	string agentType = 9;
 }
 
 
